@@ -14,3 +14,24 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'admin'], function () {
+
+    Route::get('/', 'AdminController@index')->name('get-admin-view');
+
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::resource('user','UserController');
+        Route::get('destroy/{id}', 'UserController@destroy')->name('get-user-destroy');
+        Route::get('edit/{id}', 'UserController@edit')->name('get-user-edit');
+        Route::post('update/{id}', 'UserController@update')->name('post-user-update');
+    });
+ 
+    //Route::delete('user/{id}', 'UserController@destroy');
+
+    // Route::group(['prefix' => 'profile'], function () {
+    //     Route::get('/', 'AdminController@profile')->name('get-admin-profile-view');
+    // });
+   // Route::get('/', 'AdminController@user')->name('get-user-view');
+   
+});
