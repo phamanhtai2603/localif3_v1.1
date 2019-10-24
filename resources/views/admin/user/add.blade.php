@@ -45,6 +45,13 @@ Thêm mới người dùng
                     {{session('noti')}}
                 </small>
                 @endif
+                @if(count($errors)>0)
+                <div class="alert alert-danger">
+                     @foreach($errors->all() as $err)
+                     <?php echo $err."<br/>"; ?>
+                      @endforeach
+                </div>
+            @endif
             </h4>
         </div>
         <div class="card-body card-block">

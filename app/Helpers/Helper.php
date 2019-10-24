@@ -5,6 +5,7 @@ namespace App\Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\User;
+use App\Location;
 use Illuminate\Support\Facades\File;
 
 class Helper{
@@ -74,6 +75,31 @@ class Helper{
         }
 
         $user->update($input);
+    }
+
+    //////////Tự độ chế - Tài Tóc Dài 
+    //getArrInput Location
+    public static function getArrInput2(Request $request)
+    {
+        $imageFile = $request->file('avatar');
+        // uploadFile
+        $helper = new Helper;
+        $avatarName = $helper->uploadFile($imageFile);
+        // get arr input
+        $arrInput = $request->all();
+       
+
+        return $arrInput;
+    }
+
+    public static function updateLocation($id,Request $request)
+    {
+        $locaion = Location::find($id);
+        // call funtion get arr input from app\heplers\helper
+        $helper = new Helper;
+        $input = $helper->getArrInput2($request);
+
+        $locaion->update($input);
     }
     // update for Blog controller
     // public static function updateBlog($id,Request $request)

@@ -15,10 +15,12 @@ class CreateLocationTable extends Migration
     {
         Schema::create('location', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('location')->nullable();
-            $table->string('description')->nullable();
+            $table->string('name')->unique();
+            $table->text('description')->nullable();
+            $table->string('sign')->unique();
             $table->string('image')->default('default.png');
-            $table->integer('is_delete')->default(0);
+            $table->integer('status')->default(0);
+            $table->integer('is_deleted')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

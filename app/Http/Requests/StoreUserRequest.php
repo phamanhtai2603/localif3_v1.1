@@ -37,8 +37,6 @@ class StoreUserRequest extends FormRequest
 
             'first_name'    => 'required|min:2',
 
-            'last_name'     => 'required|min:2',
-
             'gender'        => 'regex:/[0-1]{1}/',
 
             'role'          => 'regex:/[1-3]{1}/',
@@ -62,7 +60,7 @@ class StoreUserRequest extends FormRequest
     {
         return [
             
-            'email.unique'       => 'Tên tài đã được sử dụng',
+            'email.unique'       => 'Email đã được sử dụng',
             'email.required'        => 'Email không được để trống',
             'email.email'           => 'Email không hợp lệ',
 
@@ -72,9 +70,6 @@ class StoreUserRequest extends FormRequest
 
             'first_name.required'   => 'Họ không được để trống',
             'first_name.min'        => 'Họ quá ngắn',
-
-            'last_name.required'    => 'Tên không được để trống',
-            'last_name.min'         => 'Tên quá ngắn',
 
             'date_of_birth.before'  => 'Ngày sinh không hợp lệ',
 

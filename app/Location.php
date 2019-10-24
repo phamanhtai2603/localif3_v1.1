@@ -10,9 +10,14 @@ class Location extends Model
     protected $table = 'location';
     public $timestamp = true;
 
+    protected $fillable = [
+        'name', 'description','sign','image','status',
+    ];
      // one - many relationship between location -> tour
      public function tour()
      {
          return $this->hasMany('App\Tour');
      }
+
+
 }

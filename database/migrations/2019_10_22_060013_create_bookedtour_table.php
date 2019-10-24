@@ -19,9 +19,9 @@ class CreateBookedtourTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->integer('size')->nullable();
             $table->integer('total_price')->nullable();
-            $table->string('note')->nullable();
+            $table->text('note')->nullable();
             $table->integer('status')->default(0);
-            $table->integer('is_delete')->default(0);
+            $table->integer('is_deleted')->default(0);
             $table->foreign('tour_id')->references('id')->on('tour')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
