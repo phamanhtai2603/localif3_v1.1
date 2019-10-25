@@ -78,7 +78,7 @@
                 </div>   
                 <div class="row form-group">
                   <div class="col col-md-3"><label for="sign" class=" form-control-label">Ký hiệu<span class="text text-danger">*</label></div>
-                  <div class="col-12 col-md-9"><textarea name="sign" rows="4" cols="50" placeholder="Ký hiệu viết tắt" class="form-control" data-parsley-trigger="change">{{old('sign')}}</textarea></div>
+                  <div class="col-12 col-md-9"><textarea name="sign" rows="2" cols="50" placeholder="Ký hiệu viết tắt" class="form-control" data-parsley-trigger="change">{{old('sign')}}</textarea></div>
                 </div>
                 <div class="row form-group">
                   <div class="col col-md-3"><label for="description" class=" form-control-label">Mô tả</label></div>

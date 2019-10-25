@@ -12,6 +12,9 @@
                 <li >
                     <a href="{{ route('location.index') }}" > <i class="menu-icon ti-receipt"></i>Quản lý địa điểm</a>
                 </li>
+                <li >
+                    <a href="{{ route('tour.index') }}" > <i class="menu-icon ti-receipt"></i>Quản lý tour</a>
+                </li>
                 
            
             </ul>

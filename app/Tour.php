@@ -10,15 +10,19 @@ class Tour extends Model
     protected $table = 'tour';
     public $timestamp = true;
 
+    protected $fillable = [
+        'tourguide_id','name', 'location_id', 'description','content','plan','image','price','status',
+    ];
+
      // one - many relationship Tour -> User
      public function user()
      {
-         return $this->belongsTo('App\User');
+         return $this->belongsTo('App\User','tourguide_id');
      }
 
      // one - one relationship between tour -> location
     public function location(){
-        return $this->belongsTo('App\Location');
+        return $this->belongsTo('App\Location','location_id');
     }
    
     // one - many relationship between tour -> bookedtour

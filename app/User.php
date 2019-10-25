@@ -9,7 +9,8 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    protected $table = 'users';
+    public $timestamp = true;
     /**
      * The attributes that are mass assignable.
      *
@@ -36,4 +37,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+     // one - many relationship between user -> tour
+     public function tour()
+     {
+         return $this->hasMany('App\Tour');
+     }
+
+     public function bookedtour()
+     {
+         return $this->hasMany('App\BookedTour');
+     }
 }

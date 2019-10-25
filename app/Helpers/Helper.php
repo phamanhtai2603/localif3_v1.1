@@ -101,6 +101,19 @@ class Helper{
 
         $locaion->update($input);
     }
+
+    public static function getArrInputTour(Request $request)
+    {
+        // $imageFile = $request->file('avatar');
+        // // uploadFile
+        // $helper = new Helper;
+        // $avatarName = $helper->uploadFile($imageFile);
+        // // get arr input
+        $arrInput = $request->all();
+       
+
+        return $arrInput;
+    }
     // update for Blog controller
     // public static function updateBlog($id,Request $request)
     // {

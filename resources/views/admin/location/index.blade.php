@@ -111,7 +111,7 @@
                                     <div class="modal-content">
                                       <!-- Modal Header -->
                                       <div class="modal-header">
-                                        <h4 class="modal-title">Thông tin loại phòng</h4>
+                                        <h4 class="modal-title">Thông tin địa điểm</h4>
                                         <button status="button" class="close" data-dismiss="modal">&times;</button>
                                       </div>
                                       <!-- Modal body -->

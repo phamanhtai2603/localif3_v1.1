@@ -36,6 +36,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('update/{id}', 'LocationController@update')->name('post-location-update');
     });
 
+    Route::group(['prefix' => 'tour'], function () {
+        Route::resource('tour','TourController');
+        Route::get('destroy/{id}', 'TourController@destroy')->name('get-tour-destroy');
+        Route::get('edit/{id}', 'TourController@edit')->name('get-tour-edit');
+        Route::post('update/{id}', 'TourController@update')->name('post-tour-update');
+    });
+
+
     //Route::delete('user/{id}', 'UserController@destroy');
 
     // Route::group(['prefix' => 'profile'], function () {
