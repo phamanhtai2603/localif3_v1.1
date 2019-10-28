@@ -1,8 +1,8 @@
 <header id="header" class="header">
   <div class="top-left">
       <div class="navbar-header">
-          <a class="navbar-brand" href="./"><img src="admin_page_asset/images/logo.png" alt="Logo"></a>
-          <a class="navbar-brand hidden" href="./"><img src="admin_page_asset/images/logo2.png" alt="Logo"></a>
+          <a class="navbar-brand" href="{{ route('get-admin-view') }}"><img src="admin_page_asset/images/logo.png" alt="Logo"></a>
+          <a class="navbar-brand hidden" href="{{ route('get-admin-view') }}"><img src="admin_page_asset/images/logo2.png" alt="Logo"></a>
           <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
       </div>
   </div>

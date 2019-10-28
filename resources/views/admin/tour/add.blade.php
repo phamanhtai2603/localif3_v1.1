@@ -6,7 +6,7 @@
 @endsection
 
 @section('title')
-Thêm mới phòng
+Thêm mới tour
 @endsection
 
 
@@ -41,7 +41,7 @@ Thêm mới phòng
 @section('content')
     <div class="card">
         <div class="card-header">
-            <strong> Thêm mới phòng</strong>
+            <strong> Thêm mới tour</strong>
 		</div>
 
 		@if (session('noti'))
@@ -93,7 +93,11 @@ Thêm mới phòng
                                 <select name="location_id" class="form-control" data-parsley-trigger="change" required >
                                     @if (count($locations) > 0)
                                         @foreach ($locations as $location)
-                                            <option value="{{ $location->id }}">{{ $location->name}}</option>
+                                            <option value="{{ $location->id }}">{{ $location->name}}
+                                                @if($location->status==1)
+                                                <span class="text text-danger">{{ ' * Địa điểm đã bị vô hiệu hóa * '}}</span>
+                                                @endif
+                                            </option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -155,10 +159,21 @@ Thêm mới phòng
 							<label for="image" class=" form-control-label">Hình ảnh <span class="text text-danger"></span></label><br/>
 							<small class="text text-primary">Đây là hình ảnh chính để hiển thị, bạn có thể bổ sung hình ảnh khác sau</small>
 						</div>
-						<div class="col-12">
-							<img class="mt-4" id="preview_avatar" src="admin_page_asset/images/default_image.png" alt="ảnh đại điện">
-							<input type="file" id="image" name="image" class="form-control-file" required value="{{old('image')}}">
-						</div>
+						<div class="row">
+                            <div class="col-md-3" align="right"><h4>Select Images</h4></div>
+                            <div class="col-md-6">
+                                <input type="file" name="file[]" id="file" accept="image/*" multiple required />
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                0%
+                            </div>
+                        </div>
+                        <br />
+                        <div id="success" class="row">
+    
+                        </div>
 						@if ($errors->has('image'))
 							<small class="form-control-feedback text text-danger">
 								{{ $errors->first('image') }}
@@ -174,6 +189,8 @@ Thêm mới phòng
                   <i class="fa fa-ban"></i> Đặt lại
               </button>
         </form>
+
+        
           {{-- end form data --}}
         </div>
     </div>
@@ -182,22 +199,6 @@ Thêm mới phòng
     
   {{-- xem anh trc khi upload --}}
     <script src="admin_page_asset/js/validation/jquery.min.js"></script>
-    <script>
-    function readURL(file){
-      if(file.files && file.files[0]){
-        var reader = new FileReader();
-
-        reader.onload = function(e){
-          $('#preview_avatar').attr('src',e.target.result);
-        }
-        reader.readAsDataURL(file.files[0]);
-      }
-    };
-    $("#image").change(function(){
-      readURL(this)
-    })
-    
-    </script>
     <script src="admin_page_asset/js/ckeditor.js"></script>
     <script>
             ClassicEditor
@@ -209,4 +210,32 @@ Thêm mới phòng
 
     {{-- validation with parsley js --}}
     <script src="admin_page_asset/js/validation/parsley.min.js"></script>
+
+    {{-- multi image --}}
+    <script>
+        $(document).ready(function(){
+            $('form').ajaxForm({
+                beforeSend:function(){
+                    $('#success').empty();
+                    $('.progress-bar').text('0%');
+                    $('.progress-bar').css('width', '0%');
+                },
+                uploadProgress:function(event, position, total, percentComplete){
+                    $('.progress-bar').text(percentComplete + '0%');
+                    $('.progress-bar').css('width', percentComplete + '0%');
+                },
+                success:function(data)
+                {
+                    if(data.success)
+                    {
+                        $('#success').html('<div class="text-success text-center"><b>'+data.success+'</b></div><br /><br />');
+                        $('#success').append(data.image);
+                        $('.progress-bar').text('Uploaded');
+                        $('.progress-bar').css('width', '100%');
+                    }
+                }
+            });
+        });
+        </script>
+        
 @endsection

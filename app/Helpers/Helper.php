@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\User;
 use App\Location;
+use App\Tour;
 use Illuminate\Support\Facades\File;
 
 class Helper{
@@ -103,16 +104,43 @@ class Helper{
     }
 
     public static function getArrInputTour(Request $request)
-    {
-        // $imageFile = $request->file('avatar');
-        // // uploadFile
-        // $helper = new Helper;
-        // $avatarName = $helper->uploadFile($imageFile);
-        // // get arr input
-        $arrInput = $request->all();
-       
+    {   
+            $image_code = '';
+            $images = $request->file('file');
+            foreach($images as $image)
+            {
+             $new_name = rand() . '.' . $image->getClientOriginalExtension();
+             $image->move(public_path('images'), $new_name);
+             $image_code .= $new_name.',';
+            }
 
-        return $arrInput;
+            $request['image'] = $image_code;
+            
+            // // get arr input
+            $arrInput = $request->all();
+            return $arrInput; 
+    }
+
+    public static function updateTour($id,Request $request)
+    {       $tour = Tour::find($id);
+            $image_code = '';
+            if($request->file('file')){
+                $images = $request->file('file');
+                foreach($images as $image)
+                {
+                $new_name = rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $new_name);
+                $image_code .= $new_name.',';
+                }
+                //Lấy request = chuỗi img cũ
+                $request['image'] = $tour->image;
+                //thêm img mới vào
+                $request['image'] .= $image_code;
+            }
+            // // get arr input
+            $arrInput = $request->all();
+            $tour->update($arrInput);
+            
     }
     // update for Blog controller
     // public static function updateBlog($id,Request $request)

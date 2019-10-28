@@ -15,6 +15,18 @@ class TourController extends Controller
         return view('admin.tour.index',['tours' => $tours, 'stt' => 1]);
     }
 
+
+    public function destroy($id){
+        try{
+            $tour = Tour::find($id);
+            $tour->delete();
+        } catch (Exception $e) {
+            return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();
+        }
+        return redirect()->back()->with('success', 'Xóa thành công');
+        }
+
+
     public function create(){
         $user = User::where('role',2)->get();  
         $locations = Location::all();
@@ -23,14 +35,32 @@ class TourController extends Controller
 
     public function store(Request $request){
         $tour = new Tour();
-        try{
-        $input = Helper::getArrInput2($request);
-        
-        $tour->create($input);
+        try{ 
+       $input = Helper::getArrInputTour($request);
+       $tour->create($input);
         }catch (Exception $e) {
             return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();
         }
         return redirect()->back()->with('noti', 'Thêm mới thành công');
          
     }
+
+    public function edit($id){
+        $tour = Tour::find($id);
+        $user = User::where('role',2)->get();  
+        $locations = Location::all();
+        return view('admin.tour.edit',['tour' => $tour,'tourguides'=>$user,'locations'=>$locations]);
+    }
+
+    public function update(Request $request, $id){
+        try{
+       $input = Helper::updateTour($id, $request); //updateTour
+       
+        } catch (Exception $e) {
+            return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();
+        }
+        return redirect()->back()->with('noti', 'Sửa thành công');
+        }
+
+    
 }

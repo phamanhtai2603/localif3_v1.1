@@ -8,7 +8,10 @@
     
     <title>@yield('title')</title>
     <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+    
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+          <script src="http://malsup.github.com/jquery.form.js"></script>
     {{-- <script>
         // Enable pusher logging - don't include this in production
         //Pusher.logToConsole = true;
