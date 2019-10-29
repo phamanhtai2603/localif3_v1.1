@@ -110,7 +110,7 @@
 
                     <a class="nav-link" href="#"><i class="fa fa -cog"></i>Cài đặt</a>
 
-                    <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Đăng xuất</a>
+                    <a class="nav-link" href="{{route('get-admin-logout')}}"><i class="fa fa-power -off"></i>Đăng xuất</a>
               </div>
           </div>
 

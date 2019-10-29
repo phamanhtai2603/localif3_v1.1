@@ -15,7 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['namespace' => 'Auth'], function () {
+    Route::get('admin/login', 'LoginController@getAdminLogin');
+    Route::post('admin/login', 'LoginController@postAdminLogin')->name('post-admin-login');
+
+    Route::get('admin/logout', 'LoginController@logout')->name('get-admin-logout');
+});
+
+Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
 
     Route::get('/', 'AdminController@index')->name('get-admin-view');
 
