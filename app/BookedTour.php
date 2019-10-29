@@ -13,7 +13,7 @@ class BookedTour extends Model
     // one - many relationship BookedTour -> User
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','customer_id');
     }
 
     // one - many relationship BookedTour -> Tour

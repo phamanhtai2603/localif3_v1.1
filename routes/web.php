@@ -50,6 +50,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
         Route::post('update/{id}', 'TourController@update')->name('post-tour-update');
     });
 
+    Route::group(['prefix' => 'bookedtour'], function () {
+        Route::resource('bookedtour','BookedtourController');
+        Route::get('destroy/{id}', 'BookedtourController@destroy')->name('get-bookedtour-destroy');
+        Route::get('edit/{id}', 'BookedtourController@edit')->name('get-bookedtour-edit');
+        Route::post('update/{id}', 'BookedtourController@update')->name('post-bookedtour-update');
+    });
+
+    Route::group(['prefix' => 'ajax'], function () {
+        Route::get('bookedtour/{idTour}', 'AjaxController@getTour');
+        Route::get('bookedtourguide/{idTour}', 'AjaxController@getTourguide');
+    });
 
     //Route::delete('user/{id}', 'UserController@destroy');
 
