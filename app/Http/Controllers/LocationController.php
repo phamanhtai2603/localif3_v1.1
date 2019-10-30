@@ -19,17 +19,6 @@ class LocationController extends Controller
 
     public function store(StoreLocationRequest $request){
         $location = new Location();
-       
-    //    $loca_check = Location::where('sign',$request->sign)->take(1)->get();
-    //     if(isset($loca_check)){
-    //         if($loca_check->sign == ''){
-    //             echo 'Cho phep'; die();
-    //         }else{
-    //             echo 'Da ton tai';die();
-    //         }
-    //     }else{
-    //         echo 'Cho phep them moi';
-    //     }
         $validated = $request->validated();
         try{
             $input = Helper::getArrInput2($request);

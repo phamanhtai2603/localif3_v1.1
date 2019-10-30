@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\StoreEditUserRequest;
 use App\User;
+use App\UnavailableDay;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Http\Requests\StoreUserRequest;
@@ -21,8 +22,13 @@ class UserController extends Controller
     public function store(StoreUserRequest $request){
         $user = new User();
         $input = Helper::getArrInput($request);
-        
         $user->create($input);
+  
+        // $user2=User::where('email',$request->email)->get();
+        // dd($user2);
+        // $unavailableday = new UnavailableDay();
+        // $unavailableday->user_id = $user2->id;
+        // $unavailableday->save();
         
         return back()->with('noti','Thêm mới tài khoản thành công!!');
          

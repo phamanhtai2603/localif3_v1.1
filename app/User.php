@@ -48,4 +48,9 @@ class User extends Authenticatable
      {
          return $this->hasMany('App\BookedTour');
      }
+
+     public function unavailableday()
+     {
+         return $this->hasOne('App\UnavailableDay');
+     }
 }

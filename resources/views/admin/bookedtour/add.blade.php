@@ -66,6 +66,7 @@
               <div class="col col-md-3"><label for="tour_id" class=" form-control-label">Chọn tour<span class="text text-danger">*</span></label></div>
               <div class="col-12 col-md-9">
                   <select name="tour_id" id="tour_name" class="form-control" data-parsley-trigger="change" required >
+                        <option value="" selected></option>
                       @if (count($tours) > 0)
                           @foreach ($tours as $tour)
                               <option value="{{ $tour->id }}">{{ $tour->name}}</option>
@@ -73,12 +74,19 @@
                       @endif
                   </select>
               </div>
-              @if ($errors->has('location_id'))
-                  <small class="form-control-feedback text text-danger">
-                      {{ $errors->first('location_id') }}
-                  </small>
-              @endif
             </div>
+            <div class="row form-group">
+                <div class="col col-md-3"><label for="tour_id" class=" form-control-label">Chọn khách hàng<span class="text text-danger">*</span></label></div>
+                <div class="col-12 col-md-9">
+                    <select name="customer_id" id="customer_id" class="form-control" data-parsley-trigger="change" required >
+                        @if (count($users) > 0)
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->first_name.' '.$user->last_name}}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+              </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label class=" form-control-label">Giá tiền <i>(người/ngày):</i><span class="text text-danger"></span></label></div>
                 <div class="col-12 col-md-9" id="tour_price">
@@ -95,7 +103,7 @@
               <div class="col col-md-3"><label for="size" class=" form-control-label">Số người:<span class="text text-danger">*</span></label></div>
               <div class="col-12 col-md-9">
                   <input type="number" name="size" placeholder="Số người dự kiến"
-                  value="{{old('size')}}" class="form-control" data-parsley-trigger="change" required >
+                  value="1" class="form-control" data-parsley-trigger="change" required minlength="1">
               </div>
               @if ($errors->has('size'))
                   <small class="form-control-feedback text text-danger">
@@ -126,7 +134,7 @@
       </div>
 
                 <button type="submit" class="btn btn-primary mr-5">
-                  <i class="fa fa-dot-circle-o"></i> Lưu
+                  <i class="fa fa-dot-circle-o"></i> Đặt tour
                 </button>
                 <button type="reset" class="btn btn-danger">
                     <i class="fa fa-ban"></i> Đặt lại

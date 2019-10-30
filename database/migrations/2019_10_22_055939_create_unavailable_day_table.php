@@ -16,7 +16,7 @@ class CreateUnavailableDayTable extends Migration
         Schema::create('unavailableday', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('date')->nullable();
+            $table->text('date')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('status')->default(0);
             $table->timestamps();
