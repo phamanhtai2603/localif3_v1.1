@@ -38,8 +38,13 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header">
-          Đặt tour
+        <div class="card-header row">
+            <div class="col col-md-3 alert alert-warning">
+                <b>*LƯU Ý: Đối với HDV này, bạn không thể đặt tour vào những ngày:</b> 
+            </div>
+            <div class="col col-md-9 alert alert-warning" id="unavailableday">
+                ************
+            </div>
         </div>
         @if (session('success'))
             <div class="alert alert-success">
@@ -66,7 +71,7 @@
               <div class="col col-md-3"><label for="tour_id" class=" form-control-label">Chọn tour<span class="text text-danger">*</span></label></div>
               <div class="col-12 col-md-9">
                   <select name="tour_id" id="tour_name" class="form-control" data-parsley-trigger="change" required >
-                        <option value="" selected></option>
+                        <option value="{{old('tour_id')}}" selected></option>
                       @if (count($tours) > 0)
                           @foreach ($tours as $tour)
                               <option value="{{ $tour->id }}">{{ $tour->name}}</option>
@@ -90,13 +95,16 @@
             <div class="row form-group">
                 <div class="col col-md-3"><label class=" form-control-label">Giá tiền <i>(người/ngày):</i><span class="text text-danger"></span></label></div>
                 <div class="col-12 col-md-9" id="tour_price">
-                {{-- <input type="text" name="tour_price" class="form-control" id="tour_price" readonly/>                                       		 --}}
+                    <input type="text" name="tour_price" class="form-control" id="tour_price" readonly/>                                       		 
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col col-md-3"><label class=" form-control-label">Hướng dẫn viên:<span class="text text-danger"></span></label></div>
                 <div class="col-12 col-md-9" id="tourguide">
-                {{-- <input type="text" name="tour_price" class="form-control" id="tour_price" readonly/>                                       		 --}}
+                    {{-- <input type="text" name="tourguide" id="tourguidename" class="form-control" value="" readonly/>                                       	 --}}
+                    <select name="tourguidename" id="tourguidename" class="form-control" data-parsley-trigger="change" required >
+                           
+                    </select>
                 </div>
             </div>
             <div class="row form-group">
@@ -159,9 +167,21 @@
             });    
             $.get("index.php/admin/ajax/bookedtourguide/"+idTour,function(data){ //Gọi trang ajax lên và tạo một function, truyền dữ liệu vô biến data
               // alert(data);
-                $("#tourguide").html(data);       //truyền dữ liệu lên <select id="Room">
-            });                                      
+                $("#tourguidename").html(data);       //truyền dữ liệu lên <select id="Room">
+            });      
+            $.get("index.php/admin/ajax/bookedtourguideUnav/"+idTour,function(data){ //Gọi trang ajax lên và tạo một function, truyền dữ liệu vô biến data
+              // alert(data);
+                $("#unavailableday").html(data);       //truyền dữ liệu lên <select id="Room">
+            });                                  
           });
+          
+        //   $("#tourguidename").change(function(){
+        //     alert('cdm');
+        //     var idTourguide=$(this).val();
+        //     $.get("index.php/admin/ajax/bookedtourguideUnav/"+idTourguide,function(data){
+        //         alert(data);
+        //     }); 
+        //    });
         });
     </script>
 @endsection

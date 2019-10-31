@@ -60,6 +60,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
     Route::group(['prefix' => 'ajax'], function () {
         Route::get('bookedtour/{idTour}', 'AjaxController@getTour');
         Route::get('bookedtourguide/{idTour}', 'AjaxController@getTourguide');
+        Route::get('bookedtourguideUnav/{idTour}', 'AjaxController@getTourguideUnav');
     });
 
     //Route::delete('user/{id}', 'UserController@destroy');

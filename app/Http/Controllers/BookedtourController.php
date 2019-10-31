@@ -40,6 +40,9 @@ class BookedtourController extends Controller
             return $dtF->diff($dtT)->format('%a');
         }
         //
+    
+
+        
         try{
             
             $bookedtour->tour_id = $request->tour_id;
@@ -54,8 +57,9 @@ class BookedtourController extends Controller
             $days=secondsToTime($second)+1;
             //
             $bookedtour->total_price = $days*$bookedtour->tour->price;
+            
             //Xử lí unvailable
-            if($days>2){
+            if($second>=0){
                 $unavailableday='';
                 for($i=0;$i<=$days-1;$i++){
                     $date_nextsecond = $date_fromsecond + 86400*$i;
@@ -63,17 +67,32 @@ class BookedtourController extends Controller
                     $day_next = date('Y/m/d ',$date_nextsecond); 
                     $bookedtour->date .= $day_next.',';
                 }
+            }else{
+                return back()->with('errorSQL', 'Ngày xuất phát phải nhỏ hơn hoặc bằng ngày kết thúc!');
             }
-            $user = User::where('id',$bookedtour->tour->tourguide_id)->get();
-            //$user->unavailableday .= $bookedtour->date;
-            dd($user);
-            $user->save();
-            $bookedtour->save();
 
-            return back()->with('success','Thêm mới địa điểm thành công!!');
+            //Cắt mảng unvailableday và mảng bookedtour->date ra để so sánh có trùng ngày hay không
+            $user = User::where('id',$bookedtour->tour->tourguide_id)->first();
+            $arr_bookedtourdate = explode ( ',' , $bookedtour->date,-1);
+            $arr_userunavailableday = explode ( ',' , $user->unavailableday,-1);
+            //sizeof($arr_bookedtourdate);
+            //sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday));
+
+            if(sizeof($arr_bookedtourdate)==sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday))){
+                $user->unavailableday .= $bookedtour->date;
+                $user->save();
+                $bookedtour->save();
+            }else{
+                return back()->with('errorSQL', 'Hướng dẫn viên không thể nhận tour vào những ngày này!');
+            }
+
+            return back()->with('success','Đặt tour thành công!!');
         } catch (Exception $e) {
             return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();
         }
-        return redirect()->back()->with('success', 'Thêm mới thành công');
+        return redirect()->back()->with('success', 'Đặt tour thành công?!');
+        
+
     }
+    
 }

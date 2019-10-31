@@ -22,8 +22,22 @@ class AjaxController extends Controller
     	$tour = Tour::where('id',$idTour)->get();
         foreach($tour as $tour)
     	{    
-            echo "<input type='text' name='tourguide' class='form-control'  value='".$tour->user->first_name.' '.$tour->user->last_name."'readonly/>                                       		
-                    ";
+            echo "<option value='".$tour->user->id."' readonly>".$tour->user->first_name.' '.$tour->user->last_name." </option>   ";
+           //echo "<input type='text' name='tourguide' id='tourguidename' class='form-control'  value='".$tour->user->first_name.' '.$tour->user->last_name."'readonly/>  ";
         }
+    }
+
+    public function getTourguideUnav($idTour){
+    	$tour = Tour::where('id',$idTour)->get();
+    	foreach($tour as $tour)
+    	{
+            $arrs = explode ( ',' , $tour->user->unavailableday,-1);  
+                foreach($arrs as $arr){
+                    echo "<a style='color=green'>" .$arr."&emsp;&emsp;&emsp;&emsp;". "</a>";  
+                }
+            
+            //echo " <input type='text' name='unavailableday' class='form-control'  value='".$tour->user->unavailableday."'readonly/>  ";                                     		
+                    
+    	}
     }
 }
