@@ -134,6 +134,14 @@ class BookedtourController extends Controller
                 $user->unavailableday .= $bookedtour->date;
                 $user->save();
             }
+            if($request->status==2){
+                $date=$bookedtour->date;
+                $user = User::where('id',$bookedtour->tour->tourguide_id)->first();
+                $userunav = $user->unavailableday;
+                $userunav=str_replace($date,'',$userunav);
+                $user->unavailableday = $userunav;
+                $user->save();
+            }
         }
         $bookedtour->note .= ' Update: '.$request->note;
         $bookedtour->save();
