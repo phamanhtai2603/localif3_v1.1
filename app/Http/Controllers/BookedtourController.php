@@ -49,14 +49,18 @@ class BookedtourController extends Controller
             $bookedtour->customer_id = $request->customer_id;
             $bookedtour->booked_user = Auth::user()->email;
             $bookedtour->size = $request->size;
-
+            if($request->size<=0){
+                return back()->with('errorSQL', 'Số người tối thiểu là 1');
+            }
+            $bookedtour->note=$request->note;
             //Tính days từ date_from đến date_to
             $date_fromsecond = strtotime($date_from = $request->date_from);
             $date_tosecond = strtotime($date_to = $request->date_to);
             $second = $date_tosecond - $date_fromsecond;
             $days=secondsToTime($second)+1;
             //
-            $bookedtour->total_price = $days*$bookedtour->tour->price;
+           
+            $bookedtour->total_price = $bookedtour->size*$bookedtour->tour->price*$days;
             
             //Xử lí unvailable
             if($second>=0){
@@ -79,8 +83,8 @@ class BookedtourController extends Controller
             //sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday));
 
             if(sizeof($arr_bookedtourdate)==sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday))){
-                $user->unavailableday .= $bookedtour->date;
-                $user->save();
+                // $user->unavailableday .= $bookedtour->date;
+                // $user->save();
                 $bookedtour->save();
             }else{
                 return back()->with('errorSQL', 'Hướng dẫn viên không thể nhận tour vào những ngày này!');
@@ -93,6 +97,50 @@ class BookedtourController extends Controller
         return redirect()->back()->with('success', 'Đặt tour thành công?!');
         
 
+    }
+
+    public function destroy($id){
+        try{
+            $bookedtour = BookedTour::find($id);
+            $date=$bookedtour->date;
+            $user = User::where('id',$bookedtour->tour->tourguide_id)->first();
+            $userunav = $user->unavailableday;
+            $userunav=str_replace($date,'',$userunav);
+            $user->unavailableday = $userunav;
+            $user->save();
+
+            $bookedtour->delete();
+        } catch (Exception $e) {
+            return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();
+        }
+        return redirect()->back()->with('success', 'Xóa thành công');
+    }
+
+    public function edit(Request $request, $id){
+        $bookedtour = BookedTour::find($id);
+        $date_from=substr($bookedtour->date,0,10);
+        $date_to= substr(substr($bookedtour->date,-12),0,10);
+        return view('admin.bookedtour.edit',['bookedtour' => $bookedtour,'date_from'=>$date_from,'date_to'=>$date_to]);
+    }
+
+    public function update(Request $request, $id){
+        $bookedtour = BookedTour::find($id);
+        try{
+        $bookedtour->total_price = ($bookedtour->total_price/$bookedtour->size) * $request->size;
+        if($bookedtour->status!=$request->status){
+            $bookedtour->status = $request->status;
+            if($request->status==1){
+                $user = User::where('id',$bookedtour->tour->tourguide_id)->first();
+                $user->unavailableday .= $bookedtour->date;
+                $user->save();
+            }
+        }
+        $bookedtour->note .= ' Update: '.$request->note;
+        $bookedtour->save();
+        } catch (Exception $e) {
+            return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();
+        }
+        return redirect()->back()->with('success', 'Sửa thành công');
     }
     
 }

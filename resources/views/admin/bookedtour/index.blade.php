@@ -91,7 +91,7 @@
                           <td>                                                 
                                 <a class="btn btn-success btn-sm mr-2" href="" data-toggle="modal" data-target="#myModal-{{$bookedtour->id}}" data-backdrop="false"> <span><i class="fa fa-eye"></i></span> Xem</a>
                           		<a class="btn btn-warning btn-sm mr-2" href="{{ route('get-bookedtour-edit',['id'=>$bookedtour->id]) }}"> <span><i class="fa fa-edit"></i></span> Sửa</a>
-                                {{-- <button class="btn btn-danger btn-sm"  data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal{{$loca->id}}"> <span><i class="fa fa-trash"></i></span> Xoá</button> --}}
+                                <button class="btn btn-danger btn-sm"  data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal{{$bookedtour->id}}"> <span><i class="fa fa-trash"></i></span> Xoá</button>
                                         
                                   <!-- model delete-->
                                   <div style="text-align: left;" id="myModal{{$bookedtour->id}}" class="modal fade" role="dialog">
@@ -155,11 +155,11 @@
                                           </tr>
                                           <tr>
                                             <th>Ngày đi</th>
-                                            <td>{{ 'Ngày đi' }}</td>
+                                            <td>{{ substr($bookedtour->date,0,10) }}</td>
                                           </tr>
                                           <tr>
                                             <th>Ngày kết thúc</th>
-                                            <td>{{ 'Ngày kết thúc' }}</td>
+                                            <td>{{ substr($bookedtour->date,-12) }}</td>
                                           </tr>
                                           <tr>
                                             <th>Số người</th>

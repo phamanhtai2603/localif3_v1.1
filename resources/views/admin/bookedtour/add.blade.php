@@ -133,7 +133,7 @@
            </div>
            <div class="form-group" id="text-area">
               <div class=""><label for="textarea-input" class=" form-control-label">Lời nhắn đến HDV:</label></div>
-              <div class=""><textarea name="content" id="editor" rows="9" cols="9" placeholder="Bạn có muốn nhắn gì không..." class="form-control" data-parsley-trigger="change" ></textarea></div>
+              <div class=""><textarea name="note" id="editor" rows="9" cols="9" placeholder="Bạn có muốn nhắn gì không..." class="form-control" data-parsley-trigger="change" ></textarea></div>
               @if($errors->has('note'))
                   <small class="text-danger w-100">
                       {{$errors->first('note')}}

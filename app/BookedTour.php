@@ -19,6 +19,6 @@ class BookedTour extends Model
     // one - many relationship BookedTour -> Tour
     public function tour()
     {
-        return $this->belongsTo('App\tour');
+        return $this->belongsTo('App\Tour','tour_id');
     }
 }
