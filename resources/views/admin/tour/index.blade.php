@@ -171,6 +171,7 @@
                                             <hr class="my-1">
                                         </div>
                                         <div class="modal-footer">
+                                                <a class="btn btn-primary" href="{{ route('get-comment-index',['id'=>$tour->id]) }}"><i class="fa fa-edit"></i> Xem bình luận</a>
                                                 <a class="btn btn-primary" href="{{ route('get-tour-edit',['id'=>$tour->id]) }}"><i class="fa fa-edit"></i> Chỉnh sửa</a>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                                             </div>

@@ -60,6 +60,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
         Route::post('update/{id}', 'BookedtourController@update')->name('post-bookedtour-update');
     });
 
+    Route::group(['prefix' => 'comment'], function () {
+        Route::resource('comment','CommentController');
+        Route::get('destroy/{id}', 'CommentController@destroy')->name('get-comment-destroy');
+        Route::get('index/{id}', 'CommentController@indexview')->name('get-comment-index');
+        Route::get('hide/{id}', 'CommentController@hide')->name('get-comment-hide');
+        // Route::get('edit/{id}', 'CommentController@edit')->name('get-comment-edit');
+        // Route::post('update/{id}', 'CommentController@update')->name('post-comment-update');
+    });
+
     Route::group(['prefix' => 'ajax'], function () {
         Route::get('bookedtour/{idTour}', 'AjaxController@getTour');
         Route::get('bookedtourguide/{idTour}', 'AjaxController@getTourguide');

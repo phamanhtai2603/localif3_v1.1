@@ -18,7 +18,7 @@
                 <li >
                     <a href="{{ route('bookedtour.index') }}" > <i class="menu-icon ti-view-list-alt"></i>Quản lý tour đã book</a>
                 </li>
-                
+             
            
             </ul>
         </div><!-- /.navbar-collapse -->
