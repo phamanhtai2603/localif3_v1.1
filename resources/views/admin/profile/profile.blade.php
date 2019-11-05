@@ -94,7 +94,7 @@
                       <div class="page-title">
                           <ol class="breadcrumb text-right">
                           <li><a href="{{'/admin'}}">Bảng điều khiển</a></li>
-                          <li><a href="{{route('get-user-view')}}">Quản lý người dùng</a></li>
+                          <li><a href="{{route('get-admin-profile-view')}}">Thông tin tài khoản</a></li>
                           </ol>
                       </div>
                   </div>
@@ -112,6 +112,7 @@
             <div class="card">
                 <div class="card-header">
                     <strong class="card-title mr-2">Thông tin tài khoản</strong>
+                    <button class="btn btn-danger btn-sm mr-2 " data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal{{ Auth::user()->id}}"></i></span> Đổi mật khẩu</button>
                     @if(session('noti'))
                     <small id="success" class="alert alert-success p-2">
                         {{session('noti')}}
@@ -134,12 +135,12 @@
                             <ul class="list-unstyled">
                                 <li class="edit"><span>Tên Tài khoản:</span> 
                                     <span class="uppercase-first-letter old-value">
-                                        {{Auth::user()->username}}
+                                        {{ Auth::user()->first_name.' '.Auth::user()->last_name}}
                                     </span>
                                 </li>
                                 <li class="edit"><span>Email:</span>
-                                    <span id="display_email" style="text-transform: none; font-weight: normal">
-                                        {{Auth::user()->email}}
+                                    <span id="display_email" style="text-transform: none; font-weight: normal" readonly>
+                                        {{ Auth::user()->email }}
                                     </span>
                                 </li>
                                 <li class="edit"><span>Ngày tạo:</span>
@@ -167,8 +168,9 @@
                     <span id="noti" class=""></span>
                 </div>
                 <div class="card-body">
-                    <form id = "formData">
-                    <div class="row">
+                    <form action={{ route('post-admin-profile-update',['id'=>Auth::user()->id])}} enctype="multipart/form-data" method="post" class="form-horizontal" data-parsley-validate="" id = "formData">
+                    @csrf
+                        <div class="row">
                         <div class="col-sm-6 col-md-4 user-img" style="margin-top: 30px;">
                             <img id="preview_avatar" width="222px" src="
                             @if (Auth::user()->avatar == null)
@@ -185,10 +187,16 @@
                         
                         <div class="col-sm-6 col-md-8  user-detail mt-2">
                             <ul class="list-unstyled">
+                                <li class="edit"><span>Họ:</span> 
+                                    <span class="input-edit">
+                                        <input id="first_name" name="first_name" type="text" value="{{Auth::user()->first_name}}" placeholder="Tên"/>
+                                        <small id="noti_first_name" class="noti"></small>
+                                    </span>
+                                </li>
                                 <li class="edit"><span>Tên:</span> 
                                     <span class="input-edit">
-                                        <input id="name" name="name" type="text" value="{{Auth::user()->first_name . " " . Auth::user()->last_name}}" placeholder="Tên"/>
-                                        <small id="noti_name" class="noti"></small>
+                                        <input id="last_name" name="last_name" type="text" value="{{ Auth::user()->last_name}}" placeholder="Tên"/>
+                                        <small id="noti_last_name" class="noti"></small>
                                     </span>
                                 </li>
                                 <li class="edit"><span>Ngày sinh:</span>
@@ -197,9 +205,9 @@
                                         <small id="noti_date_of_birth" class="noti"></small>
                                     </span>
                                 </li>
-                                <li class="edit"><span>Địa chỉ email:</span> 
+                                <li class="edit"><span>Địa chỉ email đăng nhập:</span> 
                                     <span class="input-edit">
-                                        <input id="email" name="email" type="email" value="{{Auth::user()->email}}" placeholder="Địa chỉ email"/>
+                                        <input id="email" name="email" type="email" value="{{Auth::user()->email}}" placeholder="Địa chỉ email" readonly/>
                                         <small id="noti_email" class="noti"></small>
                                     </span>
                                 </li>
@@ -229,12 +237,20 @@
                                         <small id="noti_address" class="noti"></small>
                                     </span>
                                 </li>
-                                <li class="edit"><span>Quốc tịch:</span>
+                                {{-- <li class="edit"><span>Nhập mật khẩu cũ để đổi mật khẩu:</span>
                                     <span class="input-edit">
-                                        <input id="country" name="country" type="text" value="{{Auth::user()->country}}" placeholder="Quốc tịch"/>
-                                        <small id="noti_country" class="noti"></small>
+                                        <input id="old_password" name="old_password" type="text" value="" placeholder="Địa chỉ"/>
+                                        <small id="noti_old_password" class="noti"></small>
+                                    </span>
+                                </li> --}}
+                                
+                                <li class="edit"><span>Mật khẩu mới:</span>
+                                    <span class="input-edit">
+                                        <input id="password" name="password" type="text" value="" placeholder="Mật khẩu mới"/>
+                                        <small id="noti_password" class="noti"></small>
                                     </span>
                                 </li>
+                                
                             </ul>
                             </div><!-- end columns -->
                         <div id="edit-profile" class="modal custom-modal fade" role="dialog">
@@ -251,10 +267,50 @@
                         </div><!-- end columns -->
                     </div><!-- end row -->
                     <div class="input-edit">
-                            <button type="button" class="btn-save"><i class="fa fa-save"></i> Lưu</button>
-                            <button type="reset" class="btn-close"><i class="fa fa-close"></i> Hủy</button>
+                            <button type="submit" class="btn-save"><i class="fa fa-save"></i> Lưu</button>
+                            <button type="reset" class="btn-close"><i class="fa fa-close"></i> Hủy</button> 
                     </div>
-                    </form>
+                     </form>
+                     <div class="modal fade" id="myModal{{ Auth::user()->id}}">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Đổi mật khẩu!</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <!-- Modal body -->
+                                <form  action={{ route('post-admin-password-update',['id'=>Auth::user()->id])}} method="post" class="form-horizontal" data-parsley-validate="">
+                                 @csrf  
+                                    <div class="modal-body">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="email-input" class=" form-control-label">Mật khẩu:</label></div>
+                                             <div class="col-12 col-md-9">
+                                                <input type="password" id="password" name="password" value="" placeholder="Nhập mật khẩu hiện tại" class="form-control" data-parsley-trigger="change">                                                    
+                                             </div>
+                                        </div> 
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="email-input" class=" form-control-label">Mật khẩu mới:</label></div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="password" id="new_password" name="new_password" value="" placeholder="Nhập mật khẩu  mới" class="form-control" data-parsley-trigger="change">                                                    
+                                            </div>
+                                        </div> 
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="email-input" class=" form-control-label">Xác nhận lại:</label></div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="password" id="renew_password" name="renew_password" value="" placeholder="Nhập lại mật khẩu  mới" class="form-control" data-parsley-trigger="change">                                                    
+                                            </div>
+                                        </div>                                         
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success" data-dismiss="modal">Xác nhận</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>
@@ -264,7 +320,7 @@
 
 @section('script')
 <script src="admin_page_asset/js/validation/jquery.min.js"></script>
-<script>
+{{-- <script>
 function formatDate(dateString){
     var arrDate = dateString.split('-');
     return [arrDate[2],arrDate[1],arrDate[0]].join('/');
@@ -330,7 +386,7 @@ $('.btn-save').click(function () {
         });
 });
 
-</script>
+</script> --}}
 {{-- xem anh trc khi upload --}}
 <script>
 function readURL(file){

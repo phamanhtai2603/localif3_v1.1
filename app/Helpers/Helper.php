@@ -77,6 +77,26 @@ class Helper{
 
         $user->update($input);
     }
+    
+    public static function updateProfile($id,Request $request)
+    {
+        $user = User::find($id);
+        // call funtion get arr input from app\heplers\helper
+        $helper = new Helper;
+        $input = $helper->getArrInput($request);
+
+        // nếu mật khẩu null thì không đổi mật khẩu;
+        if($input['password']==null){
+            $input['password'] = $user['password'];
+        }
+        //if($input['old_password']!=null && $input['old_password']==$user->)
+        // nếu avatar là ảnh mặt định thì không đổi avatars;
+        if($input['avatar']== 'default.png'){
+            $input['avatar'] = $user['avatar'];
+        }
+
+        $user->update($input);
+    }
 
     //////////Tự độ chế - Tài Tóc Dài 
     //getArrInput Location

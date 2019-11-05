@@ -95,20 +95,19 @@
           <div class="user-area dropdown float-right">
               <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <img class="user-avatar rounded-circle" width="40px" height="40px" src="
-                {{-- @if(Auth::user()->avatar == null)
+                @if(Auth::user()->avatar == null)
                     {{'upload/images/default.png'}}
                 @else
                     {{'upload/images/' . Auth::user()->avatar }}
-                @endif --}}
+                @endif
               " alt="User Avatar">
               </a>
 
               <div class="user-menu dropdown-menu">
-                    <a class="nav-link" href="#"><i class="fa fa- user"></i>Quản lý tài khoản</a>
+                    <a class="nav-link" href="{{route('get-admin-profile-view')}}"><i class="fa fa- user"></i>Quản lý tài khoản</a>
 
-                   {{-- <a class="nav-link" href="#"><i class="fa fa- user"></i>Thông báo<span class="count">13</span></a> --}}
+                   <a class="nav-link" href="#"><i class="fa fa- user"></i>Thông báo<span class="count">13</span></a>
 
-                    <a class="nav-link" href="#"><i class="fa fa -cog"></i>Cài đặt</a>
 
                     <a class="nav-link" href="{{route('get-admin-logout')}}"><i class="fa fa-power -off"></i>Đăng xuất</a>
               </div>

@@ -25,15 +25,18 @@ Route::group(['namespace' => 'Auth'], function () {
 Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
 
     Route::get('/', 'AdminController@index')->name('get-admin-view');
-
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/', 'AdminController@profile')->name('get-admin-profile-view');  
+        Route::post('edit/{id}', 'AdminController@update')->name('post-admin-profile-update');
+        Route::post('updatepassword/{id}','AdminController@updatepassword')->name('post-admin-password-update');
+    });
 
     Route::group(['prefix' => 'user'], function () {
         Route::resource('user','UserController');
         Route::get('destroy/{id}', 'UserController@destroy')->name('get-user-destroy');
         Route::get('edit/{id}', 'UserController@edit')->name('get-user-edit');
         Route::post('update/{id}', 'UserController@update')->name('post-user-update');
-
-        
+   
     });
     
     Route::group(['prefix' => 'location'], function () {
@@ -71,3 +74,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
    // Route::get('/', 'AdminController@user')->name('get-user-view');
    
 });
+
+//PAGE
+
