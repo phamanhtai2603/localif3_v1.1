@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>LOCALIF3 - @yield('title')</title>
+  <base href="{{asset('')}}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    
+ <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+          <script src="http://malsup.github.com/jquery.form.js"></script>
+
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900|Display+Playfair:200,300,400,700">
+  <link rel="stylesheet" href="page_asset/fonts/icomoon/style.css">
+
+  <link rel="stylesheet" href="page_asset/css/bootstrap.min.css">
+  <link rel="stylesheet" href="page_asset/css/magnific-popup.css">
+  <link rel="stylesheet" href="page_asset/css/jquery-ui.css">
+  <link rel="stylesheet" href="page_asset/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="page_asset/css/owl.theme.default.min.css">
+
+  <link rel="stylesheet" href="page_asset/css/bootstrap-datepicker.css">
+
+  <link rel="stylesheet" href="page_asset/fonts/flaticon/font/flaticon.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
+
+
+  <link rel="stylesheet" href="page_asset/css/aos.css">
+
+  <link rel="stylesheet" href="page_asset/css/style.css">
+
+</head>
+
+<body>
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+    
+    {{-- Menu chính --}}
+      @include('page.main.layouts.menu')
+    {{-- Hết menu chính --}}
+
+    {{-- Bìa cover --}}
+    {{-- @include('page.main.layouts.cover') --}}
+    {{-- Hết bìa cover --}}
+
+    {{-- Location --}}
+    {{-- @include('page.main.layouts.location') --}}
+    {{-- Hết location --}}
+
+    {{-- intro --}}
+    {{-- @include('page.main.layouts.intro') --}}
+    {{-- hết intro --}}
+    
+
+    {{-- mission --}}
+    {{-- @include('page.main.layouts.mission') --}}
+    {{-- hết mission --}}
+ 
+
+
+    {{-- <div class="site-section">  --}}
+      {{-- content --}}
+      @yield('content')
+     {{-- hết content --}}
+
+
+
+
+
+      {{-- footer --}}
+      @include('page.main.layouts.footer')
+      {{-- Hết footer --}}
+
+      <script src="page_asset/js/jquery-3.3.1.min.js"></script>
+      <script src="page_asset/js/jquery-migrate-3.0.1.min.js"></script>
+      <script src="page_asset/js/jquery-ui.js"></script>
+      <script src="page_asset/js/popper.min.js"></script>
+      <script src="page_asset/js/bootstrap.min.js"></script>
+      <script src="page_asset/js/owl.carousel.min.js"></script>
+      <script src="page_asset/js/jquery.stellar.min.js"></script>
+      <script src="page_asset/js/jquery.countdown.min.js"></script>
+      <script src="page_asset/js/jquery.magnific-popup.min.js"></script>
+      <script src="page_asset/js/bootstrap-datepicker.min.js"></script>
+      <script src="page_asset/js/aos.js"></script>
+
+      <script src="page_asset/js/main.js"></script>
+      @yield('script')
+</body>
+
+</html>

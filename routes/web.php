@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('page.index');
 });
 
 Route::group(['namespace' => 'Auth'], function () {
@@ -86,3 +86,25 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
 
 //PAGE
 
+Route::group(['prefix' => '/'], function () {
+    return view('page.index');
+    
+    Route::get('login', 'LoginController@getLogin')->name('get-login');
+    Route::post('login', 'LoginController@postLogin')->name('post-login');
+    Route::get('logout', 'LoginController@getLogout')->name('get-logout');
+
+    
+});
+Route::get('tours', function () {
+    return view('page.main.tours');
+});
+Route::get('tourdetail', function () {
+    return view('page.main.tourdetail');
+});
+
+Route::get('register', function () {
+    return view('page.main.auth.register');
+});
+Route::get('privateprofile', function () {
+    return view('page.main.profile.private_profile');
+});
