@@ -15,12 +15,12 @@ Route::get('/', function () {
     return view('page.index');
 });
 
-Route::group(['namespace' => 'Auth'], function () {
+Route::group(['namespace' => 'Auth','middleware' =>'checkLogout'], function () {
     Route::get('admin/login', 'LoginController@getAdminLogin');
     Route::post('admin/login', 'LoginController@postAdminLogin')->name('post-admin-login');
 
-    Route::get('admin/logout', 'LoginController@logout')->name('get-admin-logout');
 });
+Route::get('admin/logout', 'Auth\LoginController@logout')->name('get-admin-logout');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
 
@@ -87,14 +87,38 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
 //PAGE
 
 Route::group(['prefix' => '/'], function () {
-    return view('page.index');
     
-    Route::get('login', 'LoginController@getLogin')->name('get-login');
-    Route::post('login', 'LoginController@postLogin')->name('post-login');
-    Route::get('logout', 'LoginController@getLogout')->name('get-logout');
+    Route::get('/', 'PageController@view')->name('get-page-view');
+  //  Route::post('/search', 'PageController@search')->name('post-page-search');
 
+    Route::get('login', 'PageLoginController@getLogin')->name('get-login')->middleware('checkuserLogout');
+    Route::post('login', 'PageLoginController@postLogin')->name('post-login');
+    Route::get('logout', 'PageLoginController@getLogout')->name('get-logout')->middleware('userLogin');
+});
+
+// Chưa đăng nhập mới đc sử dụng
+Route::group(['prefix' => '/', 'middleware' => 'checkLocheckuserLogoutgout'], function () {
+    //register
+     Route::group(['prefix' => 'register'], function () {
+
+        Route::get('/', 'RegistrationController@view')->name('get-page-registration-view');
+        // Route::post('/', 'RegistrationController@store')->name('post-page-registration-store');
+
+        // Route::get('/verify/{code}', 'RegistrationController@verify')->name('get-page-verify');
+    });
+
+    //forgot password
+    Route::group(['prefix' => 'forgot'], function () {
+        Route::get('/', 'ForgotPasswordController@view')->name('get-page-forgot-view');
+        Route::post('/', 'ForgotPasswordController@store')->name('post-page-forgot-store');
+    });
+});
+
+Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
+    //Những thứ cần login mới thực hiện
     
 });
+
 Route::get('tours', function () {
     return view('page.main.tours');
 });

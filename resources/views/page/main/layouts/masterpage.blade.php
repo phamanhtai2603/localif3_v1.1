@@ -8,9 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-    
-    
- <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+  {{-- ----------------- --}}
+
+ {{-- <script src="https://js.pusher.com/5.0/pusher.min.js"></script> --}}
     
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -37,12 +37,86 @@
 
   <link rel="stylesheet" href="page_asset/css/style.css">
 
+  {{-- ----------- --}}
+  
+  
+
+  <!-- Custom Stylesheets -->
+
+  <style>
+    .user-area {
+        float: right;
+        padding-right: 0;
+        position: relative;
+        padding-left: 20px;
+    }
+    .dropdown .dropdown-toggle {
+        line-height: 55px;
+        
+    }
+    .user-area .dropdown-toggle {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    .user-area .dropdown-toggle {
+        position: relative;
+        z-index: 0;
+    }
+    .user-area .user-menu {
+        background: #fff;
+        border: none;
+        left: inherit !important;
+        right: 0;
+        top: 40px !important;
+        margin: 0;
+        max-width: 150px;
+        padding: 5px 10px;
+        position: absolute;
+        width: 100%;
+        z-index: 999;
+        -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.7);
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.7);
+    }
+    .user-area .user-avatar {
+        float: right;
+        width: 30px;
+        border: 2px solid #849896;
+        position: relative;
+        left: -27px;
+        top: 18px;
+        position: relative;
+        transition: none 0s ease 0s;
+        cursor: move;
+    }
+    .rounded-circle {
+        border-radius: 50%!important;
+    }
+    .user-options{
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+        padding: 0px;
+        display: block;
+        margin-left: -5px;
+        color: #58595b;
+    }
+    
+  </style>
+  @yield('css')
+  
 </head>
 
 <body>
-
-  <div class="site-wrap">
-
+  @include('page.main.layouts.top_bar')
+  {{-- <div class="site-wrap"> --}}
+    
     <div class="site-mobile-menu">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close mt-3">
@@ -51,6 +125,7 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div>
+    
     
     {{-- Menu chính --}}
       @include('page.main.layouts.menu')
