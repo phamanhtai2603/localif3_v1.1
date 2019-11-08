@@ -41,6 +41,9 @@
 					@if (session('noti'))
 						<div class="alert alert-danger">{{ session('noti') }}</div>
 					@endif
+					@if (session('success'))
+						<div class="alert alert-success">{{ session('success') }}</div>
+					@endif
 					
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
@@ -79,15 +82,10 @@
 					</div>
 					
 					<div class="text-center p-t-46 p-b-20">
-						<span class="txt2">
-							or sign up using
+						<span class="txt2"><a href="{{ route('get-page-registration-view') }}">
+							or sign up here!
+							</a>
 						</span>
-					</div>
-
-					<div class="login100-form-social flex-c-m">
-						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-							<i class="fa fa-facebook-f" aria-hidden="true"></i>
-						</a>
 					</div>
 				</form>
 

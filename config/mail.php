@@ -133,4 +133,19 @@ return [
 
     'log_channel' => env('MAIL_LOG_CHANNEL'),
 
+    //config để gửi mail
+    'stream' => [
+
+        'ssl' => [
+     
+           'allow_self_signed' => true,
+     
+           'verify_peer' => false,
+     
+           'verify_peer_name' => false,
+     
+        ],
+     
+     ],
+
 ];

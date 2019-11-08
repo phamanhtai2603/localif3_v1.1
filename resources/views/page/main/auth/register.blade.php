@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login V18</title>
+    <title>Register</title>
     <base href="{{asset('')}}">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,15 +33,16 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form action="{{ route('post-page-registration-store') }}" method="POST" class=" login100-form validate-form">
+				@csrf
 					<span class="login100-form-title p-b-43" style="color:	#E96E50;">
 						Register
 					</span>
 					
 					<div class="" data-validate = "Enter your real name" >
-						<input type="radio" name="role" value="tourguide"> 
+						<input type="radio" name="role" value="2"> 
 						<span class="fs-17 text-color" style="color:#E96E50;"><i>I want to make my tours</i></span><br>
-						<input type="radio" name="role" value="customer" checked> 
+						<input type="radio" name="role" value="3" checked> 
 						<span class="fs-17 text-color"  style="color:#E96E50;"><i>I am a traveller</i></span>
 					</div>
 					<br>
@@ -59,9 +60,9 @@
                     </div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Your phone number is..">
-						<input class="input100" type="text" name="phone">
+						<input class="input100" type="text" name="phone_number">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Phone</span>
+						<span class="label-input100">Phone number</span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
@@ -72,7 +73,7 @@
 					
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass">
+						<input class="input100" type="password" name="password">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Password</span>
 					</div>
@@ -86,13 +87,13 @@
 					
 					<div class="text-center p-t-46 p-b-20">
 						<span class="txt2">
-							or <a href="#" class="txt1">Login</a>
+							or <a href="" class="txt1">Login</a>
 
 						</span>
 					</div>
 				</form>
 
-				<div class="login100-more" style="background-image: url('page_login/images/bg-01.jpg');">
+			<div class="login100-more" style="background-image: url('page_login/images/bg-01.jpg');">
 				</div>
 			</div>
 		</div>

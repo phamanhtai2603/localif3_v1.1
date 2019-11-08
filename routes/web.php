@@ -96,22 +96,24 @@ Route::group(['prefix' => '/'], function () {
     Route::get('logout', 'PageLoginController@getLogout')->name('get-logout')->middleware('userLogin');
 });
 
-// Chưa đăng nhập mới đc sử dụng
-Route::group(['prefix' => '/', 'middleware' => 'checkLocheckuserLogoutgout'], function () {
-    //register
-     Route::group(['prefix' => 'register'], function () {
 
-        Route::get('/', 'RegistrationController@view')->name('get-page-registration-view');
-        // Route::post('/', 'RegistrationController@store')->name('post-page-registration-store');
+Route::group(['prefix' => '/'], function () {
+    // Chưa đăng nhập mới đc sử dụng
+     Route::group(['prefix' => 'register', 'middleware' => 'checkuserLogout'], function () {
 
-        // Route::get('/verify/{code}', 'RegistrationController@verify')->name('get-page-verify');
+        Route::get('/', 'PageRegisterController@view')->name('get-page-registration-view');
+        Route::post('/', 'PageRegisterController@store')->name('post-page-registration-store');
+        Route::get('/verify/{code}', 'PageRegisterController@verify')->name('get-page-verify');
     });
-
+    //Xử lí liên quan đến 1 tour
+    Route::group(['prefix' => 'tour'], function () {
+        Route::get('/detail/{id}', 'PageTourController@view')->name('get-page-tourdetail-view');
+    });
     //forgot password
-    Route::group(['prefix' => 'forgot'], function () {
-        Route::get('/', 'ForgotPasswordController@view')->name('get-page-forgot-view');
-        Route::post('/', 'ForgotPasswordController@store')->name('post-page-forgot-store');
-    });
+    // Route::group(['prefix' => 'forgot'], function () {
+    //     Route::get('/', 'ForgotPasswordController@view')->name('get-page-forgot-view');
+    //     Route::post('/', 'ForgotPasswordController@store')->name('post-page-forgot-store');
+    // });
 });
 
 Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
@@ -122,13 +124,8 @@ Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
 Route::get('tours', function () {
     return view('page.main.tours');
 });
-Route::get('tourdetail', function () {
-    return view('page.main.tourdetail');
-});
 
-Route::get('register', function () {
-    return view('page.main.auth.register');
-});
+
 Route::get('privateprofile', function () {
     return view('page.main.profile.private_profile');
 });

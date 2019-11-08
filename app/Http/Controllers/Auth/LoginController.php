@@ -52,7 +52,7 @@ class LoginController extends Controller
 
     public function postAdminLogin(Request $request){
         // check login here1
-            if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 1])) {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 1,'active'=>'1'])) {
                 return redirect('/admin');
             } else {
                 return redirect('/admin/login')->with('noti','Tài khoản hoặc mật khẩu không hợp lệ');

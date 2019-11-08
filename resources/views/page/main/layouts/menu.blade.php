@@ -46,7 +46,7 @@
                       <a class="user-options" href="{{route('get-logout')}}"><i class="fa fa-power -off"></i>Logout</a>
                   </div>
               </div>
-              <li><a href=""><span><i class="fa fa-lock" style="--top:14px; --left:626.487px;"></i></span>Xin chào {{Auth::user()->email}}</a></li>
+              <li><a href=""><span><i class="fa fa-lock" style="--top:14px; --left:626.487px;"></i></span><b>Xin chào <i>{{Auth::user()->first_name.' '. Auth::user()->last_name}}</i></b></a></li>
               @else
               <li><a href="{{ route('get-login') }}" class="btn btn-primary py-1 px-5 text-white">Login</a></li>
               <li><a href="{{ route('get-page-registration-view') }}" class="btn btn-primary py-1 px-5 text-white">Sign in</a></li>

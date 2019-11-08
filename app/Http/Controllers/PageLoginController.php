@@ -13,7 +13,7 @@ class PageLoginController extends Controller
     public function postLogin(Request $request ){
         $email = $request->email;
         $password = $request->password;
-        $checklogin = array('email' => $email, 'password' => $password);
+        $checklogin = array('email' => $email, 'password' => $password,'active'=>'1');
         if (Auth::attempt($checklogin)) {
             return redirect('/');
         }else {

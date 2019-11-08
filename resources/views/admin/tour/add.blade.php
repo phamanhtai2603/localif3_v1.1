@@ -3,6 +3,7 @@
 @section('css')
 {{-- css validation --}}
     <link rel="stylesheet" href="admin_page_asset/css/parsley.css">
+
 @endsection
 
 @section('title')
@@ -61,7 +62,7 @@ Thêm mới tour
                         <div class="col col-md-3"><label for="name" class=" form-control-label">Tên tour<span class="text text-danger">*</span></label></div>
                         <div class="col-12 col-md-9">
                             <input type="text" name="name" placeholder="Tên tour"
-                            value="{{old('name')}}" class="form-control" data-parsley-trigger="change" required minlength="3">
+                            value="{{old('name')}}" class="form-control" data-parsley-trigger="change" required minlength="3" maxlength="55">
                         </div>
                         @if ($errors->has('name'))
                             <small class="form-control-feedback text text-danger">
@@ -110,8 +111,8 @@ Thêm mới tour
                     </div>
 
                     <div class="form-group" id="text-area">
-                            <div class=""><label for="textarea-input" class=" form-control-label">Mô tả *:</label></div>
-                            <div class=""><textarea name="description" id="" rows="9" cols="9" placeholder="Mô tả ngắn gọn.." class="form-control" data-parsley-trigger="change" required=""></textarea></div>
+                            <div class=""><label for="textarea-input" class=" form-control-label">Mô tả (Tối đa 800 ký tự):</label></div>
+                            <div class=""><textarea name="description" id="" rows="9" cols="9" placeholder="Mô tả ngắn gọn.." class="form-control" data-parsley-trigger="change" required="" maxlength="800"></textarea></div>
                             @if($errors->has('description'))
                                 <small class="text-danger w-100">
                                     {{$errors->first('description')}}
