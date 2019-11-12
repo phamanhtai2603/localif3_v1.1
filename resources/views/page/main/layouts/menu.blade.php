@@ -37,7 +37,7 @@
                   </a>
     
                   <div class="user-menu dropdown-menu">
-                      <a class="user-options" href=""><i class="fa fa- user"></i>Profile</a>
+                      <a class="user-options" href="{{ route('get-page-user-view') }}"><i class="fa fa- user"></i>Profile</a>
   
                       {{-- <a class="user-options" href="#"><i class="fa fa- user"></i>Thông báo: <span class="count">{{count($userNotifications)}}</span></a> --}}
     

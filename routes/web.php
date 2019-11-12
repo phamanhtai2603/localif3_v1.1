@@ -118,8 +118,11 @@ Route::group(['prefix' => '/'], function () {
 
 Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
     //Những thứ cần login mới thực hiện
-    
+    Route::get('profile', 'PageUserController@view')->name('get-page-user-view');
+    Route::post('profile/update', 'PageUserController@update')->name('post-page-user-update'); 
 });
+
+
 
 Route::get('tours', function () {
     return view('page.main.tours');
