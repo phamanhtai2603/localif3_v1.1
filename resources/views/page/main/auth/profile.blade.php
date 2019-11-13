@@ -125,9 +125,9 @@
               <div class="p-12 mb-12 bg-white">
                     <h1 style="text-align:center">Your own TOURS</h1>
                     @foreach($tours as $tour)  
-                    <div class="row">      
-                            <div class="col-md-2 " style="margin: 2px;">{{ $stt++ }}</div>
-                            <div class="col-md-8 " style="margin: 2px; padding:2px;">{{ $tour->name }}</div>                   
+                    <div class="row" style=" margin: 20px; font-size:20px;border-bottom: 1px solid ;">      
+                            <div class="col-md-1 " style=" "><a href="#">{{ $stt++ }}</a></div>
+                            <div class="col-md-10 " style=" padding:2px; font-family: Times New Roman; "><a href="{{ route('get-page-tourdetail-view',['id'=>$tour->id]) }}">{{ $tour->name }}</a></div>                   
                     </div>
                     @endforeach
               </div>

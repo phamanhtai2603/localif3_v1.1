@@ -12,7 +12,7 @@
                 <h1 class="text-white font-weight-light">Never Stop Exploring</h1>
                 <p class="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga est inventore ducimus
                   repudiandae.</p>
-                <p><a href="#" class="btn btn-primary py-3 px-5 text-white">Book Now!</a></p>
+                <p><a href="{{ route('get-page-alltours-view') }}" class="btn btn-primary py-3 px-5 text-white">Book Now!</a></p>
   
               </div>
             </div>

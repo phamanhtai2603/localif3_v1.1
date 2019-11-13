@@ -122,11 +122,8 @@ Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
     Route::post('profile/update', 'PageUserController@update')->name('post-page-user-update'); 
 });
 
-
-
-Route::get('tours', function () {
-    return view('page.main.tours');
-});
+//Trang tour: alltours - tours theo location
+Route::get('tours', 'PageTourController@viewall')->name('get-page-alltours-view');
 
 
 Route::get('privateprofile', function () {

@@ -4,6 +4,7 @@
 @endsection
 
 @section('css')
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     .t-price{
       margin: 0px;
@@ -17,6 +18,9 @@
       cursor: move;
       position: relative;
       top: 17px;
+    }
+    .checked{
+    color: orange;
     }
   </style>
 @endsection
@@ -46,7 +50,6 @@
     <div class="row justify-content-center mb-5">
       <div class="col-md-7 text-center">
         <h2 class="font-weight-light text-black">Choose your favourite local</h2>
-        <p class="color-black-opacity-5">View all</p>
       </div>
     </div>
     <div class="row">
@@ -61,7 +64,29 @@
               <h3 class="unit-1-heading t-name" style="padding: 5px; margin:0px">{{ $tour->name }}</h3>
               <strong class="text-primary mb-2 d-block t-price" style="margin:0px">{{ $tour->price }} VND</strong>
               <p style="padding: 5px; font-size:15px ; margin:0px " class="color-white-opacity-5">{{ $tour->location->name }} </p>
-              
+              <div>
+                @if($tour->avgrate==NULL)
+                <span style="color:yellow">No rate</span>
+                @elseif($tour->avgrate<=3)
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                @elseif($tour->avgrate==4)
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                @elseif($tour->avgrate==5)
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                @endif
+              </div>
             </div>
           </a>
         </div>
@@ -104,7 +129,7 @@
         </a>
       </div>
       <div style="margin:auto; font-size: 30px; ">
-        <a href="about.html">View all</a>
+        <a href="{{ route('get-page-alltours-view') }}">View all</a>
       </div>
     </div>
   </div>
