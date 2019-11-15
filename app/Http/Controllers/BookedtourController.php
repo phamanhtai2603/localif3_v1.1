@@ -58,6 +58,7 @@ class BookedtourController extends Controller
             $date_tosecond = strtotime($date_to = $request->date_to);
             $second = $date_tosecond - $date_fromsecond;
             $days=secondsToTime($second)+1;
+            
             //
            
             $bookedtour->total_price = $bookedtour->size*$bookedtour->tour->price*$days;
@@ -74,6 +75,14 @@ class BookedtourController extends Controller
             }else{
                 return back()->with('errorSQL', 'Ngày xuất phát phải nhỏ hơn hoặc bằng ngày kết thúc!');
             }
+            //Tính days current time và date_from - Nếu datefrom < date current thì k cho đặt
+            $date_currentsecond = strtotime(Carbon::now()); 
+            $date_current = date('Y/m/d', $date_currentsecond); 
+            $date_from = date('Y/m/d', $date_fromsecond); 
+            if($date_from<$date_current){
+                return back()->with('errorSQL', 'Ngày xuất phát phải lớn hơn hoặc bằng ngày hiện tại!');
+            }
+            //////// 
 
             //Cắt mảng unvailableday và mảng bookedtour->date ra để so sánh có trùng ngày hay không
             $user = User::where('id',$bookedtour->tour->tourguide_id)->first();
@@ -83,8 +92,8 @@ class BookedtourController extends Controller
             //sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday));
 
             if(sizeof($arr_bookedtourdate)==sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday))){
-                // $user->unavailableday .= $bookedtour->date;
-                // $user->save();
+                $user->unavailableday .= $bookedtour->date;
+                $user->save();
                 $bookedtour->save();
             }else{
                 return back()->with('errorSQL', 'Hướng dẫn viên không thể nhận tour vào những ngày này!');

@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->text('description')->nullable();
             $table->integer('active')->default(1);
             $table->integer('role')->default(0);
-            $table->text('unvailableday')->nullable();
+            $table->text('unavailableday')->nullable();
             $table->string('verify_code')->nullable();;
             $table->timestamp('deleted_at')->nullable();
             $table->rememberToken();
