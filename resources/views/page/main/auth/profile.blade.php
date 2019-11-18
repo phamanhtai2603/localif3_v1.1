@@ -30,7 +30,7 @@
               
               <div class="col-md-12">
                 <label class="text-black" for="email">Phone</label> 
-                <input type="type" id="email" value="{{ Auth::user()->phone_number }}" class="form-control">
+                <input type="number" id="email" name ="phone_number" value="{{ Auth::user()->phone_number }}" class="form-control">
               </div>
             </div>
             <div class="row form-group">
@@ -69,7 +69,7 @@
            <div class="row form-group">
             <div class="col-md-12">
                 <label class="text-black" for="message">Description</label> 
-                <textarea name="text" id="text" cols="30" rows="7" class="form-control" placeholder="Write about yourself..">{{ Auth::user()->description}}</textarea>
+                <textarea name="description" id="text" cols="30" rows="7" class="form-control" placeholder="Write about yourself..">{{ Auth::user()->description}}</textarea>
             </div>
             </div>
 
