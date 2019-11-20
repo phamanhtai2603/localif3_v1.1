@@ -120,6 +120,7 @@
         
       </div>
       </form>
+      @if(Auth::user()->id == 2)
       <div class="row">
             <div class="col-md-12">   
               <div class="p-12 mb-12 bg-white">
@@ -134,6 +135,7 @@
              
             </div>
     </div>
+    @endif
     
   </div>
       

@@ -108,6 +108,8 @@ Route::group(['prefix' => '/'], function () {
     //Xử lí liên quan đến 1 tour
     Route::group(['prefix' => 'tour'], function () {
         Route::get('/detail/{id}', 'PageTourController@view')->name('get-page-tourdetail-view');
+        Route::post('/booktour/{id}', 'PageTourController@booktour')->name('post-page-booktour');
+        Route::get('/thanks/{id}', 'PageTourController@thanks')->name('thanks');
     });
     //forgot password
     // Route::group(['prefix' => 'forgot'], function () {
