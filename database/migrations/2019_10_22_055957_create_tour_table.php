@@ -23,6 +23,7 @@ class CreateTourTable extends Migration
             $table->text('plan')->nullable();
             $table->integer('price')->nullable();
             $table->text('image')->default('default.png');
+            $table->string('thumbnail')->nullable();
             $table->float('avgrate')->default(0);
             $table->integer('rate_size')->default(0);
             $table->integer('status')->default(0);

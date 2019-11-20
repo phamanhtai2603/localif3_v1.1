@@ -111,17 +111,14 @@ Route::group(['prefix' => '/'], function () {
         Route::post('/booktour/{id}', 'PageTourController@booktour')->name('post-page-booktour');
         Route::get('/thanks/{id}', 'PageTourController@thanks')->name('thanks');
     });
-    //forgot password
-    // Route::group(['prefix' => 'forgot'], function () {
-    //     Route::get('/', 'ForgotPasswordController@view')->name('get-page-forgot-view');
-    //     Route::post('/', 'ForgotPasswordController@store')->name('post-page-forgot-store');
-    // });
 });
 
 Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
     //Những thứ cần login mới thực hiện
     Route::get('profile', 'PageUserController@view')->name('get-page-user-view');
     Route::post('profile/update', 'PageUserController@update')->name('post-page-user-update'); 
+
+    Route::resource('tourmanage','PageTourManageController');
 });
 
 //Trang tour: alltours - tours theo location

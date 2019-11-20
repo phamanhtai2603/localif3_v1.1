@@ -1,8 +1,11 @@
 @extends('page.main.layouts.masterpage')
 @section('title')
-    All tours
+    Profile
 @endsection
+@section('css')
+<link rel="stylesheet" href="page_asset/css/style.css">
 
+@endsection
 @section('content')
 {{-- Bìa cover --}}
 @include('page.main.layouts.cover')
@@ -120,7 +123,7 @@
         
       </div>
       </form>
-      @if(Auth::user()->id == 2)
+      @if(Auth::user()->role == 2)
       <div class="row">
             <div class="col-md-12">   
               <div class="p-12 mb-12 bg-white">
@@ -128,7 +131,12 @@
                     @foreach($tours as $tour)  
                     <div class="row" style=" margin: 20px; font-size:20px;border-bottom: 1px solid ;">      
                             <div class="col-md-1 " style=" "><a href="#">{{ $stt++ }}</a></div>
-                            <div class="col-md-10 " style=" padding:2px; font-family: Times New Roman; "><a href="{{ route('get-page-tourdetail-view',['id'=>$tour->id]) }}">{{ $tour->name }}</a></div>                   
+                            <div class="col-md-8 " style=" padding:2px; font-family: Times New Roman; "><a href="{{ route('get-page-tourdetail-view',['id'=>$tour->id]) }}">{{ $tour->name }}</a></div>
+                            @if($tour->status==0)
+                            <div class="col-md-2" style="padding:2px; font-family: Times New Roman; color:green"><span class="glyphicon glyphicon-eye-open"></span>Visiable</div>   
+                            @elseif($tour->status==1)  
+                            <div class="col-md-2" style="padding:2px; font-family: Times New Roman; color:red">Invisiable</div>      
+                            @endif          
                     </div>
                     @endforeach
               </div>
