@@ -8,7 +8,7 @@ class UploadImageService {
      * @param UploadFile $file
      * @return String $path
      */
-    public static function uploadImage(UploadedFile $file) {
+    public static function uploadImage(UploadedFile $file,$width, $height) {
         if(!File::exists(\public_path('/images'))){
             File::makeDirectory(\public_path('/images'), 0777, true, true);
         }
@@ -19,7 +19,16 @@ class UploadImageService {
             $imageName = date('Y-M-D') . '-' . round(microtime(true) * 1000).rand() .'.' . $imageExt;
             $file->move($imagePath, $imageName);
         }
-        return $imagePath . '/' . $imageName; // trả về đường dẫn thư mục public
+
+
+        $thumbnailPath = \public_path('/thumbnails');
+        $thumbnailName = $width .'x'. $height . '-' . \basename($imageName);  
+        $resizeImage = Image::make('public/images/', $imageName);dd($resizeImage);
+        
+        $resizeImage->resize($width, $height, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($thumbnailPath . '/' . $thumbnailName);
+        return  $thumbnailPath . '/' . $thumbnailName;
     }
     /**
      * @param String $path
@@ -32,9 +41,9 @@ class UploadImageService {
             File::makeDirectory(\public_path('/thumbnails'), 0777, true, true);
         }
         $thumbnailPath = \public_path('/thumbnails');
-        $thumbnailName = $width .'x'. $height . '-' . \basename($path);
-        $resizeImage = Image::make($path); dd($resizeImage);
-
+        $thumbnailName = $width .'x'. $height . '-' . \basename($path); 
+        $resizeImage = Image::make('public/images/', $path);
+        
         $resizeImage->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
         })->save($thumbnailPath . '/' . $thumbnailName);

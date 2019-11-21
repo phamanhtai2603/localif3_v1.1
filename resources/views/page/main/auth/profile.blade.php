@@ -13,7 +13,7 @@
 
 <div class="site-section bg-light">
     <div class="container">
-        <form action="{{ route('post-page-user-update') }}" enctype="multipart/form-data" method="post" class="p-5 bg-white">
+        <form action="{{ route('post-page-profile-update') }}" enctype="multipart/form-data" method="post" class="p-5 bg-white">
         @csrf
       <div class="row">
         <div class="col-md-7 mb-5">

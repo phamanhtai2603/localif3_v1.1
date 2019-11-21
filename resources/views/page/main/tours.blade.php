@@ -28,12 +28,11 @@
 @section('content')
 {{-- Bìa cover --}}
 @include('page.main.layouts.cover')
+@include('page.main.layouts.location')
 {{-- Hết bìa cover --}}
 
 <div class="site-section">
-      
-    <div class="container">
-      
+    <div class="container ">
       <div class="row">
           @foreach($tours as $tour)     
           <?php 
@@ -75,6 +74,13 @@
         @endforeach
       </div>
     </div>
+    <div class="container">
+      <div class="pagination">
+        <div style="margin: auto;">
+         {!! $tours->links() !!}
+        </div>
+      </div>
+  </div>
   
   </div>
   {{-- intro  --}}

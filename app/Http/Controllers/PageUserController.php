@@ -23,4 +23,12 @@ class PageUserController extends Controller
     }
     return redirect()->back()->with('success', 'Sửa thành công');
     }
+
+    //profile cua user khac
+    public function userprofileview($id){
+            echo "chưa có view";
+    }
+
 }
+
+

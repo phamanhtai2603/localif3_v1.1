@@ -28,7 +28,7 @@
                   </a>
     
                   <div class="user-menu dropdown-menu">
-                      <a class="user-options" href="{{ route('get-page-user-view') }}"><i class="fa fa- user"></i>Profile</a>
+                      <a class="user-options" href="{{ route('get-page-profile-view') }}"><i class="fa fa- user"></i>Profile</a>
                       @if(Auth::user()->role == 2)
                       <a class="user-options" href="{{ route('tourmanage.index') }}"><i class="fa fa- user"></i>Tours manage</a>
                       @elseif(Auth::user()->role == 3)

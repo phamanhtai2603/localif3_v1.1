@@ -115,14 +115,17 @@ Route::group(['prefix' => '/'], function () {
 
 Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
     //Những thứ cần login mới thực hiện
-    Route::get('profile', 'PageUserController@view')->name('get-page-user-view');
-    Route::post('profile/update', 'PageUserController@update')->name('post-page-user-update'); 
+    Route::get('profile', 'PageUserController@view')->name('get-page-profile-view');
+    Route::post('profile/update', 'PageUserController@update')->name('post-page-profile-update'); 
 
     Route::resource('tourmanage','PageTourManageController');
 });
 
 //Trang tour: alltours - tours theo location
 Route::get('tours', 'PageTourController@viewall')->name('get-page-alltours-view');
+Route::get('location-tours/{id}', 'PageTourController@locationview')->name('get-page-location-tours-view');
+
+Route::get('user-profile/{id}', 'PageUserController@userprofileview')->name('get-page-otheruser-profile-view');
 
 
 Route::get('privateprofile', function () {

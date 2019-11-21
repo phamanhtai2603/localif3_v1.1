@@ -170,7 +170,7 @@
                     <a style="font-family: 'Times New Roman', Times, serif">({{ $tour->rate_size }})</a>
                   </div>
             <p>{{ $tour->description }}</p>
-            <p><a href="#" class="btn btn-primary px-4 py-2 text-white">Host by {{ $tour->user->first_name.' '.$tour->user->last_name }}</a></p>
+            <p><a href="{{ route('get-page-otheruser-profile-view',['id'=>$tour->user->id]) }}" class="btn btn-primary px-4 py-2 text-white">Host by {{ $tour->user->first_name.' '.$tour->user->last_name }}</a></p>
           </div>
           @if(Auth::guest()||($tour->user->id!=Auth::user()->id ))
           <form action="{{ route('post-page-booktour',['id'=>$tour->id]) }}" method="POST" enctype="multipart/form-data" class="p-5 bg-white">

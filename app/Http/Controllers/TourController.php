@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Http\Requests\StoreLocationRequest;
 use App\Services\UploadImageService;
+use Image;
 
 class TourController extends Controller
 {
@@ -35,34 +36,34 @@ class TourController extends Controller
     }
 
     public function store(Request $request){
-    //     $tour = new Tour();
-    //     try{ 
-    //    $input = Helper::getArrInputTour($request);
-    //    $tour->create($input);
-    //     }catch (Exception $e) {
-    //         return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();
-    //     }
-    //     return redirect()->back()->with('noti', 'Thêm mới thành công');
+        $tour = new Tour();
+        try{ 
+       $input = Helper::getArrInputTour($request);
+       $tour->create($input);
+        }catch (Exception $e) {
+            return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();
+        }
+        return redirect()->back()->with('noti', 'Thêm mới thành công');
    
-            try{ 
-                if($request->hasFile('file')) {
-                    $images = $request->file('file');
-                    foreach($images as $image)
-                    {
-                        $imagePath = UploadImageService::uploadImage($image); 
-                        $thumbnailPath = UploadImageService::resizeImage($imagePath, 400, 400);
-                    }
+            // try{ 
+            //     if($request->hasFile('file')) {
+            //         $images = $request->file('file');
+            //         foreach($images as $image)
+            //         {
+            //             $imagePath = UploadImageService::uploadImage($image,400,400); 
+            //            // $thumbnailPath = UploadImageService::resizeImage($imagePath, 400, 400);
+            //         }
                     
-                }
-                $tour = new Tour();
-                $tour->image = basename($imagePath);
-                $tour->thumbnail = basename($thumbnailPath);
-                $input = $request->all();
-                $tour->create($input);
-            }catch (Exception $e) {
-                return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();
-            }
-            return redirect()->back()->with('noti', 'Thêm mới thành công');
+            //     }
+            //     $tour = new Tour();
+            //     $tour->image = basename($imagePath);
+            //     $tour->thumbnail = basename($thumbnailPath);
+            //     $input = $request->all();
+            //     $tour->create($input);
+            // }catch (Exception $e) {
+            //     return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();
+            // }
+            // return redirect()->back()->with('noti', 'Thêm mới thành công');
          
     }
 

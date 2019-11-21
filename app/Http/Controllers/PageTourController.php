@@ -9,10 +9,17 @@ use App\User;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 class PageTourController extends Controller
 {
     public function viewall(){
-        $tours = Tour::All();
+        $tours = Tour::paginate(3);
+        return view('page.main.tours',['tours'=>$tours]);
+    }
+
+    public function locationview($id){
+        $tours = Tour::where('location_id',$id)->paginate(15);
         return view('page.main.tours',['tours'=>$tours]);
     }
 
