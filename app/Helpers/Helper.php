@@ -65,7 +65,21 @@ class Helper{
         // call funtion get arr input from app\heplers\helper
         $helper = new Helper;
         $input = $helper->getArrInput($request);
-
+        //khóa bài đăng
+        if( ($request->active==0)){
+            $tours = Tour::where('tourguide_id',$id)->get();
+            foreach($tours as $tour){
+                $tour->status=1;
+                $tour->save();
+            }
+        } 
+        if($request->active==1){
+            $tours = Tour::where('tourguide_id',$id)->get();
+            foreach($tours as $tour){
+                $tour->status=0;
+                $tour->save();
+            }
+        }
         // nếu mật khẩu null thì không đổi mật khẩu;
         if($input['password']==null){
             $input['password'] = $user['password'];
@@ -77,6 +91,7 @@ class Helper{
 
         $user->update($input);
     }
+    
     
     public static function updateProfile($id,Request $request)
     {
@@ -118,9 +133,15 @@ class Helper{
         $locaion = Location::find($id);
         // call funtion get arr input from app\heplers\helper
         $helper = new Helper;
-        $input = $helper->getArrInput2($request);
-
+        $input = $helper->getArrInput2($request);    
         $locaion->update($input);
+        if($request->status!=0){
+            $tours = Tour::where('location_id',$id)->get();
+            foreach($tours as $tour){
+                $tour->status=1;
+                $tour->save();
+            }
+       }
     }
 
     public static function getArrInputTour(Request $request)

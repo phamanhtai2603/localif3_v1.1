@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\StoreEditUserRequest;
 use App\User;
+use App\Tour;
 use App\UnavailableDay;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
@@ -36,7 +37,12 @@ class UserController extends Controller
 
     public function destroy($id){
         $user = User::find($id);
-        $user->delete();
+        $user->delete();     
+        $tours = Tour::where('tourguide_id',$id)->get();
+        foreach($tours as $tour){
+            $tour->status=1;
+            $tour->save();          
+       }
         return back()->with('noti','Xóa tài khoản thành công!!');
     }
 
