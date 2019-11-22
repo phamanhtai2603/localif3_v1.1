@@ -22,6 +22,8 @@ class CreateCommentTable extends Migration
             $table->integer('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('tour_id')->references('id')->on('tour')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

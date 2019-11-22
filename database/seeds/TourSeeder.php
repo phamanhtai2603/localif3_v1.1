@@ -20,7 +20,7 @@ class TourSeeder extends Seeder
             'content'=>'Tour du lịch này được tạo ra nhằm chia sẽ lối sống của người bản địa cho du khách, thưởng thức món ăn....', //Đây là nội dung bài đăng, Càng dài càng tốt. Giới thiệu về tour
             'plan'=>'Sáng 8h: Xuất phát &nbsp; Trưa 12h:Ăn&nbsp; Tối:...',// Đây là lịch
             'price'=>'1200000', // giá tùy chọn
-            'img'=>'1.png,2.png,3.png,4.png', //Hình ảnh cứ giữ nguyên như này, thay đổi thứ tự cũng dc
+            'image'=>'1.png,2.png,3.png,4.png', //Hình ảnh cứ giữ nguyên như này, thay đổi thứ tự cũng dc
             'avgrate'=>'4', //Cho từ 1 tới 5
             //Lưu ý, dấu  &nbsp; dùng để xuống dòng, enter ko có tác dụng vì lưu trong database
         ]);
@@ -32,7 +32,7 @@ class TourSeeder extends Seeder
             'content'=>'Tour du lịch này được tạo ra nhằm chia sẽ lối sống của người bản địa cho du khách, thưởng thức món ăn....', //Đây là nội dung bài đăng, Càng dài càng tốt. Giới thiệu về tour
             'plan'=>'Sáng 8h: Xuất phát &nbsp; Trưa 12h:Ăn &nbsp; Tối:...',// Đây là lịch
             'price'=>'1200000', // giá tùy chọn
-            'img'=>'1.png,2.png,3.png,4.png', //Hình ảnh cứ giữ nguyên như này, thay đổi thứ tự cũng dc
+            'image'=>'1.png,2.png,3.png,4.png', //Hình ảnh cứ giữ nguyên như này, thay đổi thứ tự cũng dc
             'avgrate'=>'4', //Cho từ 1 tới 5
             //Lưu ý, dấu  &nbsp; dùng để xuống dòng, enter ko có tác dụng vì lưu trong database
         ]);

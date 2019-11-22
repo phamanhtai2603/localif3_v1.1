@@ -93,7 +93,7 @@
                             <tr>
                                 
                                 <td class="text-center">{{$stt++}}</td>
-                                <td>{{ $comment->user->first_name.' '.$comment->user->last_name }}</td>
+                                <td>{{$comment->user->email }}</td>
                                 <td>{{$comment->comment}}</td>
                                 <td>{{$comment->created_at}}</td>
                                 <td>{{$comment->updated_at}}</td>

@@ -23,6 +23,7 @@ class CreateRateTable extends Migration
             $table->integer('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

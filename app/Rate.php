@@ -9,7 +9,9 @@ class Rate extends Model
     use SoftDeletes;
     protected $table = 'rate';
     public $timestamp = true;
-
+    protected $fillable = [
+        'customer_id','tour_id','rate','comment','is_deleted','status'
+    ];
     // one - many relationship between rate -> User
     public function user()
     {
