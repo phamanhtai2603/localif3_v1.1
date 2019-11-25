@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\Helper;
 use App\Tour;
+use App\User;
 class PageUserController extends Controller
 {
     public function view(){
@@ -26,7 +27,9 @@ class PageUserController extends Controller
 
     //profile cua user khac
     public function userprofileview($id){
-            echo "chưa có view";
+            $user = User::Find($id);
+            $tours = Tour::where('tourguide_id',$id)->paginate(6);
+            return view('page.main.user.user_profile',['user'=>$user,'tours'=>$tours]);
     }
 
 }

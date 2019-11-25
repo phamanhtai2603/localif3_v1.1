@@ -143,6 +143,7 @@
             <img src="images/{{ $arrs[0] }}" alt="Image" style="width:397px;height:265px;" class="img-fluid mb-4 rounded">
             <h3 class="h4 text-black mb-3" style="font-family: 'Times New Roman', Times, serif; text-align:center">{{ $tour->name }}</h3>
             <div style="text-align:center">
+              <p style="font-size:20px"><b>Location: </b><a style="color:#F58543;">{{ $tour->location->name }}</a></p>
               <p style="font-size:20px"><b>PRICE: </b>{{ number_format($tour->price) }} VND/people/day</p>
             </div>
             <div style="text-align:center">

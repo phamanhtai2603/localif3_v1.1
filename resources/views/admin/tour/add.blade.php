@@ -161,7 +161,7 @@ Thêm mới tour
 							<small class="text text-primary">Đây là hình ảnh chính để hiển thị, bạn có thể bổ sung hình ảnh khác sau</small>
 						</div>
 						<div class="row">
-                            <div class="col-md-3" align="right"><h4>Select Images</h4></div>
+                            <div class="col-md-3" text-align="right"><h4>Select Images</h4></div>
                             <div class="col-md-6">
                                 <input type="file" name="file[]" id="file" accept="image/*" multiple required />
                             </div>

@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-header">
                     <strong class="card-title mr-2">Your TOURS</strong>
-                    <a class="btn btn-primary" href="#"><i class="fa fa-plus"></i>ADD MORE </a>
+                    <a class="btn btn-primary" href="{{ route('tourmanage.create') }}"><i class="fa fa-plus"></i>ADD MORE </a>
                     @if(session('success'))
                     <small id="success" class="alert alert-success p-2">
                         {{session('success')}}

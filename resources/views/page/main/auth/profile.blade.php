@@ -13,6 +13,8 @@
 
 <div class="site-section bg-light">
     <div class="container">
+        @if(isset($user))
+        @else
         <form action="{{ route('post-page-profile-update') }}" enctype="multipart/form-data" method="post" class="p-5 bg-white">
         @csrf
       <div class="row">
@@ -123,6 +125,10 @@
         
       </div>
       </form>
+      @endif
+      @if(isset($user))
+
+      @else
       @if(Auth::user()->role == 2)
       <div class="row">
             <div class="col-md-12">   
@@ -144,7 +150,7 @@
             </div>
     </div>
     @endif
-    
+    @endif
   </div>
       
     

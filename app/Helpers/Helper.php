@@ -154,9 +154,9 @@ class Helper{
              $image->move(public_path('images'), $new_name);
              $image_code .= $new_name.',';
             }
-
-            $request['image'] = $image_code;
             
+            $request['image'] = $image_code;
+
             // // get arr input
             $arrInput = $request->all();
             return $arrInput; 

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Http\Requests\StoreLocationRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Services\UploadImageService;
+use Image;
 
 class PageTourManageController extends Controller
 {
@@ -29,7 +31,8 @@ class PageTourManageController extends Controller
      */
     public function create()
     {
-        //
+        $locations = Location::all();
+        return view('page.main.tourmanage.add',['locations'=>$locations]);
     }
 
     /**
@@ -40,7 +43,23 @@ class PageTourManageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tour = new Tour();
+        try{
+            $image_code = '';
+            $images = $request->file('file');
+            foreach($images as $image)
+            {
+                $new_name = rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $new_name);
+                $image_code .= $new_name.',';
+            }   
+            $request['image'] = $image_code;
+            $tour = $request->all();
+            $tour->save();
+        }catch (Exception $e) {
+            return back()->with('errorSQL', 'Something error!')->withInput();
+        }
+        return redirect()->back()->with('noti', 'You have add a new tour post!');
     }
 
     /**

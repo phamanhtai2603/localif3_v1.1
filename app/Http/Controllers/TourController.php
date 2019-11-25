@@ -38,8 +38,8 @@ class TourController extends Controller
     public function store(Request $request){
         $tour = new Tour();
         try{ 
-       $input = Helper::getArrInputTour($request);
-       $tour->create($input);
+       $input = Helper::getArrInputTour($request); 
+       $tour->create($input); 
         }catch (Exception $e) {
             return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();
         }

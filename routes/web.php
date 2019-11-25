@@ -118,7 +118,10 @@ Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
     Route::get('profile', 'PageUserController@view')->name('get-page-profile-view');
     Route::post('profile/update', 'PageUserController@update')->name('post-page-profile-update'); 
 
-    Route::resource('tourmanage','PageTourManageController');
+    //Role=2, tourguide mới làm đc
+    Route::group(['prefix' => 'user', 'middleware' => 'tourguideLogin'], function () {
+        Route::resource('tourmanage','PageTourManageController');
+    });
 });
 
 //Trang tour: alltours - tours theo location
@@ -126,6 +129,10 @@ Route::get('tours', 'PageTourController@viewall')->name('get-page-alltours-view'
 Route::get('location-tours/{id}', 'PageTourController@locationview')->name('get-page-location-tours-view');
 
 Route::get('user-profile/{id}', 'PageUserController@userprofileview')->name('get-page-otheruser-profile-view');
+
+
+
+
 
 
 Route::get('privateprofile', function () {
