@@ -85,19 +85,19 @@ class PageTourController extends Controller
             //sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday));
 
             if(sizeof($arr_bookedtourdate)==sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday))){
-                $user->unavailableday .= $bookedtour->date;
+                //$user->unavailableday .= $bookedtour->date;
                 $user->save();
                 $bookedtour->save();
             }else{
                 return back()->with('errorSQL', 'The host is unavailable on this days!');
             }
-
-            return redirect()->route('thanks',['id'=>$bookedtour->$id]);
+            return redirect()->route('thanks',['id'=>$bookedtour->$id]); 
     
         } catch (Exception $e) {
             return back()->with('errorSQL', 'Error')->withInput();
         }
-        return redirect()->back()->with('success', 'Thank you! We will contact to you soon!');
+        return redirect()->route('thanks',['id'=>$bookedtour->$id]);
+        
     }
 
     public function thanks($id){

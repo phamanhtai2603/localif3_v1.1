@@ -19,7 +19,7 @@ class CreateBookedtourTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->string('booked_user')->nullable();
             $table->integer('size')->nullable();
-            $table->string('date')->nullable();
+            $table->text('date')->nullable();
             $table->integer('total_price')->nullable();
             $table->text('note')->nullable();
             $table->integer('status')->default(0);

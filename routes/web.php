@@ -105,7 +105,7 @@ Route::group(['prefix' => '/'], function () {
         Route::post('/', 'PageRegisterController@store')->name('post-page-registration-store');
         Route::get('/verify/{code}', 'PageRegisterController@verify')->name('get-page-verify');
     });
-    //Xử lí liên quan đến 1 tour
+    //Xử lí liên quan đến 1 tour, book tour
     Route::group(['prefix' => 'tour'], function () {
         Route::get('/detail/{id}', 'PageTourController@view')->name('get-page-tourdetail-view');
         Route::post('/booktour/{id}', 'PageTourController@booktour')->name('post-page-booktour');
@@ -119,8 +119,13 @@ Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
     Route::post('profile/update', 'PageUserController@update')->name('post-page-profile-update'); 
 
     //Role=2, tourguide mới làm đc
-    Route::group(['prefix' => 'user', 'middleware' => 'tourguideLogin'], function () {
+    Route::group(['prefix' => 'tourguide', 'middleware' => 'tourguideLogin'], function () {
         Route::resource('tourmanage','PageTourManageController');
+    });
+
+    Route::group(['prefix' => 'customer', 'middleware' => 'customerLogin'], function () {
+        Route::resource('customerbooked','PageCustomerBookedTourController');
+        Route::get('bookedtour/delete/{id}','PageCustomerBookedTourController@cancel')->name('get-page-customerbooked-cancel');
     });
 });
 
@@ -128,6 +133,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
 Route::get('tours', 'PageTourController@viewall')->name('get-page-alltours-view');
 Route::get('location-tours/{id}', 'PageTourController@locationview')->name('get-page-location-tours-view');
 
+//Xem profile người khác
 Route::get('user-profile/{id}', 'PageUserController@userprofileview')->name('get-page-otheruser-profile-view');
 
 

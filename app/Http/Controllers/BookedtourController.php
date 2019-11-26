@@ -92,7 +92,7 @@ class BookedtourController extends Controller
             //sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday));
 
             if(sizeof($arr_bookedtourdate)==sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday))){
-                $user->unavailableday .= $bookedtour->date;
+                //$user->unavailableday .= $bookedtour->date; //user chưa accept nên k thể + chuỗi ngày đc
                 $user->save();
                 $bookedtour->save();
             }else{
@@ -140,8 +140,16 @@ class BookedtourController extends Controller
             $bookedtour->status = $request->status;
             if($request->status==1){
                 $user = User::where('id',$bookedtour->tour->tourguide_id)->first();
-                $user->unavailableday .= $bookedtour->date;
-                $user->save();
+                $arr_bookedtourdate = explode ( ',' , $bookedtour->date,-1);
+                $arr_userunavailableday = explode ( ',' , $user->unavailableday,-1);
+                if(sizeof($arr_bookedtourdate)==sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday))){
+                    $user->unavailableday .= $bookedtour->date; 
+                    $user->save();
+                    $bookedtour->save();
+                }else{
+                    return back()->with('errorSQL', 'TRÙNG LỊCH!!! Hướng dẫn viên không thể nhận tour vào những ngày này!');
+                }
+        
             }
             if($request->status==2){
                 $date=$bookedtour->date;

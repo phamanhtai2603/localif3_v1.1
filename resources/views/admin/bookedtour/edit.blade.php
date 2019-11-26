@@ -129,11 +129,12 @@
                   <option value="1" selected="selected">Đã xác nhận</option>
                   <option value="2">Hủy xác nhận</option>
                 </select>
-                @else 
+                @elseif($bookedtour->status==2) 
                 <select style="padding: 0px;font-size: 15px; " name="status" id="status" class="form-control" data-parsley-trigger="change">  
                   <option value="1" >Xác nhận</option>
                   <option value="2" selected="selected">Đã từ chối</option>
                 </select>
+                
                 @endif
               </div>  
             </div>

@@ -85,7 +85,11 @@
                             @elseif ($bookedtour->status == 2)
                               <p class="text text-danger">
                                   Đã từ chối
-                              </p>  
+                              </p> 
+                            @elseif ($bookedtour->status == 3)
+                            <p class="text text-danger">
+                                Đã tự hủy
+                            </p>   
                             @endif
                           </td>
                           <td>                                                 

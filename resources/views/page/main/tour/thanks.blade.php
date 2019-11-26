@@ -1,6 +1,6 @@
 @extends('page.main.layouts.masterpage')
 @section('title')
-    Tour
+    Thanks you!
 @endsection
 @section('css')
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -105,7 +105,7 @@
               </div>  
               <div class="col-md-12" style="font-family: 'Times New Roman'; font-size: 20px">
                   <p>You have booked a tour: {{ $name }} </p>
-                  <p>By host: <a href="#">{{ $tourguide->first_name.' '.$tourguide->last_name }}</a> - Hotline of host: {{ $tourguide_phone }}</p>
+                  <p>By host: <a href="{{ route('get-page-otheruser-profile-view',['id'=>$tourguide->id]) }}">{{ $tourguide->first_name.' '.$tourguide->last_name }}</a> - Hotline of host: {{ $tourguide_phone }}</p>
                   <p>For {{ $size }} people</p>
                   <p>On day:  {{ substr($date, 0, -1) }}</p>
                   <p>TOTAL COST: <b><i>{{ number_format($total_price)  }} VND</i></b></p>

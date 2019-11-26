@@ -32,7 +32,7 @@
                       @if(Auth::user()->role == 2)
                       <a class="user-options" href="{{ route('tourmanage.index') }}"><i class="fa fa- user"></i>Tours manage</a>
                       @elseif(Auth::user()->role == 3)
-                      <a class="user-options" href="#"><i class="fa fa- user"></i>Your booked</a>
+                      <a class="user-options" href="{{ route('customerbooked.index') }}"><i class="fa fa- user"></i>Your booked</a>
                       @endif
                       {{-- <a class="user-options" href="#"><i class="fa fa- user"></i>Thông báo: <span class="count">{{count($userNotifications)}}</span></a> --}}
     
