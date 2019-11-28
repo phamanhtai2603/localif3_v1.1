@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Tour;
+use App\BookedTour;
 use App\Location;
 use App\User;
 use Illuminate\Http\Request;

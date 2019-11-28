@@ -20,20 +20,9 @@ class PageCustomerBookedTourController extends Controller
      */
     public function index()
     {
-        $bookedtours = BookedTour::where('customer_id',Auth::user()->id)->get(); 
+        $bookedtours = BookedTour::where('customer_id',Auth::user()->id)->orderBy('created_at', 'desc')->get(); 
         $stt=1;
-        // $checkdone=0;
-        // foreach($bookedtours as $bookedtour){
         $date_currentsecond = strtotime(Carbon::now()); 
-        //     $date_current = date('Y/m/d', $date_currentsecond);
-
-        //     $date_to=substr($bookedtour->date,-12);
-        //     $date_to=substr($date_to,0,10);
-        //     if($date_to>$date_current){
-        //         $checkdone=1;
-        //     }
-        // }
-        
         return view('page.main.customerbookedtour.index',['bookedtours' => $bookedtours,'stt'=>$stt,'date_currentsecond'=>$date_currentsecond]);
     }
 

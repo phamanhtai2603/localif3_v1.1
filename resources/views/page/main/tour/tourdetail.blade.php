@@ -178,22 +178,55 @@
             @csrf
             <div class="row form-group">
                 @if (session('success'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success col-md-12">
                       {{session('success')}}
                     </div>
                 @endif
                 @if (session('errorSQL'))
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger col-md-12">
                       {{session('errorSQL')}}
                     </div>
                 @endif
                 @if(count($errors)>0)
-                  <div class="alert alert-danger">
+                  <div class="alert alert-danger col-md-12">
                       @foreach($errors->all() as $err)
                       <?php echo $err."<br/>"; ?>
                         @endforeach
                   </div>
               @endif
+                <div class="col-md-12">
+                  <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                      The Tourist guide unavailable days!
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">You can not book on this days</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="row" >
+                            <?php 
+                                $arrs = explode ( ',' , $tour->user->unavailableday,-1);
+                                foreach($arrs as $arr){
+                                    echo "<div class='col-md-3' style='color=green'>" .$arr. "</div>";  
+                                }
+                            ?>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">I got it!</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
                 <div class="col-md-12">
                         <label class="text-black" for="size">People size</label> 
                         <input type="number" name="size" class="form-control" placeholder="Số người dự kiến"

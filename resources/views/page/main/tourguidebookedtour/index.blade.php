@@ -22,6 +22,11 @@
                         {{session('success')}}
                     </small>
                     @endif
+                    @if(session('error'))
+                    <small id="error" class="alert alert-danger p-2">
+                        {{session('error')}}
+                    </small>
+                    @endif
                 </div>
                 <div class="card-body">
                     <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -29,6 +34,7 @@
                             <tr>
                                 <th></th>
                                 <th>Name</th>
+                                <th>Booked by</th>
                                 <th>Created at</th>
                                 <th>Size </th>
                                 <th>Date</th>
@@ -46,68 +52,85 @@
                                 $checkdone=0;
                                 $date_current = date('Y/m/d', $date_currentsecond);
 
-                                $date_to=substr($bookedtour->date,-12);
+                                $date_to=substr($bookedtour->b_date,-12);
                                 $date_to=substr($date_to,0,10);
-                                $date_from=substr($bookedtour->date,0,12);
-                                if($date_to<$date_current && $bookedtour->status==1){
+                                if($date_to<$date_current){
                                     $checkdone=1;
-                                }elseif($date_from<$date_current){
-                                    $checkdone=2;
                                 }
                                 ?>
                                 <td class="text-center">{{$stt++}}</td>
-                                <td ><a href="{{ route('get-page-tourdetail-view',['id'=>$bookedtour->tour->id]) }}">{{ $bookedtour->tour->name }}</a></td>
-                                <td>{{$bookedtour->created_at->format('M d Y')}}</td>
+                                <td >{{ $bookedtour->t_name }}</td>
+                                <td ><a href="{{ route('get-page-otheruser-profile-view',['id'=>$bookedtour->u_id]) }}">{{ $bookedtour->email }}</a></td>
+                                <td>{{$bookedtour->b_created_at}}</td>
                                 <td>{{$bookedtour->size}}</td>
-                                <td>{{ $bookedtour->date }}</td>
+                                <td>{{ $bookedtour->b_date }}</td> 
                                 <td>{{$bookedtour->total_price}}</td>
-                                @if($bookedtour->status==0)
+                                @if($bookedtour->b_status==0)
                                 <td><a style="color:yellowgreen">Unchecked</a></td>
-                                @elseif($bookedtour->status==1)
+                                @elseif($bookedtour->b_status==1)
                                 <td><a style="color:green">Accepted</a></td>
-                                @elseif($bookedtour->status==2)
+                                @elseif($bookedtour->b_status==2)
                                 <td><a style="color:red">Refused</a></td>
-                                @elseif($bookedtour->status==3)
+                                @elseif($bookedtour->b_status==3)
                                 <td><a style="color:red">Canceled</a></td>
                                 @endif
                                 
                                 <td>
-                                    @if(($bookedtour->status!=3) && ($bookedtour->status!=2))
-                                        @if($bookedtour->status==1 && $checkdone==1)
+                                    @if($bookedtour->b_status!=3 && $bookedtour->b_status!=2)        
+                                        @if($bookedtour->b_status==1 && $checkdone==1)
                                         <a style="color:green; text-align:center">DONE</a>
-                                        <button type="button" href="#" class="btn btn-primary">RATE ME</button>
-                                        @elseif($checkdone==2)
+                                        @elseif($bookedtour->b_status!=1 && $checkdone==1)
                                         <a style="color:red; text-align:center">Out of date</a>
-                                        @else
-                                        <a class="btn btn-danger btn-sm btn-op" href="" data-toggle="modal" data-target="#myModalDel{{$bookedtour->id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Cancel</a>
+                                        @elseif($checkdone==0 && $bookedtour->b_status==0)
+                                        <a class="btn btn-success btn-sm btn-op" href="" data-toggle="modal" data-target="#myModalDel2{{$bookedtour->b_id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Accept</a>
+                                        <a class="btn btn-danger btn-sm btn-op" href="" data-toggle="modal" data-target="#myModalDel{{$bookedtour->b_id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Deny</a>
+                                        @elseif($checkdone==0 && $bookedtour->b_status==1)
+                                        <a class="btn btn-danger btn-sm btn-op" href="" data-toggle="modal" data-target="#myModalDel{{$bookedtour->b_id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Deny</a>
                                         @endif
+                                    @else                                      
                                     @endif
                                 </td>
                                 
-                                <div class="modal fade" id="myModalDel{{$bookedtour->id}}">
-                                        <div class="modal-dialog">
+                                <div class="modal fade" id="myModalDel{{$bookedtour->b_id}}">
+                                        <div class="modal-dialog">  
                                           <div class="modal-content">
                                             <!-- Modal Header -->
                                             <div class="modal-header">
-                                                <h4 class="modal-title">You want to cancel?</h4>
+                                                <h4 class="modal-title">Warning</h4>
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             </div>
                                             <!-- Modal body -->
                                             <div class="modal-body">
-                                                <p>You have to pay 50% even cancel this tour! OK?</p>
+                                                <p>OK to deny! OK?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <a class="btn btn-primary" href="{{ route('get-page-customerbooked-cancel',['id'=>$bookedtour->id]) }}">OK!</a>
+                                                <a class="btn btn-primary" href="{{ route('get-page-tourguidebooked-deny',['id'=>$bookedtour->b_id]) }}">OK!</a>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                                {{-- <form action="{{  route('user.destroy',['id'=>$user->id]) }}" method="post">
-                                                    <input class="btn btn-default" type="submit" value="Xóa" />
-                                                    @method('post')
-                                                    @csrf
-                                                </form> --}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="modal fade" id="myModalDel2{{$bookedtour->b_id}}">
+                                        <div class="modal-dialog">  
+                                          <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Warning</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <p>OK to accept! OK?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a class="btn btn-primary" href="{{ route('get-page-tourguidebooked-accept',['id'=>$bookedtour->b_id]) }}">OK!</a>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </tr>
                             @endforeach
                             
