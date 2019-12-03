@@ -126,10 +126,13 @@ Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
         Route::get('bookedtour/deny/{id}','PageTourguideBookedTourController@deny')->name('get-page-tourguidebooked-deny');
         Route::resource('tourguidebooked','PageTourguideBookedTourController');
     });
-
+    //Role=3, customer
     Route::group(['prefix' => 'customer', 'middleware' => 'customerLogin'], function () {
         Route::resource('customerbooked','PageCustomerBookedTourController');
         Route::get('bookedtour/delete/{id}','PageCustomerBookedTourController@cancel')->name('get-page-customerbooked-cancel');
+        //rate
+        Route::get('bookedtour/rate/{id}','PageCustomerBookedTourController@getrate')->name('get-page-customerbooked-rate');
+        Route::post('bookedtour/rate/{id}','PageCustomerBookedTourController@postrate')->name('post-page-customerbooked-rate');
     });
 });
 

@@ -27,7 +27,7 @@ class PageUserController extends Controller
 
     //profile cua user khac
     public function userprofileview($id){
-            $user = User::Find($id);
+            $user = User::Find($id); 
             $tours = Tour::where('tourguide_id',$id)->paginate(6);
             return view('page.main.user.user_profile',['user'=>$user,'tours'=>$tours]);
     }

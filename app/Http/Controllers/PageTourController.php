@@ -75,7 +75,6 @@ class PageTourController extends Controller
             if($date_from<$date_current){
                 return back()->with('errorSQL', 'Day from is the past');
             }
-            //////// 
 
             //Cắt mảng unvailableday và mảng bookedtour->date ra để so sánh có trùng ngày hay không
             $user = User::where('id',$bookedtour->tour->tourguide_id)->first();
@@ -91,17 +90,16 @@ class PageTourController extends Controller
             }else{
                 return back()->with('errorSQL', 'The host is unavailable on this days!');
             }
-            return redirect()->route('thanks',['id'=>$bookedtour->$id]); 
+            return redirect()->route('thanks',['id'=>$bookedtour->id]);
     
         } catch (Exception $e) {
             return back()->with('errorSQL', 'Error')->withInput();
         }
         return redirect()->route('thanks',['id'=>$bookedtour->$id]);
-        
     }
 
     public function thanks($id){
-        $bookedtour = BookedTour::find($id);
+        $bookedtour = BookedTour::where('id',$id)->first();
         $name = $bookedtour->tour->name;
         $tourguide = $bookedtour->tour->user;
         $tourguide_phone = $bookedtour->tour->user->phone_number;

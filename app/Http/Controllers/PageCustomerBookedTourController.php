@@ -7,6 +7,7 @@ use App\Tour;
 use App\BookedTour;
 use App\Location;
 use App\User;
+use App\Rate;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,7 @@ class PageCustomerBookedTourController extends Controller
         $bookedtours = BookedTour::where('customer_id',Auth::user()->id)->orderBy('created_at', 'desc')->get(); 
         $stt=1;
         $date_currentsecond = strtotime(Carbon::now()); 
+
         return view('page.main.customerbookedtour.index',['bookedtours' => $bookedtours,'stt'=>$stt,'date_currentsecond'=>$date_currentsecond]);
     }
 
@@ -126,5 +128,53 @@ class PageCustomerBookedTourController extends Controller
             return back()->with('errorSQL', 'Something wrong happened!')->withInput();
         }
         return redirect()->back()->with('success', 'You have canceled one tour!');
+    }
+
+    public function getrate($id){
+        try{
+            $bookedtour = BookedTour::where('id',$id)->first();
+            //Check done mới cho rate
+            $date_currentsecond = strtotime(Carbon::now());
+            $date_current = date('Y/m/d', $date_currentsecond);
+            $date_to=substr($bookedtour->date,-12);
+            $date_to=substr($date_to,0,10);
+            $checkdone=0;
+            if($date_to<$date_current){
+                $checkdone=1;
+            }
+            $rate = Rate::where([['customer_id',Auth::user()->id],['tour_id',$id]])->get();
+            if(count($rate)>0){
+                return back()->with('error', 'You have rated this tour before!');
+            }
+            if($bookedtour->customer_id==Auth::user()->id && $bookedtour->status==1 && $checkdone=1){
+                return view('page.main.customerbookedtour.rate',['bookedtour'=>$bookedtour]);
+            }else{
+                return back()->with('error', 'You can not rate this tour!')->withInput();
+            }
+        }catch (Exception $e) {
+            return back()->with('errorSQL', 'Error')->withInput();
+        }
+    }
+
+    public function postrate($id, Request $request){
+        try{
+            $rate = new Rate();
+            $rate->customer_id = Auth::user()->id;
+            $rate->tour_id = $id;
+            $rate->rate = $request->rate;
+            $rate->comment = $request->comment;
+            $rate->save();
+
+            
+            $bookedtour = BookedTour::where('id',$id)->first();
+            $tour = Tour::where('id',$bookedtour->tour->id)->first();
+            $tour->avgrate = (($tour->avgrate*$tour->rate_size) + $request->rate)/($tour->rate_size+1);
+            $tour->rate_size +=1;
+            $tour->save();
+            
+        }catch (Exception $e) {
+            return back()->with('errorSQL', 'Error')->withInput();
+        }
+        return $this->index()->with('success', 'Thank you! You just rated one tour!');
     }
 }

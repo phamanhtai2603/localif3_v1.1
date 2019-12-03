@@ -60,7 +60,7 @@
                                 ?>
                                 <td class="text-center">{{$stt++}}</td>
                                 <td >{{ $bookedtour->t_name }}</td>
-                                <td ><a href="{{ route('get-page-otheruser-profile-view',['id'=>$bookedtour->u_id]) }}">{{ $bookedtour->email }}</a></td>
+                                <td ><a href="{{ route('get-page-otheruser-profile-view',['id'=>$bookedtour->b_u]) }}">Click to see</a></td>
                                 <td>{{$bookedtour->b_created_at}}</td>
                                 <td>{{$bookedtour->size}}</td>
                                 <td>{{ $bookedtour->b_date }}</td> 

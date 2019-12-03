@@ -22,6 +22,11 @@
                         {{session('success')}}
                     </small>
                     @endif
+                    @if(session('error'))
+                    <small id="error" class="alert alert-danger p-2">
+                        {{session('error')}}
+                    </small>
+                    @endif
                 </div>
                 <div class="card-body">
                     <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -75,7 +80,7 @@
                                     @if(($bookedtour->status!=3) && ($bookedtour->status!=2))
                                         @if($bookedtour->status==1 && $checkdone==1)
                                         <a style="color:green; text-align:center">DONE</a>
-                                        <button type="button" href="#" class="btn btn-primary">RATE ME</button>
+                                            <button type="button"  class="btn btn-primary"><a style ="color:yellow" href="{{ route('get-page-customerbooked-rate',['id'=>$bookedtour->id]) }}">RATE ME</a></button>
                                         @elseif($checkdone==2)
                                         <a style="color:red; text-align:center">Out of date</a>
                                         @else
