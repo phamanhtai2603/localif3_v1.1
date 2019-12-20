@@ -104,22 +104,22 @@
         <div class="col-md-7 mb-5">
             <h1 class=" font-weight-light orange" style="color: #F58543;">WELCOME TO MY OWN TRIP! </h1>
             <div  class="p-5 bg-white">
-                <div id="slider">
-                  <a  class="control_next">></a>
-                  <a  class="control_prev"><</a>
-                  <ul>
-                      <?php $arrs = explode ( ',' , $tour->image,-1);  
-                      foreach($arrs as $arr){
-                      ?>
-                          
-                          <li style="background-image: url('images/{{$arr}}'); width:540px;height:400px;"></li>
-                      <?php
-                      }
-                      ?>
-                  </ul>  
-                </div>
-            </div>
-            <br>
+              <div id="slider">
+                <a  class="control_next">></a>
+                <a  class="control_prev"><</a>
+                <ul>
+                    <?php $arrs = explode ( ',' , $tour->image,-1);  
+                    foreach($arrs as $arr){
+                    ?>
+                        
+                        <li style="background-image: url('images/{{$arr}}'); width:540px;height:400px;"></li>
+                    <?php
+                    }
+                    ?>
+                </ul>  
+              </div>
+          </div>
+          <br>
             <div  class="p-5 bg-white">
               <p style="font-family: 'Times New Roman', Times, serif; font-size:25px">ABOUT MY SPECIAL TOUR</p>
                 <div>

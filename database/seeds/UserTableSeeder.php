@@ -20,15 +20,33 @@ class UserTableSeeder extends Seeder
         DB::table('users')->insert([
             'first_name'=>'Tour',
             'last_name'=>'Guide',
-            'email'=>'tourguide@tourguide.tourguide',
+            'email'=>'tourguide@tourguide.com',
             'password'=>bcrypt('tourguide'),
             'role'=>2,
         ]);
         DB::table('users')->insert([
             'first_name'=>'Customer',
-            'email'=>'customer@customer.customer',
+            'email'=>'customer@customer.com',
             'password'=>bcrypt('customer'),
             'role'=>3,
+        ]);
+        DB::table('location')->insert([
+            'name'=>'Da Nang',
+            'description'=>'Da Nang city',
+            'sign'=>'DN',
+            'status'=>0,
+        ]);
+        DB::table('location')->insert([
+            'name'=>'Hoi An',
+            'description'=>'Hoi An city',
+            'sign'=>'HA',
+            'status'=>0,
+        ]);
+        DB::table('location')->insert([
+            'name'=>'Hue',
+            'description'=>'Hue city',
+            'sign'=>'Hu',
+            'status'=>0,
         ]);
     }
 }

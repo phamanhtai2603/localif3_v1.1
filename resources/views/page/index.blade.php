@@ -45,7 +45,7 @@
     {{-- hết mission --}}
 
 
-    <div class="site-section">
+    {{-- <div class="site-section"> --}}
 <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-md-7 text-center">
@@ -59,7 +59,7 @@
         ?>
         <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
           <a href="{{ route('get-page-tourdetail-view',['id'=>$tour->id]) }}" class="unit-1 text-center">
-            <img src="images/{{ $arr_image[1] }}" style="width:350px;height:400px;" alt="Image" class="img-fluid">
+            <img src="images/{{ $arr_image[0] }}" style="width:350px;height:400px;" alt="Image" class="img-fluid">
             <div class="unit-1-text">
               <h3 class="unit-1-heading t-name" style="padding: 5px; margin:0px">{{ $tour->name }}</h3>
               <strong class="text-primary mb-2 d-block t-price" style="margin:0px">{{ $tour->price }} VND</strong>

@@ -55,9 +55,9 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="btn btn-success btn-sm btn-op" href="" data-toggle="modal" data-target="#myModal{{$tour->id}}" data-backdrop="true"><span><i class="fa fa-eye"></i></span> Xem</a>
-                                    <a class="btn btn-warning btn-sm btn-op" href=""><span><i class="fa fa-edit"></i></span> Sửa</a>
-                                    <a class="btn btn-danger btn-sm btn-op" href="" data-toggle="modal" data-target="#myModalDel{{$tour->id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Xoá</a>
+                                    <a class="btn btn-success btn-sm btn-op" href="" data-toggle="modal" data-target="#myModal{{$tour->id}}" data-backdrop="true"><span><i class="fa fa-eye"></i></span> Detail</a>
+                                    <a class="btn btn-warning btn-sm btn-op" href="{{ route('get-tourmanage-edit',['id'=>$tour->id]) }}"><span><i class="fa fa-edit"></i></span> Edit</a>
+                                    <a class="btn btn-danger btn-sm btn-op" href="" data-toggle="modal" data-target="#myModalDel{{$tour->id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Delete</a>
                                 </td>
                                 {{-- modal --}}
                                 <!-- The Modal -->
@@ -67,7 +67,7 @@
 
                                         <!-- Modal Header -->
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Thông tin tour</h4>
+                                            <h4 class="modal-title">Information</h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                         
@@ -93,24 +93,24 @@
                                                 </div>
                                                 <div class="my-center my-center-85">
                                                     <div class="row">
-                                                    <p class="col-4 p-5px">Tên HDV :</p><p class="col-8 p-5px text-body">{{ $tour->user->first_name.' '.$tour->user->last_name}}</p>
+                                                    <p class="col-4 p-5px">Tourist guide :</p><p class="col-8 p-5px text-body">{{ $tour->user->first_name.' '.$tour->user->last_name}}</p>
                                                     </div>
                                                     <div class="row">
                                                     <p class="col-4 p-5px">Email :</p><p class="col-8 p-5px text-body ">{{$tour->user->email}}</p>
                                                     </div>
                                                     <div class="row">
-                                                        <p class="col-4 p-5px ">Địa điểm:</p><p class="col-8 p-5px text-body">{{$tour->location->name}}</p>
+                                                        <p class="col-4 p-5px ">Location:</p><p class="col-8 p-5px text-body">{{$tour->location->name}}</p>
                                                     </div>
                                                     <div class="row">
-                                                        <p class="col-4 p-5px">Mô tả</p><p class="col-8 p-5px text-body ">{{$tour->description }}</p>
+                                                        <p class="col-4 p-5px">description</p><p class="col-8 p-5px text-body ">{{$tour->description }}</p>
                                                     </div>
                                                     <div class="row">
-                                                        <p class="col-4 p-5px">Giá cả</p><p class="col-8 p-5px text-body">{{$tour->price}}</p>
+                                                        <p class="col-4 p-5px">Price</p><p class="col-8 p-5px text-body">{{$tour->price}}</p>
                                                     </div>
                                                     <div class="row">
-                                                        <p class="col-4 p-5px">Đánh giá</p>
+                                                        <p class="col-4 p-5px">Rate</p>
                                                         @if($tour->avgrate=='')
-                                                        <p class="col-4 p-5px text-body">Chưa có đánh giá nào</p>
+                                                        <p class="col-4 p-5px text-body">No rate</p>
                                                         @else
                                                         <p class="col-4 p-5px text-body">{{ $tour->avgrate }}</p>
                                                         @endif
@@ -120,9 +120,9 @@
                                             <hr class="my-1">
                                         </div>
                                         <div class="modal-footer">
-                                                <a class="btn btn-primary" href=""><i class="fa fa-edit"></i> Xem bình luận</a>
-                                                <a class="btn btn-primary" href=""><i class="fa fa-edit"></i> Chỉnh sửa</a>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                <a class="btn btn-primary" href=""><i class="fa fa-edit"></i> View comments</a>
+                                                <a class="btn btn-primary" href=""><i class="fa fa-edit"></i> Edit</a>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>
@@ -150,7 +150,7 @@
                                                     <hr class="my-1">
                                                 </div>
                                                 <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 </div>
                                                 </div>
                                             </div>
@@ -162,21 +162,16 @@
                                           <div class="modal-content">
                                             <!-- Modal Header -->
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Xác nhận xóa tour!</h4>
+                                                <h4 class="modal-title">Delete this tour!</h4>
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             </div>
                                             <!-- Modal body -->
                                             <div class="modal-body">
-                                                <p>Bạn đồng ý xóa tour <strong>{{ $tour->name }}</strong> này không ?</p>
+                                                <p>You really want to delete tour <strong>{{ $tour->name }}</strong> ?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <a class="btn btn-primary" href="">Đồng ý</a>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                                {{-- <form action="{{  route('user.destroy',['id'=>$user->id]) }}" method="post">
-                                                    <input class="btn btn-default" type="submit" value="Xóa" />
-                                                    @method('post')
-                                                    @csrf
-                                                </form> --}}
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <a class="btn btn-danger" href="{{ route('tourmanage-delete',['id'=>$tour->id]) }}"><i class="fa fa-edit"></i> OK</a>
                                             </div>
                                         </div>
                                     </div>

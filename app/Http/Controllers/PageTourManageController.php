@@ -45,23 +45,32 @@ class PageTourManageController extends Controller
     public function store(Request $request)
     {
         $tour = new Tour();
-        try{
-            $image_code = '';
-            $images = $request->file('file');
-            foreach($images as $image)
-            {
-                $new_name = rand() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('images'), $new_name);
-                $image_code .= $new_name.',';
-            }   
-            $request['image'] = $image_code;
-            $tour = $request->all();
-            $tour->save();
+            try{
+                $tour->tourguide_id = Auth::user()->id;
+                $tour->location_id = $request->location_id;
+                $tour->name = $request->name;
+                $tour->description = $request->description;
+                $tour->content = $request->content;
+                $tour->plan = $request->plan;
+                $tour->price = $request->price;
+
+                $image_code = '';
+                $images = $request->file('file');
+                foreach($images as $image)
+                {
+                 $new_name = date('Y-M-D') . '_' . round(microtime(true) * 1000) . '.'  . $image->getClientOriginalExtension();
+                 $image->move(public_path('images'), $new_name); 
+                 $image_code .= $new_name.','; 
+                }
+                $tour->image = $image_code;
+                $tour->save();
+
         }catch (Exception $e) {
-            return back()->with('errorSQL', 'Something error!')->withInput();
+            return back()->with('errorSQL', 'Something wrong!')->withInput();
         }
-        return redirect()->back()->with('noti', 'You have add a new tour post!');
+        return redirect()->back()->with('noti', 'You have created a new tour post!');
     }
+
 
     /**
      * Display the specified resource.
@@ -82,7 +91,10 @@ class PageTourManageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tour = Tour::find($id);
+        $user = User::where('role',2)->get();  
+        $locations = Location::all();
+        return view('page.main.tourmanage.edit',['tour' => $tour,'tourguides'=>$user,'locations'=>$locations]);
     }
 
     /**
@@ -94,8 +106,33 @@ class PageTourManageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $tour = Tour::find($id);
+        try{
+            $tour->location_id = $request->location_id;
+            $tour->name = $request->name;
+            $tour->description = $request->description;
+            $tour->content = $request->content;
+            $tour->plan = $request->plan;
+            $tour->price = $request->price;
+
+            $image_code = '';
+            $images = $request->file('file');
+            if($request->file('file')){
+                foreach($images as $image)
+                {
+                    $new_name = date('Y-M-D') . '_' . round(microtime(true) * 1000) . '.'  . $image->getClientOriginalExtension();
+                    $image->move(public_path('images'), $new_name); 
+                    $image_code .= $new_name.','; 
+                }
+            }
+            $tour->image = $image_code;
+            $tour->save();
+
+        }catch (Exception $e) {
+            return back()->with('errorSQL', 'Something wrong!')->withInput();
+        }
+        return redirect()->back()->with('noti', 'You have updated a new tour post!');
+        }
 
     /**
      * Remove the specified resource from storage.
@@ -105,6 +142,16 @@ class PageTourManageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tour = Tour::find($id);
+        $tour->delete();
+        return back()->with('noti', 'Deleted!')->withInput();
     }
+
+    public function delete($id)
+    {
+        $tour = Tour::find($id);
+        $tour->delete();
+        return back()->with('noti', 'Deleted!')->withInput();
+    }
+
 }

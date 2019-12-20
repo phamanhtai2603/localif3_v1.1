@@ -6,6 +6,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600">
   <link rel="stylesheet" href="admin_page_asset/css/parsley.css">
+
+  <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+  <script> CKEDITOR.replace('editor1'); </script>
   <style>
     #slider {
   position: relative;
@@ -105,11 +108,19 @@
         <div class="row">
             <div class="col-md-7 mb-5">
                 <h1 class=" font-weight-light orange" style="color: #F58543;">ADD NEW TOUR POST! </h1>
+                
+                @if (session('noti'))
+                    <div class="alert alert-success">{{ session('noti') }}</div>
+                @endif
+                @if (session('errorSQL'))
+                    <div class="alert alert-danger">{{ session('errorSQL') }}</div>
+                @endif
                 <br>
+                
                 <div  class="p-5 bg-white">
                 <p style="font-family: 'Times New Roman', Times, serif; font-size:25px">ABOUT MY SPECIAL TOUR</p>
                     <div>
-                        <div class=""><textarea name="content" id="editor" rows="13" cols="9" placeholder="Tell about your tour, which make your tour special. You better write in the best look.. !" class="form-control" data-parsley-trigger="change" required=""></textarea></div>
+                        <div class=""><textarea name="content" id="editor1" rows="13" cols="9" placeholder="Tell about your tour, which make your tour special. You better write in the best look.. !" class="form-control" data-parsley-trigger="change" required=""></textarea></div>
                         @if($errors->has('content'))
                             <small class="text-danger w-100">
                                 {{$errors->first('content')}}
@@ -139,6 +150,7 @@
                 <div class="row">
                     <div class="col-md-3" text-align="right"><h4>Select Images</h4></div>
                     <div class="col-md-6">
+                        {{-- <input type="file" name="file" id="file" accept="image/*" required /> --}}
                         <input type="file" name="file[]" id="file" accept="image/*" multiple required />
                     </div>
                 </div>
@@ -296,5 +308,16 @@
               }
           });
       });
+    </script>
+    <script> 
+        CKEDITOR.replace( 'editor1', {
+            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+        } );
+        
     </script>
 @endsection

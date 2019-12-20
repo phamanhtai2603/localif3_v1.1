@@ -110,6 +110,8 @@ Route::group(['prefix' => '/'], function () {
         Route::get('/detail/{id}', 'PageTourController@view')->name('get-page-tourdetail-view');
         Route::post('/booktour/{id}', 'PageTourController@booktour')->name('post-page-booktour');
         Route::get('/thanks/{id}', 'PageTourController@thanks')->name('thanks');
+
+
     });
 });
 
@@ -121,6 +123,9 @@ Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
     //Role=2, tourguide mới làm đc
     Route::group(['prefix' => 'tourguide', 'middleware' => 'tourguideLogin'], function () {
         Route::resource('tourmanage','PageTourManageController'); //Bài post về tour
+        Route::get('tourmanage/edit/{id}', 'PageTourManageController@edit')->name('get-tourmanage-edit');
+        Route::post('tourmanage/update/{id}', 'PageTourManageController@update')->name('post-tourmanage-update');
+        Route::get('tourmanage/delete/{id}','PageTourManageController@delete')->name('tourmanage-delete');
 
         Route::get('bookedtour/accept/{id}','PageTourguideBookedTourController@accept')->name('get-page-tourguidebooked-accept');
         Route::get('bookedtour/deny/{id}','PageTourguideBookedTourController@deny')->name('get-page-tourguidebooked-deny');

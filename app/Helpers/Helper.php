@@ -145,42 +145,42 @@ class Helper{
     }
 
     public static function getArrInputTour(Request $request)
-    {   
-            $image_code = '';
-            $images = $request->file('file');
-            foreach($images as $image)
-            {
-             $new_name = rand() . '.' . $image->getClientOriginalExtension();
-             $image->move(public_path('images'), $new_name);
-             $image_code .= $new_name.',';
-            }
-            
-            $request['image'] = $image_code;
+    {       
+        $image_code = '';
+        $images = $request->file('file');
+        foreach($images as $image)
+        {
+         $new_name = rand() . '.' . $image->getClientOriginalExtension();
+         $image->move(public_path('images'), $new_name);
+         $image_code .= $new_name.',';
+        }
+        
+        $request['image'] = $image_code;
 
-            // // get arr input
-            $arrInput = $request->all();
-            return $arrInput; 
+        // // get arr input
+        $arrInput = $request->all();
+        return $arrInput; 
     }
 
     public static function updateTour($id,Request $request)
     {       $tour = Tour::find($id);
-            $image_code = '';
-            if($request->file('file')){
-                $images = $request->file('file');
-                foreach($images as $image)
-                {
-                $new_name = rand() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('images'), $new_name);
-                $image_code .= $new_name.',';
-                }
-                //Lấy request = chuỗi img cũ
-                $request['image'] = $tour->image;
-                //thêm img mới vào
-                $request['image'] .= $image_code;
+        $image_code = '';
+        if($request->file('file')){
+            $images = $request->file('file');
+            foreach($images as $image)
+            {
+            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $new_name);
+            $image_code .= $new_name.',';
             }
-            // // get arr input
-            $arrInput = $request->all();
-            $tour->update($arrInput);
+            //Lấy request = chuỗi img cũ
+            $request['image'] = $tour->image;
+            //thêm img mới vào
+            $request['image'] .= $image_code;
+        }
+        // // get arr input
+        $arrInput = $request->all();
+        $tour->update($arrInput);
             
     }
     // update for Blog controller

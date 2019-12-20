@@ -4,6 +4,8 @@
 {{-- css validation --}}
     <link rel="stylesheet" href="admin_page_asset/css/parsley.css">
 
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script> CKEDITOR.replace('editor1'); </script>
 @endsection
 
 @section('title')
@@ -122,7 +124,7 @@ Thêm mới tour
 
                     <div class="form-group" id="text-area">
                             <div class=""><label for="textarea-input" class=" form-control-label">Nội dung chính của tour *:</label></div>
-                            <div class=""><textarea name="content" id="editor" rows="13" cols="9" placeholder="Điều đặc biệt mà bạn muốn chia sẽ, điều đặc biệt làm nên chuyến đi của bạn" class="form-control" data-parsley-trigger="change" required=""></textarea></div>
+                            <div class=""><textarea name="content" id="editor1" rows="13" cols="9" placeholder="Điều đặc biệt mà bạn muốn chia sẽ, điều đặc biệt làm nên chuyến đi của bạn" class="form-control" data-parsley-trigger="change" required=""></textarea></div>
                             @if($errors->has('content'))
                                 <small class="text-danger w-100">
                                     {{$errors->first('content')}}
@@ -238,5 +240,16 @@ Thêm mới tour
             });
         });
         </script>
-        
+        <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+        <script> 
+            CKEDITOR.replace( 'editor1', {
+                filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+                filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+                filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+                filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+                filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+                filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+            } );
+            
+        </script>
 @endsection
