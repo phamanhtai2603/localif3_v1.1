@@ -25,7 +25,7 @@ class PageCustomerBookedTourController extends Controller
         $stt=1;
         $date_currentsecond = strtotime(Carbon::now()); 
 
-        return view('page.main.customerbookedtour.index',['bookedtours' => $bookedtours,'stt'=>$stt,'date_currentsecond'=>$date_currentsecond]);
+        return view('page.customerbookedtour.index',['bookedtours' => $bookedtours,'stt'=>$stt,'date_currentsecond'=>$date_currentsecond]);
     }
 
     /**
@@ -151,7 +151,7 @@ class PageCustomerBookedTourController extends Controller
             }
 
             if($bookedtour->customer_id==Auth::user()->id && $checkdone=1){
-                return view('page.main.customerbookedtour.rate',['bookedtour'=>$bookedtour]);
+                return view('page.customerbookedtour.rate',['bookedtour'=>$bookedtour]);
             }else{
                 return back()->with('error', 'You can not rate this tour!')->withInput();
             }

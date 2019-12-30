@@ -1,4 +1,4 @@
-@extends('page.main.layouts.masterpage')
+@extends('page.layouts.masterpage')
 @section('title')
     Homepage
 @endsection
@@ -29,19 +29,19 @@
    
 
     {{-- Bìa cover --}}
-    @include('page.main.layouts.cover')
+    @include('page.layouts.cover')
     {{-- Hết bìa cover --}}
 
     {{-- Location --}}
-    @include('page.main.layouts.location')
+    @include('page.layouts.location')
     {{-- Hết location --}}
 
     {{-- intro  --}}
-    @include('page.main.layouts.intro')
+    @include('page.layouts.intro')
     {{-- hết intro --}}
  
     {{-- mission --}}
-     @include('page.main.layouts.mission')
+     @include('page.layouts.mission')
     {{-- hết mission --}}
 
 
@@ -100,6 +100,6 @@
   
   <br />
       {{-- intro team --}}
-      @include('page.main.layouts.team_intro')
+      @include('page.layouts.team_intro')
       {{-- hết intro team --}}
 @endsection

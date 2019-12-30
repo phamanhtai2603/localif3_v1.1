@@ -12,7 +12,7 @@ class PageUserController extends Controller
     public function view(){
         $tours = Tour::where('tourguide_id',Auth::user()->id)->get();
         $stt=1;
-        return view('page.main.auth.profile',['tours'=>$tours,'stt'=>$stt]);
+        return view('page.auth.profile',['tours'=>$tours,'stt'=>$stt]);
     }
 
     public function update(Request $request){
@@ -29,7 +29,7 @@ class PageUserController extends Controller
     public function userprofileview($id){
             $user = User::Find($id); 
             $tours = Tour::where('tourguide_id',$id)->paginate(6);
-            return view('page.main.user.user_profile',['user'=>$user,'tours'=>$tours]);
+            return view('page.user.user_profile',['user'=>$user,'tours'=>$tours]);
     }
 
 }

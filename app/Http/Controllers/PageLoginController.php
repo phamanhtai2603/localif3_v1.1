@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 class PageLoginController extends Controller
 {
     public function getLogin(){
-        var_dump('sdsd');exit();
-        return view('page.main.auth.login');
+        return view('page.auth.login');
     }
 
     public function postLogin(Request $request ){

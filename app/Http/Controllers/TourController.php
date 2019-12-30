@@ -76,7 +76,7 @@ class TourController extends Controller
 
     public function update(Request $request, $id){
         try{
-       $input = Helper::updateTour($id, $request); //updateTour
+            $input = Helper::updateTour($id, $request); //updateTour
        
         } catch (Exception $e) {
             return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();

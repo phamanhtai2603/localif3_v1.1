@@ -18,20 +18,24 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class PageTourController extends Controller
 {
     public function viewall(){
-        $tours = Tour::paginate(15);
-        return view('page.main.tours',['tours'=>$tours]);
+        $tours = Tour::where('status', 0)->paginate(15);
+        return redirect()->route('get-page-view');
     }
 
     public function locationview($id){
-        $tours = Tour::where('location_id',$id)->paginate(15);
-        return view('page.main.tours',['tours'=>$tours]);
+        $tours = Tour::where('location_id',$id)->where('status', 0)->paginate(15);
+        return view('page.tours',['tours'=>$tours]);
     }
 
     public function view($id){
         $tour = Tour::find($id);
+        if (!isset($tour) || $tour->status == 1){
+            $tours = Tour::where('status', 0)->orderBy('avgrate','desc')->take(6)->get();
+            return view('page.index',['tours'=>$tours]);
+        }
         $rates = Rate::where('tour_id',$id)->paginate(15);
-        $comments = Comment::where('tour_id',$id)->paginate(15);
-        return view('page.main.tour.tourdetail',['tour'=>$tour,'rates'=>$rates,'comments'=>$comments]); 
+        $comments = Comment::where('tour_id',$id)->orderBy('id', 'DESC')->paginate(15);
+        return view('page.tour.tourdetail',['tour'=>$tour,'rates'=>$rates,'comments'=>$comments]); 
     }
 
     public function booktour(Request $request,$id){
@@ -86,8 +90,6 @@ class PageTourController extends Controller
             $user = User::where('id',$bookedtour->tour->tourguide_id)->first();
             $arr_bookedtourdate = explode ( ',' , $bookedtour->date,-1);
             $arr_userunavailableday = explode ( ',' , $user->unavailableday,-1);
-            //sizeof($arr_bookedtourdate);
-            //sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday));
 
             if(sizeof($arr_bookedtourdate)==sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday))){
                 //$user->unavailableday .= $bookedtour->date;
@@ -99,7 +101,7 @@ class PageTourController extends Controller
             //mail send noti
             $customer = Auth::user()->email;
             $email = $user->email;
-            Mail::send('page.main.mail.havebooked', ['customer' => $customer], function($message) use ($customer,$email) {
+            Mail::send('page.mail.havebooked', ['customer' => $customer], function($message) use ($customer,$email) {
                 $message->to($email)
                 ->subject('Localif3');
                 $message->from('phamanhtai263@gmail.com','Localif3 - You have a booking!');
@@ -121,7 +123,7 @@ class PageTourController extends Controller
         $date=$bookedtour->date;
         $size = $bookedtour->size;
         $total_price = $bookedtour->total_price;
-        return view('page.main.tour.thanks',['name'=>$name,'tourguide'=>$tourguide,'date'=>$date,'tourguide_phone'=>$tourguide_phone,'size'=>$size,'total_price'=>$total_price]);
+        return view('page.tour.thanks',['name'=>$name,'tourguide'=>$tourguide,'date'=>$date,'tourguide_phone'=>$tourguide_phone,'size'=>$size,'total_price'=>$total_price]);
     }
 
     public function comment($id,Request $request){
@@ -152,4 +154,21 @@ class PageTourController extends Controller
 
     }
 
+    public static function cutDateFrom($string){
+        $date_from = substr($string, 0, 10);
+        return $date_from;
+    }
+
+    public static function cutDateTo($string){
+        $date_to = substr(substr($string,-12),0,10);
+        return $date_to;
+    }
+
+    public static function checkDone($date_to){
+        $date_currentsecond = strtotime(Carbon::now());
+        $date_current = date('Y/m/d', $date_currentsecond);
+        if($date_to<$date_current){
+            return true;
+        }
+    }
 }

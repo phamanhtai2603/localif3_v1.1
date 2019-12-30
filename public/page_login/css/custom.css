@@ -1,0 +1,7 @@
+.float-center{
+    transition: none 0s ease 0s;
+    cursor: move;
+    position: relative;
+    left: 40%;
+    top: -62px;
+}

@@ -5,6 +5,7 @@ namespace App\Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\User;
+use App\Rate;
 use App\Location;
 use App\Tour;
 use Illuminate\Support\Facades\File;
@@ -163,7 +164,8 @@ class Helper{
     }
 
     public static function updateTour($id,Request $request)
-    {       $tour = Tour::find($id);
+    {       
+        $tour = Tour::find($id);
         $image_code = '';
         if($request->file('file')){
             $images = $request->file('file');
@@ -183,15 +185,11 @@ class Helper{
         $tour->update($arrInput);
             
     }
-    // update for Blog controller
-    // public static function updateBlog($id,Request $request)
-    // {
-    //     $post = User::find($id);
+
+    public static function checkRated($booked_id){
+        $rate = Rate::find($booked_id);
+        if (isset($rate))
+            return true;
         
-    //     $imageFile = $request->file('image');
-
-    //     dd($imageFile);
-
-    //     // $post->update($input);
-    // }
+    }
 }

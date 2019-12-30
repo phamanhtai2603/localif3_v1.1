@@ -116,7 +116,7 @@
                                     <option value="1" {{$tour->status == 1 ? 'selected': ''}}>Vô hiệu hóa</option>
                                 </select>
                             </div>
-                          </div>
+                        </div>
                       <div class="form-group" id="text-area">
                               <div class=""><label for="textarea-input" class=" form-control-label">Mô tả *:</label></div>
                               <div class=""><textarea name="description" id="" rows="9" cols="9" placeholder="Mô tả ngắn gọn.." class="form-control" data-parsley-trigger="change" required="">{{ $tour->description }}</textarea></div>

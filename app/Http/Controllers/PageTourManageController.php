@@ -22,7 +22,7 @@ class PageTourManageController extends Controller
     public function index()
     {
         $tours = Tour::where('tourguide_id',Auth::user()->id)->get();
-        return view('page.main.tourmanage.index',['tours' => $tours, 'stt' => 1]);
+        return view('page.tourmanage.index',['tours' => $tours, 'stt' => 1]);
     }
 
     /**
@@ -33,7 +33,7 @@ class PageTourManageController extends Controller
     public function create()
     {
         $locations = Location::all();
-        return view('page.main.tourmanage.add',['locations'=>$locations]);
+        return view('page.tourmanage.add',['locations'=>$locations]);
     }
 
     /**
@@ -94,7 +94,7 @@ class PageTourManageController extends Controller
         $tour = Tour::find($id);
         $user = User::where('role',2)->get();  
         $locations = Location::all();
-        return view('page.main.tourmanage.edit',['tour' => $tour,'tourguides'=>$user,'locations'=>$locations]);
+        return view('page.tourmanage.edit',['tour' => $tour,'tourguides'=>$user,'locations'=>$locations]);
     }
 
     /**
@@ -114,6 +114,7 @@ class PageTourManageController extends Controller
             $tour->content = $request->content;
             $tour->plan = $request->plan;
             $tour->price = $request->price;
+            $tour->status = $request->status;
 
             $image_code = '';
             $images = $request->file('file');

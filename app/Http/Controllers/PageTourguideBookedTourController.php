@@ -18,10 +18,10 @@ class PageTourguideBookedTourController extends Controller
         $bookedtours = DB::table('tour')
             ->join('users', 'tour.tourguide_id', '=', 'users.id')
             ->join('bookedtour', 'tour.id', '=', 'bookedtour.tour_id')
-            ->select('bookedtour.*','bookedtour.customer_id as b_u','bookedtour.created_at as b_created_at','bookedtour.date as b_date','bookedtour.id as b_id','bookedtour.status as b_status','bookedtour.created_at as b_created_at', 'tour.*','tour.id as t_id','tour.name as t_name', 'users.*','users.id as u_id')
+            ->select('bookedtour.*', 'booked_user as u_email','bookedtour.customer_id as b_u','bookedtour.created_at as b_created_at','bookedtour.date as b_date','bookedtour.id as b_id','bookedtour.status as b_status','bookedtour.created_at as b_created_at', 'tour.*','tour.id as t_id','tour.name as t_name', 'users.*','users.id as u_id')
             ->orderBy('b_created_at', 'desc')->get();
             $date_currentsecond = strtotime(Carbon::now());
-            return view('page.main.tourguidebookedtour.index',['bookedtours' => $bookedtours,'stt'=>1,'date_currentsecond'=>$date_currentsecond]);
+            return view('page.tourguidebookedtour.index',['bookedtours' => $bookedtours,'stt'=>1,'date_currentsecond'=>$date_currentsecond]);
     }
 
     public function deny($id){
