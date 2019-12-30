@@ -4,7 +4,6 @@
 @endsection
 @section('css')
 <link rel="stylesheet" href="page_asset/css/style.css">
-
 @endsection
 @section('content')
 {{-- Bìa cover --}}
@@ -39,6 +38,7 @@
                                 <th>Size </th>
                                 <th>Date</th>
                                 <th>Cost</th>
+                                <th>Message</th>
                                 <th>Status</th>
                                 <th class="mw-241"></th>
                             </tr>
@@ -65,6 +65,7 @@
                                 <td>{{$bookedtour->size}}</td>
                                 <td>{{ $bookedtour->b_date }}</td> 
                                 <td>{{$bookedtour->total_price}}</td>
+                                <td><a class="btn btn-success btn-sm btn-op" href="" data-toggle="modal" data-target="#myModalDel3{{$bookedtour->b_id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span>Click to see</a></td>
                                 @if($bookedtour->b_status==0)
                                 <td><a style="color:yellowgreen">Unchecked</a></td>
                                 @elseif($bookedtour->b_status==1)
@@ -127,6 +128,20 @@
                                                 <a class="btn btn-primary" href="{{ route('get-page-tourguidebooked-accept',['id'=>$bookedtour->b_id]) }}">OK!</a>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="myModalDel3{{$bookedtour->b_id}}">
+                                        <div class="modal-dialog">  
+                                          <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Message from customer</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    <p>{{ $bookedtour->note }}</p>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>

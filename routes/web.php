@@ -111,7 +111,8 @@ Route::group(['prefix' => '/'], function () {
         Route::post('/booktour/{id}', 'PageTourController@booktour')->name('post-page-booktour');
         Route::get('/thanks/{id}', 'PageTourController@thanks')->name('thanks');
 
-
+        Route::post('comment/{id}','PageTourController@comment')->name('post-page-write-comment');
+        Route::get('comment/delete/{id}','PageTourController@destroyComment')->name('post-page-destroy-comment');
     });
 });
 
@@ -138,6 +139,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'userLogin'], function () {
         //rate
         Route::get('bookedtour/rate/{id}','PageCustomerBookedTourController@getrate')->name('get-page-customerbooked-rate');
         Route::post('bookedtour/rate/{id}','PageCustomerBookedTourController@postrate')->name('post-page-customerbooked-rate');
+        Route::get('rate_thanks', function () {return view('page.main.customerbookedtour.rate_thanks');})->name('rate_thanks');
     });
 });
 

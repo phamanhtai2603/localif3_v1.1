@@ -31,6 +31,11 @@
 												{{session('success')}}
 										</small>
 										@endif
+										@if(session('errorSQL'))
+										<small id="danger" class="alert alert-danger p-2">
+												{{session('errorSQL')}}
+										</small>
+										@endif
 								</div>
 								<div class="card-body">
 										<form action="{{ route('post-page-customerbooked-rate',['id'=>$bookedtour->id]) }}" method="POST" enctype="multipart/form-data" class="p-5 bg-white">

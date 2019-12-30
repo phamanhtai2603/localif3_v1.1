@@ -17,7 +17,8 @@ class CreateCommentTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('tour_id');
-            $table->text('comment')->nullable();;
+            $table->text('comment')->nullable();
+            $table->text('non_user')->nullable();
             $table->integer('is_deleted')->default(0);
             $table->integer('status')->default(0);
             $table->timestamps();

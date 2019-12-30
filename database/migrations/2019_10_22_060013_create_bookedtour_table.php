@@ -23,6 +23,7 @@ class CreateBookedtourTable extends Migration
             $table->integer('total_price')->nullable();
             $table->text('note')->nullable();
             $table->integer('status')->default(0);
+            $table->integer('have_rate')->default(0);
             $table->integer('is_deleted')->default(0);
             $table->foreign('tour_id')->references('id')->on('tour')->onDelete('cascade');
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');

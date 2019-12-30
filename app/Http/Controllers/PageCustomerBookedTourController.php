@@ -139,14 +139,18 @@ class PageCustomerBookedTourController extends Controller
             $date_to=substr($bookedtour->date,-12);
             $date_to=substr($date_to,0,10);
             $checkdone=0;
-            if($date_to<$date_current){
+            if($date_to<$date_current && $bookedtour->status==1){
                 $checkdone=1;
             }
-            $rate = Rate::where([['customer_id',Auth::user()->id],['tour_id',$id]])->get();
-            if(count($rate)>0){
+            // $rate = Rate::where([['customer_id',Auth::user()->id],['bookedtour_id',$id]])->get();
+            // if(count($rate)>0){
+            //     return back()->with('error', 'You have rated this tour before!');
+            // }
+            if($bookedtour->have_rate!=0){
                 return back()->with('error', 'You have rated this tour before!');
             }
-            if($bookedtour->customer_id==Auth::user()->id && $bookedtour->status==1 && $checkdone=1){
+
+            if($bookedtour->customer_id==Auth::user()->id && $checkdone=1){
                 return view('page.main.customerbookedtour.rate',['bookedtour'=>$bookedtour]);
             }else{
                 return back()->with('error', 'You can not rate this tour!')->withInput();
@@ -158,15 +162,21 @@ class PageCustomerBookedTourController extends Controller
 
     public function postrate($id, Request $request){
         try{
+            if($request->rate>5 || $request->rate<0){
+                return back()->with('errorSQL', 'Rate must be from 1 to 5!')->withInput();
+            }
+            $bookedtour = BookedTour::where('id',$id)->first();
+            $bookedtour->have_rate=1;
+            $bookedtour->save();
+
             $rate = new Rate();
             $rate->customer_id = Auth::user()->id;
-            $rate->tour_id = $id;
+            $rate->tour_id = $bookedtour->tour->id;
+            $rate->bookedtour_id = $id;
             $rate->rate = $request->rate;
             $rate->comment = $request->comment;
             $rate->save();
-
-            
-            $bookedtour = BookedTour::where('id',$id)->first();
+ 
             $tour = Tour::where('id',$bookedtour->tour->id)->first();
             $tour->avgrate = (($tour->avgrate*$tour->rate_size) + $request->rate)/($tour->rate_size+1);
             $tour->rate_size +=1;
@@ -175,6 +185,6 @@ class PageCustomerBookedTourController extends Controller
         }catch (Exception $e) {
             return back()->with('errorSQL', 'Error')->withInput();
         }
-        return $this->index()->with('success', 'Thank you! You just rated one tour!');
+        return redirect()->route('rate_thanks');
     }
 }

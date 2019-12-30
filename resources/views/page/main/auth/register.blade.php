@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+s<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Register</title>
@@ -38,6 +38,12 @@
 					<span class="login100-form-title p-b-43" style="color:	#E96E50;">
 						Register
 					</span>
+					@if (session('noti'))
+					<div class="alert alert-danger">{{ session('noti') }}</div>
+					@endif
+					@if (session('success'))
+						<div class="alert alert-success">{{ session('success') }}</div>
+					@endif
 					
 					<div class="" data-validate = "Enter your real name" >
 						<input type="radio" name="role" value="2"> 

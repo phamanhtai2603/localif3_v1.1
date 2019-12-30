@@ -6,15 +6,19 @@ use Illuminate\Http\Request;
 use App\Tour;
 use App\BookedTour;
 use App\User;
+use App\Rate;
+use App\Comment;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 class PageTourController extends Controller
 {
     public function viewall(){
-        $tours = Tour::paginate(3);
+        $tours = Tour::paginate(15);
         return view('page.main.tours',['tours'=>$tours]);
     }
 
@@ -25,7 +29,9 @@ class PageTourController extends Controller
 
     public function view($id){
         $tour = Tour::find($id);
-        return view('page.main.tour.tourdetail',['tour'=>$tour]);
+        $rates = Rate::where('tour_id',$id)->paginate(15);
+        $comments = Comment::where('tour_id',$id)->paginate(15);
+        return view('page.main.tour.tourdetail',['tour'=>$tour,'rates'=>$rates,'comments'=>$comments]); 
     }
 
     public function booktour(Request $request,$id){
@@ -90,6 +96,15 @@ class PageTourController extends Controller
             }else{
                 return back()->with('errorSQL', 'The host is unavailable on this days!');
             }
+            //mail send noti
+            $customer = Auth::user()->email;
+            $email = $user->email;
+            Mail::send('page.main.mail.havebooked', ['customer' => $customer], function($message) use ($customer,$email) {
+                $message->to($email)
+                ->subject('Localif3');
+                $message->from('phamanhtai263@gmail.com','Localif3 - You have a booking!');
+                });
+                
             return redirect()->route('thanks',['id'=>$bookedtour->id]);
     
         } catch (Exception $e) {
@@ -108,4 +123,33 @@ class PageTourController extends Controller
         $total_price = $bookedtour->total_price;
         return view('page.main.tour.thanks',['name'=>$name,'tourguide'=>$tourguide,'date'=>$date,'tourguide_phone'=>$tourguide_phone,'size'=>$size,'total_price'=>$total_price]);
     }
+
+    public function comment($id,Request $request){
+        try{
+            $comment = new Comment();
+            if((Auth::guest())){
+                $comment->customer_id=1;
+                $comment->non_user = $request->non_user;
+                $comment->comment = $request->comment;
+                $comment->tour_id=$id;
+            }else{
+                $comment->customer_id=Auth::user()->id; 
+                $comment->comment = $request->comment;
+                $comment->tour_id=$id;
+            }
+            $comment->save();
+
+        } catch (Exception $e) {
+            return back()->with('commentError', 'Error')->withInput();
+        }
+        return back()->with('commentSuccess', 'You just have commented!')->withInput();
+    }
+
+    public function destroyComment($id,Request $request){
+        $comment = Comment::Find($id);
+        $comment->delete();
+        return back()->with('commentSuccess', 'You just have commented!')->withInput();
+
+    }
+
 }

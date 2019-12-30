@@ -58,4 +58,9 @@ class User extends Authenticatable implements MustVerifyEmail
      {
          return $this->hasOne('App\UnavailableDay');
      }
+     
+     public function rate()
+     {
+         return $this->hasMany('App\Rate');
+     }
 }

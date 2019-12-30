@@ -15,7 +15,7 @@ class Rate extends Model
     // one - many relationship between rate -> User
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','customer_id');
     }
     // one - many relationship between rate -> tour
     public function tour()

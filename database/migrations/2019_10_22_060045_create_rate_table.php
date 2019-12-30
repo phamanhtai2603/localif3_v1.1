@@ -17,6 +17,7 @@ class CreateRateTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('tour_id');
+            $table->integer('bookedtour_id');
             $table->integer('rate');
             $table->text('comment')->nullable();;
             $table->integer('is_deleted')->default(0);

@@ -4,7 +4,8 @@
       <div class="row align-items-center">
 
         <div class="col-6 col-xl-2">
-          <h1 class="mb-0"><a href="{{ route('get-page-view') }}" class="text-black h2 mb-0">LOGO </a></h1>
+          {{-- <h1 class="mb-0"><a href="{{ route('get-page-view') }}" class="text-black h2 mb-0">LOGO </a></h1> --}}
+          <a href="{{ route('get-page-view') }}"><img class="user-avatar rounded-circle" width="80px"  src="upload/images/logo.jpg" alt="User Avatar"></a>
         </div>
         <div class="col-10 col-md-8 d-none d-xl-block" style="float:left">
           <nav class="site-navigation position-relative text-right text-lg-center" role="navigation">
@@ -20,7 +21,7 @@
                   <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img class="user-avatar rounded-circle" width="30px" height="30px" src="
                     @if(Auth::user()->avatar == null)
-                        {{'upload/images/default.png'}}
+                        {{ 'upload/images/default.png' }}
                     @else
                         {{'upload/images/' . Auth::user()->avatar }}
                     @endif

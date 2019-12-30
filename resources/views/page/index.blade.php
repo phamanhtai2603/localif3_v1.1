@@ -67,19 +67,19 @@
               <div>
                 @if($tour->avgrate==NULL)
                 <span style="color:yellow">No rate</span>
-                @elseif($tour->avgrate<=3)
+                @elseif($tour->avgrate<=3.5)
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
-                @elseif($tour->avgrate==4)
+                @elseif($tour->avgrate>3.5 && $tour->avgrate<=4.5)
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star"></span>
-                @elseif($tour->avgrate==5)
+                @elseif($tour->avgrate>4.5 && $tour->avgrate<=5 )
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>

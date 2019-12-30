@@ -21,7 +21,12 @@ class PageRegisterController extends Controller
     }
 
     public function store(RegistrationRequest $request)
-    {
+    {   
+        $user1 = User::where('email',$request->email)->get();
+        if(count($user1)>0){
+            return back()->with('noti', 'Email has been used!');
+        }
+
         $verify_code =rand(999,9999);
         $user = User::create([
             'role'  =>$request->role,
@@ -37,9 +42,9 @@ class PageRegisterController extends Controller
         $first_name=$request->first_name;
         $email = $request->email;
         Mail::send('page.main.verify.verify', ['code' => $verify_code,'name' => $request->last_name], function($message) use ($first_name, $email) {
-            $message->to($email, $email)
+            $message->to($email)
             ->subject('Localif3');
-            $message->from('localif3@gmail.com','Localif3 - Verify your new account!');
+            $message->from('phamanhtai263@gmail.com','Localif3 - Verify your new account!');
             });
 
         // Mail::send('page.main.verify.verify',['code' => $verify_code,'name' => $request->email],function($messenger) use ($user){

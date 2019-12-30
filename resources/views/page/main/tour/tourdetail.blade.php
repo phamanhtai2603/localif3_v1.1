@@ -97,29 +97,29 @@
 {{-- Bìa cover --}}
 @include('page.main.layouts.cover')
 {{-- Hết bìa cover --}}
+@if(isset($tour))
 <div class="site-section bg-light">
     <div class="container">
-      @if(isset($tour))
       <div class="row">
         <div class="col-md-7 mb-5">
             <h1 class=" font-weight-light orange" style="color: #F58543;">WELCOME TO MY OWN TRIP! </h1>
             <div  class="p-5 bg-white">
-              <div id="slider">
-                <a  class="control_next">></a>
-                <a  class="control_prev"><</a>
-                <ul>
-                    <?php $arrs = explode ( ',' , $tour->image,-1);  
-                    foreach($arrs as $arr){
-                    ?>
-                        
-                        <li style="background-image: url('images/{{$arr}}'); width:540px;height:400px;"></li>
-                    <?php
-                    }
-                    ?>
-                </ul>  
-              </div>
-          </div>
-          <br>
+                <div id="slider">
+                  <a  class="control_next">></a>
+                  <a  class="control_prev"><</a>
+                  <ul>
+                      <?php $arrs = explode ( ',' , $tour->image,-1);  
+                      foreach($arrs as $arr){
+                      ?>
+                          
+                          <li style="background-image: url('images/{{$arr}}'); width:540px;height:400px;"></li>
+                      <?php
+                      }
+                      ?>
+                  </ul>  
+                </div>
+            </div>
+            <br>
             <div  class="p-5 bg-white">
               <p style="font-family: 'Times New Roman', Times, serif; font-size:25px">ABOUT MY SPECIAL TOUR</p>
                 <div>
@@ -135,9 +135,6 @@
               </div>
         </div>
         <div class="col-md-5">
-          
-          
-          
           <div class="p-4 mb-3 bg-white">
               <?php $arrs = explode ( ',' , $tour->image,2); ?>
             <img src="images/{{ $arrs[0] }}" alt="Image" style="width:397px;height:265px;" class="img-fluid mb-4 rounded">
@@ -149,19 +146,19 @@
             <div style="text-align:center">
                     @if($tour->avgrate==NULL)
                     <span style="color:yellow">No rate</span>
-                    @elseif($tour->avgrate<=3)
+                    @elseif($tour->avgrate<=3.5)
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star"></span>
                     <span class="fa fa-star"></span>
-                    @elseif($tour->avgrate==4)
+                    @elseif($tour->avgrate>3.5 && $tour->avgrate<=4.5)
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star"></span>
-                    @elseif($tour->avgrate==5)
+                    @elseif($tour->avgrate>4.5 && $tour->avgrate<=5 )
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
@@ -269,11 +266,107 @@
           </form>
           @endif
         </div>
-      </div>
-      @endif
     </div>
 </div>
 
+<div class="site-section bg-light">
+    <div class="container">
+      <div class="row">
+          <div class="col-md-12 bg-white" style="border: 1px solid">
+            <div style="border-bottom: 1px solid; color: #F06757">Write a comment:</div>
+            <div>
+                <form action="{{ route('post-page-write-comment',['id'=>$tour->id]) }}" method="POST" enctype="multipart/form-data" class="p-5 bg-white">
+                  @csrf
+                  <textarea name="comment" id="note" rows="5" class="form-control" placeholder="Write your comment here..." required></textarea>
+                  @if(Auth::guest())
+                  <input type="text" name="non_user" class="form-control"  placeholder="Your name"  style=" width:50%; margin:5px" required>
+                  @endif
+                  <input type="submit" value="SEND" class="btn btn-primary py-2 px-4 text-white" style="float:right; margin:5px">
+                </form>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
+
+<div class="site-section bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7 mb-5 bg-white" style="margin-top: 20px">
+          <h1 class=" font-weight-light orange" style="color: #F58543;">RATE LIST</h1>
+          @if(count($rates)>0)
+            @foreach($rates as $rate)
+            <div class="col-md-12" style="border-bottom: solid 1px  #F58543; ">
+              <div style="margin-top: 8px">
+                <a  href="{{ route('get-page-otheruser-profile-view',['id'=>$rate->user->id]) }}">
+                  <img class="user-avatar rounded-circle" width="30px" height="30px" src="
+                    @if($rate->user->avatar == null)
+                        {{'upload/images/default.png'}}
+                    @else
+                        {{'upload/images/' . $rate->user->avatar }}
+                    @endif
+                  " alt="User Avatar">
+                  <b>{{ $rate->user->first_name.' '.$rate->user->last_name }}</b></a>({{ $rate->rate }} <span class="fa fa-star checked"></span>)
+                </a>
+              </div>
+              <div style="margin: 15px">
+                <p>{{ $rate->comment }}</p>
+              </div>
+            </div>
+            @endforeach
+          @else 
+          <h3 class=" font-weight-light" style="color444444"><i>There are no rate!</i></h1>
+          @endif
+        </div>
+
+        <div class="col-md-5">
+          <div class="p-4 mb-3 bg-white">
+              <h1 class=" font-weight-light orange" style="color: #F58543;">Comments</h1>
+              @if(count($comments)>0)
+                @foreach($comments as $comment)
+                @if($comment->user->id!=1)
+                <div style="margin-top: 8px">
+                    <a  href="{{ route('get-page-otheruser-profile-view',['id'=>$comment->user->id]) }}">
+                      <img class="user-avatar rounded-circle" width="30px" height="30px" src="
+                        @if($comment->user->avatar == null)
+                            {{ 'upload/images/default.png' }}
+                        @else
+                            {{'upload/images/' . $comment->user->avatar }}
+                        @endif
+                      " alt="User Avatar">
+                      <b>{{ $comment->user->first_name.' '.$comment->user->last_name }}</b></a>
+                </div>
+                <div class="row">
+                  <div class="col-md-10" style="margin-top: 15px; border-bottom: solid 1px #F58543 ">
+                    <p>{{ $comment->comment }}</p>
+                  </div>
+                  @if(Auth::user()->role==1 || Auth::user()->id==$comment->customer_id || Auth::user()->id==$tour->user->id)
+                  <div class="col-md-2">
+                    <a href="{{ route('post-page-destroy-comment',['id'=>$comment->id]) }}"><p style="color:red;"><i>Delete</i></p></a>
+                  </div>
+                  @endif
+                </div>
+                @else
+                <div style="margin-top: 8px">
+                    <a>
+                      <img class="user-avatar rounded-circle" width="30px" height="30px" src=" {{ 'upload/images/default.png' }}" alt="User Avatar">
+                      <b>{{ $comment->non_user}}(Non-User)</b>
+                </div>
+                <div class="col-md-10" style="margin-top: 15px; border-bottom: solid 1px #F58543 ">
+                  <p>{{ $comment->comment }}</p>
+                </div>
+                @endif
+                @endforeach
+              </div>
+              @else
+              <h3 class=" font-weight-light" style="color444444"><i>There are no comments!</i></h1>
+              @endif
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+@endif
 @endsection
 
 @section('script')
