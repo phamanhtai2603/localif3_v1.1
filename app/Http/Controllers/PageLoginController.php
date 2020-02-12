@@ -8,6 +8,7 @@ class PageLoginController extends Controller
 {
     public function getLogin(){
         return view('page.auth.login');
+
     }
 
     public function postLogin(Request $request ){
