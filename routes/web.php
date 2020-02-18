@@ -129,6 +129,9 @@ Route::group(['prefix' => '/'], function () {
             Route::get('bookedtour/accept/{id}','PageTourguideBookedTourController@accept')->name('get-page-tourguidebooked-accept');
             Route::get('bookedtour/deny/{id}','PageTourguideBookedTourController@deny')->name('get-page-tourguidebooked-deny');
             Route::resource('tourguidebooked','PageTourguideBookedTourController');
+
+            Route::resource('tourguidebusy','PageTourguideBusyController');
+            Route::post('tourguidebusy/update/{id}', 'PageTourguideBusyController@update')->name('tourguidebusy-update');
         });
 
         //Role=3, customer

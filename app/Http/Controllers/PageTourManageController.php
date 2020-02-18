@@ -126,7 +126,7 @@ class PageTourManageController extends Controller
                     $image_code .= $new_name.','; 
                 }
             }
-            $tour->image = $image_code;
+            $tour->image .= $image_code;
             $tour->save();
 
         }catch (Exception $e) {

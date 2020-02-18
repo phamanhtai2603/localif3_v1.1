@@ -21,17 +21,21 @@ class UserController extends Controller
     }
 
     public function store(StoreUserRequest $request){
-        $user = new User();
-        $input = Helper::getArrInput($request);
-        $user->create($input);
-  
-        // $user2=User::where('email',$request->email)->get();
-        // dd($user2);
-        // $unavailableday = new UnavailableDay();
-        // $unavailableday->user_id = $user2->id;
-        // $unavailableday->save();
-        
-        return back()->with('noti','Thêm mới tài khoản thành công!!');
+        try{
+            $user = new User();
+            $input = Helper::getArrInput($request);
+            $user->create($input);
+      
+            // $user2=User::where('email',$request->email)->get();
+            // dd($user2);
+            // $unavailableday = new UnavailableDay();
+            // $unavailableday->user_id = $user2->id;
+            // $unavailableday->save();
+            
+            return back()->with('noti','Thêm mới tài khoản thành công!!');
+        }catch (Exception $e) {
+            return back()->with('errorSQL', 'Error')->withInput();
+        }
          
     }
 

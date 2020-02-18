@@ -108,11 +108,11 @@
                   <a  class="control_next">></a>
                   <a  class="control_prev"><</a>
                   <ul>
-                      <?php $arrs = explode ( ',' , $tour->image,-1);  
+                      <?php
+                      $arrs = explode ( ',' , $tour->image);
                       foreach($arrs as $arr){
                       ?>
-                          
-                          <li style="background-image: url('images/{{$arr}}'); width:540px;height:400px;"></li>
+                        <li style="background-image: url('images/{{$arr}}'); width:540px;height:400px;"></li>
                       <?php
                       }
                       ?>
@@ -197,7 +197,7 @@
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         The Tourist guide unavailable days!
                       </button>
-
+                      <input type="text" id="Txt_Date" value="{{$tour->user->unavailableday}}" style="cursor: pointer; width: 308.59px;" readonly >
                       <!-- Modal -->
                       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -225,6 +225,7 @@
                         </div>
                       </div>
                   </div>
+
                   <div class="col-md-12">
                           <label class="text-black" for="size">People size</label> 
                           <input type="number" name="size" class="form-control" placeholder="Số người dự kiến"
@@ -420,6 +421,13 @@
       });
 
     });    
-
+    $("#Txt_Date").datepicker({
+      format: 'yyyy-mm-dd',
+      inline: false,
+      lang: 'en',
+      step: true,
+      multidate: true,
+      closeOnDateSelect: true
+    });
   </script>
 @endsection

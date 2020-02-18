@@ -55,7 +55,7 @@
     <div class="row">
       @foreach($tours as $tour)     
         <?php 
-           $arr_image = explode ( ',' , $tour->image,-1);
+           $arr_image = explode("," , $tour->image);
         ?>
         <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
           <a href="{{ route('get-page-tourdetail-view',['id'=>$tour->id]) }}" class="unit-1 text-center">

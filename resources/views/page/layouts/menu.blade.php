@@ -33,6 +33,7 @@
                       @if(Auth::user()->role == 2)
                       <a class="user-options" href="{{ route('tourmanage.index') }}"><i class="fa fa- user"></i>Tours post manage</a>
                       <a class="user-options" href="{{ route('tourguidebooked.index') }}"><i class="fa fa- user"></i>Booked tours manage</a>
+                      <a class="user-options" href="{{ route('tourguidebusy.index') }}"><i class="fa fa- user"></i>Busy days</a>
                       @elseif(Auth::user()->role == 3)
                       <a class="user-options" href="{{ route('customerbooked.index') }}"><i class="fa fa- user"></i>Your booked</a>
                       @endif

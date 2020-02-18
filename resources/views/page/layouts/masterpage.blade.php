@@ -14,29 +14,25 @@
     
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-          <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
 
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,700,900|Display+Playfair:200,300,400,700">
   <link rel="stylesheet" href="page_asset/fonts/icomoon/style.css">
-
   <link rel="stylesheet" href="page_asset/css/bootstrap.min.css">
   <link rel="stylesheet" href="page_asset/css/magnific-popup.css">
   <link rel="stylesheet" href="page_asset/css/jquery-ui.css">
   <link rel="stylesheet" href="page_asset/css/owl.carousel.min.css">
   <link rel="stylesheet" href="page_asset/css/owl.theme.default.min.css">
-
   <link rel="stylesheet" href="page_asset/css/bootstrap-datepicker.css">
-
   <link rel="stylesheet" href="page_asset/fonts/flaticon/font/flaticon.css">
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
-
-
   <link rel="stylesheet" href="page_asset/css/aos.css">
-
   <link rel="stylesheet" href="page_asset/css/style.css">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" rel="stylesheet"/>
   {{-- ----------- --}}
   
   
