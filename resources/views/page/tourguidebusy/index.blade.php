@@ -50,7 +50,7 @@
 									<div class="modal-body">                
 										<form action="{{ route('tourguidebusy-update',['id'=>Auth::user()->id]) }}" method="POST" >
 										@csrf
-											<input type="text" name="busy_day" id="Txt_Date" value="{{Auth::user()->unavailableday}}" style="cursor: pointer; width: 308.59px;" readonly >
+											<input type="text" name="busy_day" id="Txt_Date" value="{{$busyunavai}}" style="cursor: pointer; width: 308.59px;" readonly >
 											<button type="submit" >OK!</button>
 									</form>
 									</div>
