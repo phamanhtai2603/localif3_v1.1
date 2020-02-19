@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use App\Tour;
 use Illuminate\Http\Request;
 
 class PageTourguideBusyController extends Controller
 {
     public function index(){
-        return view('page.tourguidebusy.index');
+        $busyunavai = Auth::user()->unavailableday . Auth::user()->busy_day;
+        // $busyunavai = str_replace('/', '-', $busyunavai);
+        // $busyunavai = str_replace(' ', '', $busyunavai);
+        return view('page.tourguidebusy.index',['busyunavai'=>$busyunavai]);
     }
 
     public function update($id, Request $request){
@@ -29,6 +33,7 @@ class PageTourguideBusyController extends Controller
                 $newbusyday = array_diff($newbusyday_fromrequest,$user_busyday);              //Lọc ngày không trùng với $user->busy_day
                 $newbusyday = implode(",",$newbusyday); //convert to string
                 $user->busy_day .= $newbusyday.',';
+                $user->busy_day = str_replace( ',,', ',', $user->busy_day ); //Xóa bớt 1 dấu ',' nếu như bị lặp
                 $user->save();
                 return back()->with('success','Success add !!');
             }else{
