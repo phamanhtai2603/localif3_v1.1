@@ -29,31 +29,59 @@
 			</div>
 			<div class="card-body">
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModaladd">
 							Add busy days
 						</button>
+						<div class = "busy-note">
+							<span>NOTE:<span class="text text-danger">* </span>Show your all busy days. Include the booking days and the busy days you added by yourself. 
+						You can only add more busy day here.</span>
+						</div>
 					</div>
-					<div class="col-md-3">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+					<div class="col-md-4 busy-note2">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalremove">
 							Remove busy days
 						</button>
-						<div class="modal fade" id="exampleModaladd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Add busy days</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">                
-										<form action="{{ route('tourguidebusy-update',['id'=>Auth::user()->id]) }}" method="POST" >
-										@csrf
-											<input type="text" name="busy_day" id="Txt_Date" value="{{$busyunavai}}" style="cursor: pointer; width: 308.59px;" readonly >
-											<button type="submit" >OK!</button>
-									</form>
-									</div>
+						<div class = "busy-note"> 
+							<span>NOTE:<span class="text text-danger">* </span>Show your busy days you have added by yourself only. If you dont want to take any order
+							you can fix your busy schedule</span>
+						</div>
+					</div>
+					<div class="modal fade" id="exampleModaladd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Add busy days</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">                
+									<form action="{{ route('tourguidebusy-add',['id'=>Auth::user()->id]) }}" method="POST" >
+									@csrf
+										<input type="text" name="busyunavai" id="Txt_Date" value="{{$busyunavai}}" style="cursor: pointer; width: 308.59px;" readonly >
+										<button type="submit" >OK!</button>
+								</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal fade" id="exampleModalremove" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Remove busy days</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">                
+									<form action="{{ route('tourguidebusy-remove',['id'=>Auth::user()->id]) }}" method="POST" >
+									@csrf
+										<input type="text" name="busy_day" id="Txt_Date2" value="{{$busyday}}" style="cursor: pointer; width: 308.59px;" readonly >
+										<button type="submit" >OK!</button>
+								</form>
 								</div>
 							</div>
 						</div>
@@ -67,7 +95,15 @@
 
 @section('script')
 <script>
-	    $("#Txt_Date").datepicker({
+	$("#Txt_Date").datepicker({
+      format: 'yyyy-mm-dd',
+      inline: false,
+      lang: 'en',
+      step: true,
+      multidate: true,
+      closeOnDateSelect: true
+	});
+	$("#Txt_Date2").datepicker({
       format: 'yyyy-mm-dd',
       inline: false,
       lang: 'en',

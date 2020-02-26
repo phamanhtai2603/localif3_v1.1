@@ -35,7 +35,8 @@ class PageTourController extends Controller
         }
         $rates = Rate::where('tour_id',$id)->paginate(15);
         $comments = Comment::where('tour_id',$id)->orderBy('id', 'DESC')->paginate(15);
-        return view('page.tour.tourdetail',['tour'=>$tour,'rates'=>$rates,'comments'=>$comments]); 
+        $busyunavai = $tour->user->unavailableday . $tour->user->busy_day;
+        return view('page.tour.tourdetail',['tour'=>$tour,'rates'=>$rates,'comments'=>$comments,'busyunavai'=>$busyunavai]); 
     }
 
     public function booktour(Request $request,$id){
@@ -87,11 +88,17 @@ class PageTourController extends Controller
             }
 
             //Cắt mảng unvailableday và mảng bookedtour->date ra để so sánh có trùng ngày hay không
-            $user = User::where('id',$bookedtour->tour->tourguide_id)->first();
-            $arr_bookedtourdate = explode ( ',' , $bookedtour->date,-1);
-            $arr_userunavailableday = explode ( ',' , $user->unavailableday,-1);
+            $user = User::where('id',$bookedtour->tour->tourguide_id)->first();  
+            $arr_bookedtourdate = explode ( ',' , str_replace(' ', '', $bookedtour->date),-1); //Xoa dau cach, xong chuyen ve array
+            $arr_userunavailableday = explode ( ',' , str_replace(' ', '', $user->unavailableday),-1); 
+            //
+            $user_busyday = str_replace('-', '/', $user->busy_day);
+            $user_busyday = explode ( ',' , $user_busyday,-1);
+            // $user_busyunavai = $user_busyday . $arr_userunavailableday;
+            $user_busyunavai = array_merge($user_busyday, $arr_userunavailableday);
+            
 
-            if(sizeof($arr_bookedtourdate)==sizeof(array_diff($arr_bookedtourdate,$arr_userunavailableday))){
+            if(sizeof($arr_bookedtourdate)==sizeof(array_diff($arr_bookedtourdate,$user_busyunavai))){
                 //$user->unavailableday .= $bookedtour->date;
                 $user->save();
                 $bookedtour->save();

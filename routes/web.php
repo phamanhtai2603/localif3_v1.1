@@ -131,7 +131,8 @@ Route::group(['prefix' => '/'], function () {
             Route::resource('tourguidebooked','PageTourguideBookedTourController');
 
             Route::resource('tourguidebusy','PageTourguideBusyController');
-            Route::post('tourguidebusy/update/{id}', 'PageTourguideBusyController@update')->name('tourguidebusy-update');
+            Route::post('tourguidebusy/add/{id}', 'PageTourguideBusyController@add')->name('tourguidebusy-add');
+            Route::post('tourguidebusy/remove/{id}', 'PageTourguideBusyController@remove')->name('tourguidebusy-remove');
         });
 
         //Role=3, customer

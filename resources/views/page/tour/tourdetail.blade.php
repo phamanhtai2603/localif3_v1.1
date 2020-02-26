@@ -197,7 +197,7 @@
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         The Tourist guide unavailable days!
                       </button>
-                      <input type="text" id="Txt_Date" value="{{$tour->user->unavailableday}}" style="cursor: pointer; width: 308.59px;" readonly >
+                      <input type="text" id="Txt_Date" value="{{$busyunavai}}" style="cursor: pointer; width: 308.59px;" readonly >
                       <!-- Modal -->
                       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -207,16 +207,6 @@
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="row" >
-                              <?php 
-                                  $arrs = explode ( ',' , $tour->user->unavailableday,-1);
-                                  foreach($arrs as $arr){
-                                      echo "<div class='col-md-3' style='color=green'>" .$arr. "</div>";  
-                                  }
-                              ?>
-                              </div>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">I got it!</button>
