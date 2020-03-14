@@ -235,5 +235,8 @@ jQuery(document).ready(function($) {
 
 	};
 	siteDatePicker();
-
+	$(document).scroll(function(){
+		  var $nav = $(".site-navbar");
+		  $nav.toggleClass("changefixed", $(this).scrollTop() > $nav.height());
+	  });
 });
