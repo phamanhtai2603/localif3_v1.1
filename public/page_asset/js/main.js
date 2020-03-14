@@ -264,4 +264,6 @@ jQuery(document).ready(function($) {
 		var n = parseInt(formatMoney[i].textContent, 10).toFixed(0).replace(/(\d)(?=(\d{3})+\b)/g,'$1 ');
 		formatMoney[i].textContent = n;
 	}
+		  var $nav = $(".site-navbar");
+		  $nav.toggleClass("changefixed", $(this).scrollTop() > $nav.height());
 });

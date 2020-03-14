@@ -49,8 +49,13 @@
               <div class="col-md-4">
                 <label class="text-black" for="message">Gender</label> 
                 <select option="1" id="gender" name="gender" value="1" class="form-control">
+<<<<<<< HEAD
                   <option value="1" <?php if(Auth::user()->gender == 1){echo("selected");}?>>Male</option>
                   <option value="0" <?php if(Auth::user()->gender == 0){echo("selected");}?>>Female</option>
+=======
+                  <option value="1" <?php if(Auth::user()->gender == 1){echo("selected");}?>>Nam</option>
+                  <option value="0" <?php if(Auth::user()->gender == 0){echo("selected");}?>>Nữ</option>
+>>>>>>> Chưa fix:
                 </select>
               </div>
               <div class="col-md-8">

@@ -1,5 +1,9 @@
 <header class="site-navbar py-1" role="banner">
+<<<<<<< HEAD
   <div class="container">
+=======
+  <div class="container" id="nhuan">
+>>>>>>> Chưa fix:
     <div class="row align-items-center">
       <div class="col-6 col-xl-2">
         <a href="{{ route('get-page-view') }}" class="text-black h2 mb-0">
