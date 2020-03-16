@@ -133,6 +133,8 @@ Route::group(['prefix' => '/'], function () {
             Route::resource('tourguidebusy','PageTourguideBusyController');
             Route::post('tourguidebusy/add/{id}', 'PageTourguideBusyController@add')->name('tourguidebusy-add');
             Route::post('tourguidebusy/remove/{id}', 'PageTourguideBusyController@remove')->name('tourguidebusy-remove');
+
+            Route::get('revenue','PageRevenueController@index')->name('page-revenue');
         });
 
         //Role=3, customer
