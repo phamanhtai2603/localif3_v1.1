@@ -123,14 +123,19 @@ class PageTourController extends Controller
     }
 
     public function thanks($id){
+        
         $bookedtour = BookedTour::where('id',$id)->first();
-        $name = $bookedtour->tour->name;
-        $tourguide = $bookedtour->tour->user;
-        $tourguide_phone = $bookedtour->tour->user->phone_number;
-        $date=$bookedtour->date;
-        $size = $bookedtour->size;
-        $total_price = $bookedtour->total_price;
-        return view('page.tour.thanks',['name'=>$name,'tourguide'=>$tourguide,'date'=>$date,'tourguide_phone'=>$tourguide_phone,'size'=>$size,'total_price'=>$total_price]);
+        if($bookedtour->customer_id == Auth::user()->id){
+            $name = $bookedtour->tour->name;
+            $tourguide = $bookedtour->tour->user;
+            $tourguide_phone = $bookedtour->tour->user->phone_number;
+            $date=$bookedtour->date;
+            $size = $bookedtour->size;
+            $total_price = $bookedtour->total_price;
+            return view('page.tour.thanks',['name'=>$name,'tourguide'=>$tourguide,'date'=>$date,'tourguide_phone'=>$tourguide_phone,'size'=>$size,'total_price'=>$total_price]);
+        }else{
+            return redirect()->route('get-page-view');
+        }
     }
 
     public function comment($id,Request $request){

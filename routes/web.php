@@ -108,7 +108,6 @@ Route::group(['prefix' => '/'], function () {
     Route::group(['prefix' => 'tour'], function () {
         Route::get('/detail/{id}', 'PageTourController@view')->name('get-page-tourdetail-view');
         Route::post('/booktour/{id}', 'PageTourController@booktour')->name('post-page-booktour')->middleware('userLogin');
-        Route::get('/thanks/{id}', 'PageTourController@thanks')->name('thanks');
 
         Route::post('comment/{id}','PageTourController@comment')->name('post-page-write-comment');
         Route::get('comment/delete/{id}','PageTourController@destroyComment')->name('post-page-destroy-comment');
@@ -135,6 +134,11 @@ Route::group(['prefix' => '/'], function () {
             Route::post('tourguidebusy/remove/{id}', 'PageTourguideBusyController@remove')->name('tourguidebusy-remove');
 
             Route::get('revenue','PageRevenueController@index')->name('page-revenue');
+            Route::get('revenue-tour', 'PageRevenueController@tour')->name('page-get-revenue-tour');
+            Route::group(['prefix' => 'ajax'], function () {
+                Route::get('monthly', 'PageAjaxController@getMonthly');
+                Route::get('tour/{month}', 'PageAjaxController@getTourRevenue');
+            });  
         });
 
         //Role=3, customer
@@ -145,6 +149,8 @@ Route::group(['prefix' => '/'], function () {
             Route::get('bookedtour/rate/{id}','PageCustomerBookedTourController@getrate')->name('get-page-customerbooked-rate');
             Route::post('bookedtour/rate/{id}','PageCustomerBookedTourController@postrate')->name('post-page-customerbooked-rate');
             Route::get('rate_thanks', function () {return view('page.customerbookedtour.rate_thanks');})->name('rate_thanks');
+
+            Route::get('/thanks/{id}', 'PageTourController@thanks')->name('thanks');
         });
     });
 });
