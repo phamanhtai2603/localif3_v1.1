@@ -36,7 +36,7 @@
                 <li><a href="{{ route('customerbooked.index') }}">Your booked</a></li>
                 @endif
                 <li>{{-- <a href="#">Thông báo: <span class="count">{{count($userNotifications)}}</span></a> --}}</li>
-                <li><a href="#">Change password</a></li>
+                <li><a href="{{route('page-revenue')}}">Revenue</a></li>
                 <li><a href="{{route('get-logout')}}">Logout</a></li>
               </ul>
             </li>          
