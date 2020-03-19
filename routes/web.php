@@ -69,10 +69,20 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
         // Route::post('update/{id}', 'CommentController@update')->name('post-comment-update');
     });
 
+    Route::group(['prefix' => 'revenue'], function () {
+        Route::resource('revenue','RevenueController');
+        Route::get('tourguides','RevenueController@viewTourguides')->name('get-revenue-user');
+        Route::get('tourguides/{id}','RevenueController@detailTourguide')->name('get-revenue-detail');
+    });
+
     Route::group(['prefix' => 'ajax'], function () {
         Route::get('bookedtour/{idTour}', 'AjaxController@getTour');
         Route::get('bookedtourguide/{idTour}', 'AjaxController@getTourguide');
         Route::get('bookedtourguideUnav/{idTour}', 'AjaxController@getTourguideUnav');
+
+        Route::get('monthly/{year}', 'RevenueController@getMonthly'); 
+        Route::get('detailtourguide/{year}/{id}', 'RevenueController@getMonthlyTourguide');
+        // Route::get('tourguides/', 'RevenueController@ajaxTourguides');
     });  
 });
 
@@ -136,8 +146,8 @@ Route::group(['prefix' => '/'], function () {
             Route::get('revenue','PageRevenueController@index')->name('page-revenue');
             Route::get('revenue-tour', 'PageRevenueController@tour')->name('page-get-revenue-tour');
             Route::group(['prefix' => 'ajax'], function () {
-                Route::get('monthly', 'PageAjaxController@getMonthly');
-                Route::get('tour/{month}', 'PageAjaxController@getTourRevenue');
+                Route::get('monthly/{year}', 'PageRevenueController@getMonthly');
+                Route::get('tour/{month}', 'PageRevenueController@getTourRevenue');
             });  
         });
 
