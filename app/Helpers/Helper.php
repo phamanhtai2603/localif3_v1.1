@@ -19,7 +19,7 @@ class Helper{
      */
     public function uploadFile(UploadedFile $imageFile = null)
     {
-        $imageName = "default.png";
+        $imageName = "user_default.png";
         if ($imageFile) {
             // get file original extention
             $imageExt = $imageFile->getClientOriginalExtension();

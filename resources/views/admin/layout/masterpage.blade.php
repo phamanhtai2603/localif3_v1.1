@@ -58,6 +58,7 @@
     <link rel="stylesheet" href="admin_page_asset/css/flag-icon.min.css">
     <link rel="stylesheet" href="admin_page_asset/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="admin_page_asset/css/style.css">
+    <link rel="stylesheet" href="admin_page_asset/css/custom.css">
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     {{-- <link href="admin_page_asset/css/chartist.min.css" rel="stylesheet"> --}}
     {{-- <link href="admin_page_asset/css/jqvmap.min.css" rel="stylesheet"> --}}

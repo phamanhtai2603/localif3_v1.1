@@ -18,7 +18,9 @@
                 <li >
                     <a href="{{ route('bookedtour.index') }}" > <i class="menu-icon ti-view-list-alt"></i>Quản lý tour đã book</a>
                 </li>
-             
+                <li >
+                    <a href="{{ route('revenue.index') }}" > <i class="menu-icon ti-wallet"></i>Thống kê</a>
+                </li>
            
             </ul>
         </div><!-- /.navbar-collapse -->

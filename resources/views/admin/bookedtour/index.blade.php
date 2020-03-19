@@ -72,7 +72,7 @@
                           <td>{{$bookedtour->tour->name}}</td>
                           <td>{{$bookedtour->user->first_name. ' '. $bookedtour->user->last_name}}</td>
                           <td>{{$bookedtour->booked_user}}</td>
-                          <td><p>{{ 'Thời gian đặt' }}</p></td>
+                          <td><p>{{ $bookedtour->created_at }}</p></td>
                           <td>
                             @if ($bookedtour->status == 0)
                               <p class="text text-warning">

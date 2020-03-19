@@ -1,6 +1,6 @@
 @extends('page.layouts.masterpage')
 @section('title')
-    Thanks you!
+    Revenue
 @endsection
 @section('content')
 {{-- Bìa cover --}}
@@ -20,7 +20,21 @@
                     <a style="color:white;" href="{{route('page-get-revenue-tour')}}" >More detail</a>
                   </button>
                 </div>
-                <div class ="col-md-12" id="revenue_monthly">
+                <div class ="col-md-12">
+                  <ul class="pagination">
+                    <li class="paginate_button page-item previous ">
+                      <button id="previous-year" class="page-link">Previous</button>
+                    </li>
+                    <li>
+                      <a class="page-link" id="year_revenue"></a>
+                    </li>
+                    <li class="paginate_button page-item next" >
+                      <button id="next-year" class="page-link">Next</button>
+                    </li>
+                  </ul>
+                  <div id="revenue">
+
+                  </div>
                 </div>
               </div>
             </div>
@@ -31,13 +45,30 @@
 
 @section('script')
 <script>
-  $(document).ready(function(){            
-    $("#btn_monthly").click(function(){    
-      $.get("index.php/user/tourguide/ajax/monthly/",function(data){ 
+  var year = new Date().getFullYear();
+  $("#next-year").click(function(){
+    year++;
+    $("#year_revenue").html(year);
+    $.get("index.php/user/tourguide/ajax/monthly/"+year,function(data){
+        $("#revenue").html(data); 
+    }); 
+  });  
+  $("#previous-year").click(function(){
+    year--;
+    $("#year_revenue").html(year);
+    $.get("index.php/user/tourguide/ajax/monthly/"+year,function(data){
+        $("#revenue").html(data); 
+    }); 
+  });  
+</script>
+<script>
+  $(document).ready(function(){    
+    $("#year_revenue").html(year);
+      $.get("index.php/user/tourguide/ajax/monthly/"+year,function(data){ 
         // alert(data);
-         $("#revenue_monthly").html(data); 
+         $("#revenue").html(data); 
       });    
-    });
   });
+
 </script>
 @endsection
