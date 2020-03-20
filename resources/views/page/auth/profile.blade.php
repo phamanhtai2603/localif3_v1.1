@@ -97,7 +97,17 @@
                   <input name="id" type="hidden" value="{{Auth::user()->id}}">
               </span>
             </div><!-- end columns -->
+            <div class="col-sm-12 col-md-12">
+              <p style="font-weight:bold">Balance: &nbsp; &nbsp; 
+              @if(Auth::user()->balance==null)
+                <a style="font-weight:normal">0 VND</a>
+              @else
+                <a style="font-weight:normal">{{ number_format(Auth::user()->balance) }} VND</a>
+              @endif
+               </p>
+            </div>
           </div>
+          
         </div>
       </div>
       </form>

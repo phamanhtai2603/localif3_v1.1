@@ -36,7 +36,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
         Route::get('destroy/{id}', 'UserController@destroy')->name('get-user-destroy');
         Route::get('edit/{id}', 'UserController@edit')->name('get-user-edit');
         Route::post('update/{id}', 'UserController@update')->name('post-user-update');
-   
+
+        Route::get('balance/{id}', 'UserController@getBalance')->name('get-balance');
+        Route::post('update-balance/{id}', 'UserController@updateBalance')->name('update-balance');
     });
     
     Route::group(['prefix' => 'location'], function () {
@@ -82,6 +84,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'adminLogin'], function () {
 
         Route::get('monthly/{year}', 'RevenueController@getMonthly'); 
         Route::get('detailtourguide/{year}/{id}', 'RevenueController@getMonthlyTourguide');
+        Route::get('charts/{year}', 'RevenueController@chartsAjax');
         // Route::get('tourguides/', 'RevenueController@ajaxTourguides');
     });  
 });
@@ -148,6 +151,7 @@ Route::group(['prefix' => '/'], function () {
             Route::group(['prefix' => 'ajax'], function () {
                 Route::get('monthly/{year}', 'PageRevenueController@getMonthly');
                 Route::get('tour/{month}', 'PageRevenueController@getTourRevenue');
+                Route::get('charts/{year}', 'PageRevenueController@chartsAjax');
             });  
         });
 

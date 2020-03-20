@@ -163,7 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
+        
         /*
          * Package Service Providers...
          */
