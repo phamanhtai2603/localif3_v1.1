@@ -26,7 +26,7 @@
 @endsection
 
 @section('content')
-   
+
 
     {{-- Bìa cover --}}
     @include('page.layouts.cover')

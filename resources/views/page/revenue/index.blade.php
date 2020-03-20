@@ -32,8 +32,10 @@
                       <button id="next-year" class="page-link">Next</button>
                     </li>
                   </ul>
-                  <div id="revenue">
-
+                  <div id="revenue"></div>
+                </div>
+                <div class="col-md-12">
+                  <div id="charts_con" style="width:100%; height:400px;">
                   </div>
                 </div>
               </div>
@@ -69,6 +71,8 @@
          $("#revenue").html(data); 
       });    
   });
-
 </script>
+
+{{-- Charts --}}
+<script src="page_asset/js/charts.js"></script>
 @endsection

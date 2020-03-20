@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Notifications\BookingNoti;
+
 class PageTourController extends Controller
 {
     public function viewall(){
@@ -99,7 +101,6 @@ class PageTourController extends Controller
             
 
             if(sizeof($arr_bookedtourdate)==sizeof(array_diff($arr_bookedtourdate,$user_busyunavai))){
-                //$user->unavailableday .= $bookedtour->date;
                 $user->save();
                 $bookedtour->save();
             }else{
@@ -108,12 +109,15 @@ class PageTourController extends Controller
             //mail send noti
             $customer = Auth::user()->email;
             $email = $user->email;
-            Mail::send('page.mail.havebooked', ['customer' => $customer], function($message) use ($customer,$email) {
+            Mail::send('page.mail.havebooked', ['customer' => $customer,'bookedtour'=>$bookedtour], function($message) use ($customer,$email) {
                 $message->to($email)
                 ->subject('Localif3');
                 $message->from('phamanhtai263@gmail.com','Localif3 - You have a booking!');
                 });
-                
+            
+            //Noti send noti
+            $user->notify(new BookingNoti($bookedtour));
+
             return redirect()->route('thanks',['id'=>$bookedtour->id]);
     
         } catch (Exception $e) {

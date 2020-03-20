@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->integer('active')->default(1);
             $table->integer('role')->default(0);
             $table->text('busy_day')->nullable();
+            $table->float('balance')->default(0);
             $table->text('unavailableday')->nullable();
             $table->string('verify_code')->nullable();;
             $table->timestamp('deleted_at')->nullable();

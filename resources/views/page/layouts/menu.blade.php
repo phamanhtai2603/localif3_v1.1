@@ -19,10 +19,10 @@
             <li><a href="page_asset/about.html">About</a></li>
             <li><a href="page_asset/contact.html">Contact</a></li>
             @if(isset(Auth::user()->email))
-            <li class="active"><a href="{{ route('get-page-profile-view') }}"><b>Xin chào </b><i>{{Auth::user()->first_name.' '. Auth::user()->last_name}}</i></a></li>
             <li class="has-children active">
               <a href="{{ route('get-page-profile-view') }}">
-                <img class="user-avatar rounded-circle" width="30px" src="
+                <i>{{Auth::user()->first_name.' '. Auth::user()->last_name}}</i>
+                <img class="user-avatar rounded-circle"  width="30px" src="
                     @if(Auth::user()->avatar == null)
                         {{ 'upload/images/default.png' }}
                     @else
@@ -30,11 +30,11 @@
                     @endif
                   " alt="User Avatar">
               </a>
-              <ul class="dropdown">
+              <ul class="dropdown" style="text-align:center">
                 <li><a href="{{ route('get-page-profile-view') }}">Profile</a></li>
                 @if(Auth::user()->role == 2)
                 <li><a href="{{ route('tourmanage.index') }}">Tours post manage</a></li>
-                <li><a href="{{ route('tourguidebooked.index') }}">Booked tours manage</a></li>
+                <li><a href="{{ route('tourguidebooked.index') }}">Bookings manage</a></li>
                 <li><a href="{{ route('tourguidebusy.index') }}">Busy days</a></li>
                 @elseif(Auth::user()->role == 3)
                 <li><a href="{{ route('customerbooked.index') }}">Your booked</a></li>
