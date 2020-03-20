@@ -5,6 +5,11 @@
 @endsection
 @section('css')
 <link rel="stylesheet" href="page_asset/css/style.css">
+<style>
+	.modal{
+		padding-top: 200px;
+	}
+</style>
 @endsection
 @section('content')
 {{-- Bìa cover --}}

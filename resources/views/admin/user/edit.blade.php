@@ -208,6 +208,22 @@
                                   </small>
                               @endif
                           </div>
+                          <br>
+                          @if($user->role==2)
+                          <div class="col-12">
+                          <div class="col col-md-12">
+                              <label for="balance-input" class=" form-control-label">Số dư (VND): 
+                              @if($user->balance==null)
+                              0
+                              @else
+                              {{$user->balance}}
+                              @endif
+                            </label>
+                            <br>
+                            <a href="{{route('get-balance',['id' => $user->id])}}" class="btn btn-primary">Thay đổi số dư</a>
+                        </div>
+                          </div>
+                          @endif
                         </div>
                       </div>
                   </div>

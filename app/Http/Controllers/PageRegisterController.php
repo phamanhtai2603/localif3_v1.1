@@ -47,10 +47,6 @@ class PageRegisterController extends Controller
             $message->from('phamanhtai263@gmail.com','Localif3 - Verify your new account!');
             });
 
-        // Mail::send('page.verify.verify',['code' => $verify_code,'name' => $request->email],function($messenger) use ($user){
-        //     $messenger->to($user['email']);
-        //     $messenger->subject('Activation Code Here!');
-        // });
         return redirect()->to('login')->with('success','Check your email to active account!');
     }
     function verify($code){

@@ -63,9 +63,11 @@
                       <button id="next-year" class="page-link">Next</button>
                     </li>
                   </ul>
-                  <div id="revenue">
-
-                  </div>
+                  <div id="revenue"></div>
+              </div>
+              <div class="card-body">
+                <div id="charts_con" style="width:100%; height:400px;">
+                </div>
               </div>
           </div>
       </div>
@@ -117,6 +119,7 @@
     <script src="admin_page_asset/js/lib/data-table/buttons.print.min.js"></script>
     <script src="admin_page_asset/js/lib/data-table/buttons.colVis.min.js"></script>
     <script src="admin_page_asset/js/init/datatables-init.js"></script>
+    <script src="admin_page_asset/js/charts.js"></script>
 
     <script type="text/javascript">
       $(document).ready(function() {

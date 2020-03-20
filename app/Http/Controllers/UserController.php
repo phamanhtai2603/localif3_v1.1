@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\StoreEditUserRequest;
+use App\Http\Requests\StoreBalanceRequest;
 use App\User;
 use App\Tour;
 use App\UnavailableDay;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -60,5 +63,34 @@ class UserController extends Controller
         $input = Helper::update($id,$request);
         return back()->with('noti','Chỉnh sửa tài khoản thành công!!');
 
+    }
+
+    public function getBalance($id){
+        $user = User::find($id);
+        return view('admin.user.balance',['user' => $user]);
+    }
+
+    public function updateBalance(StoreBalanceRequest $request, $id){
+        try{
+            
+            if (Hash::check($request->password,Auth::user()->password)) {
+                $user = User::find($id);
+                if($request->type == 0){   // +
+                    $user->balance += $request->balance;
+                   $user->save();
+                }elseif($request->type == 1){ // -
+                    $user->balance -= $request->balance;
+                    $user->save();
+                }else{
+                    return back()->with('noti','Thất bại!!');
+                }
+                return back()->with('noti','Thành công!!');
+
+            }else{
+                return back()->with('danger', 'Sai mật khẩu');
+            }
+        }catch (Exception $e) {
+            return back()->with('errorSQL', 'Error')->withInput();
+        }
     }
 }
