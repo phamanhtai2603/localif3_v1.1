@@ -49,6 +49,32 @@
             <li><a href="{{ route('get-page-registration-view') }}" class="btn btn-primary py-1 px-3 text-white">Sign in</a></li>
             @endif
           </ul>
+          {{-- <div class="dropdown for-notification ">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-bell"></i>
+                  <span class="count bg-danger" id="count">{{ count($notifications) }}</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="notification" id="thongBao">
+                <p class="red">Bạn có n thông báo</p>
+                @foreach ($notifications as $noti)
+                <a class="dropdown-item media" href="
+                  @if ($noti->notifiable_type == 'App\Message')
+                      {{ route('get-contact-view') }}
+                  @elseif($noti->notifiable_type == 'App\User')
+                      {{ route('get-user-view') }}
+                  @elseif($noti->notifiable_type == 'App\Booking')
+                      {{ route('get-booking-noti',['id' => $noti->notifiable_id]) }} 
+                       
+                  @endif
+                ">
+                    <i class="fa fa-check"></i>
+                    <p>{{ json_decode($noti->data)->subject }}</p>
+                </a>
+                
+                @endforeach
+
+            </div>
+        </div> --}}
         </nav>
       </div>
       <div class="col-6 col-xl-2 text-right">

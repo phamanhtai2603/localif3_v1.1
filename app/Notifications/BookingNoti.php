@@ -33,6 +33,7 @@ class BookingNoti extends Notification
     {
         // return ['mail','database'];
         return ['database'];
+        // return [CustomDbChannel::class];
     }
 
     /**

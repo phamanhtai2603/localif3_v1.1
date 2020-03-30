@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class PageTourguideBookedTourController extends Controller
 {
@@ -43,6 +44,13 @@ class PageTourguideBookedTourController extends Controller
         } catch (Exception $e) {
             return back()->with('errorSQL', 'Something wrong happened!')->withInput();
         }
+        //mail send noti to customer who booked
+        $customer = $bookedtour->user->email;
+        Mail::send('page.mail.canceled', ['bookedtour'=>$bookedtour], function($message) use ($customer) {
+            $message->to($customer)
+            ->subject('Localif3');
+            $message->from('phamanhtai263@gmail.com','Localif3 - Your tour has been refused!');
+            });
         return redirect()->back()->with('success', 'You have canceled one tour!');
     }
 
@@ -67,7 +75,13 @@ class PageTourguideBookedTourController extends Controller
                     $bookedtour->save();
                     return back()->with('error', 'You are not available this days!');
                 }
-    
+                
+                $customer = $bookedtour->user->email;
+                Mail::send('page.mail.accepted', ['bookedtour'=>$bookedtour], function($message) use ($customer) {
+                    $message->to($customer)
+                    ->subject('Localif3');
+                    $message->from('phamanhtai263@gmail.com','Localif3 - Your tour has been accepted!');
+                    });
                 return back()->with('success','You have accept one tour!!');
 
             }    

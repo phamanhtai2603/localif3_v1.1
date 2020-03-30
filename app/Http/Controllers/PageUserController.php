@@ -17,12 +17,15 @@ class PageUserController extends Controller
 
     public function update(Request $request){
         try{
+        if($request->password!=$request->password2){
+            return back()->with('error', 'New password and confirm password must be together')->withInput();
+        }
         $id = Auth::user()->id;
         $input = Helper::updateProfile($id,$request);
+        return redirect()->back()->with('success', 'Sửa thành công');
     } catch (Exception $e) {
         return back()->with('error', 'Có lỗi xảy ra')->withInput();
     }
-    return redirect()->back()->with('success', 'Sửa thành công');
     }
 
     //profile cua user khac

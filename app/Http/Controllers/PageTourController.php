@@ -106,13 +106,20 @@ class PageTourController extends Controller
             }else{
                 return back()->with('errorSQL', 'The host is unavailable on this days!');
             }
-            //mail send noti
+            //mail send noti to tourguide
             $customer = Auth::user()->email;
             $email = $user->email;
             Mail::send('page.mail.havebooked', ['customer' => $customer,'bookedtour'=>$bookedtour], function($message) use ($customer,$email) {
                 $message->to($email)
                 ->subject('Localif3');
                 $message->from('phamanhtai263@gmail.com','Localif3 - You have a booking!');
+                });
+
+            //mail send noti to customer who booked
+            Mail::send('page.mail.youbooked', ['bookedtour'=>$bookedtour], function($message) use ($customer,$email) {
+                $message->to($customer)
+                ->subject('Localif3');
+                $message->from('phamanhtai263@gmail.com','Localif3 - You have booked!');
                 });
             
             //Noti send noti
