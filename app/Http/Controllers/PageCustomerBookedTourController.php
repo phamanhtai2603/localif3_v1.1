@@ -27,68 +27,7 @@ class PageCustomerBookedTourController extends Controller
 
         return view('page.customerbookedtour.index',['bookedtours' => $bookedtours,'stt'=>$stt,'date_currentsecond'=>$date_currentsecond]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         try{
@@ -127,6 +66,12 @@ class PageCustomerBookedTourController extends Controller
         } catch (Exception $e) {
             return back()->with('errorSQL', 'Something wrong happened!')->withInput();
         }
+        $email = $bookedtour->tour->user->email;
+        Mail::send('page.mail.customercanceled', ['bookedtour'=>$bookedtour], function($message) use ($email) {
+            $message->to($email)
+            ->subject('Localif3');
+            $message->from('phamanhtai263@gmail.com','Localif3 - Your tour has been canceled!');
+            });
         return redirect()->back()->with('success', 'You have canceled one tour!');
     }
 

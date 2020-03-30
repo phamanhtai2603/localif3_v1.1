@@ -82,11 +82,11 @@
                                 <td>
                                     @if(($bookedtour->status!=3) && ($bookedtour->status!=2))
                                         @if($bookedtour->status==1 && $checkdone==1)
-                                        <a style="color:green; text-align:center">DONE</a>
-                                            @if (Helper::checkRated($bookedtour->id))
+                                        <a style="color:green; text-align:center">DONE</a> 
+                                            @if (Helper::checkRated($bookedtour->id)==false) 
                                             <button type="button"  class="btn btn-primary"><a style ="color:yellow" href="{{ route('get-page-customerbooked-rate',['id'=>$bookedtour->id]) }}">RATE ME</a></button>
                                             @else
-                                            <span>(You have rated)</span>
+                                            <span>(Rated)</span>
                                             @endif
                                         @elseif($checkdone==2)
                                         <a style="color:red; text-align:center">Out of date</a>

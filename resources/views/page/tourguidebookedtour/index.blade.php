@@ -67,11 +67,11 @@
                                 @if($bookedtour->b_status==0)
                                 <td><a style="color:yellowgreen">Unchecked</a></td>
                                 @elseif($bookedtour->b_status==1)
-                                <td><a style="color:green"><i class="far fa-check-square"></i></a></td>
+                                <td><a style="color:green">Accepted<i class="far fa-check-square"></i></a></td>
                                 @elseif($bookedtour->b_status==2)
                                 <td><a style="color:red">Refused</a></td>
                                 @elseif($bookedtour->b_status==3)
-                                <td><a style="color:red"><i class="far fa-window-close"></i></a></td>
+                                <td><a style="color:red">Canceled<i class="far fa-window-close"></i></a></td>
                                 @endif
                                 
                                 <td>

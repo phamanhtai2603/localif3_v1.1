@@ -13,6 +13,16 @@
 
 <div class="site-section bg-light">
     <div class="container">
+      @if(session('success'))
+      <small id="success" class="alert alert-success p-2">
+          {{session('success')}}
+      </small>
+      @endif
+      @if(session('error'))
+      <small id="error" class="alert alert-danger p-2">
+          {{session('error')}}
+      </small>
+      @endif
         @if(isset($user))
         @else
         <form action="{{ route('post-page-profile-update') }}" enctype="multipart/form-data" method="post" class="p-5 bg-white">
@@ -49,18 +59,19 @@
               <div class="col-md-4">
                 <label class="text-black" for="message">Gender</label> 
                 <select option="1" id="gender" name="gender" value="1" class="form-control">
-<<<<<<< HEAD
                   <option value="1" <?php if(Auth::user()->gender == 1){echo("selected");}?>>Male</option>
                   <option value="0" <?php if(Auth::user()->gender == 0){echo("selected");}?>>Female</option>
-=======
-                  <option value="1" <?php if(Auth::user()->gender == 1){echo("selected");}?>>Nam</option>
-                  <option value="0" <?php if(Auth::user()->gender == 0){echo("selected");}?>>Nữ</option>
->>>>>>> Chưa fix:
                 </select>
               </div>
-              <div class="col-md-8">
+            </div>
+            <div class="row form-group">
+              <div class="col-md-6">
                 <label class="text-black" for="password">New password</label> 
-                <input id="password" name="password" type="text" value="" placeholder="Enter newpassword" class="form-control"/>
+                <input id="password" name="password" type="password" value="" placeholder="Enter newpassword" class="form-control"/>
+              </div>
+              <div class="col-md-6">
+                <label class="text-black" for="password">New password confirm</label> 
+                <input id="password" name="password2" type="password" value="" placeholder="Confirm" class="form-control"/>
               </div>
             </div>
            <div class="row form-group">
