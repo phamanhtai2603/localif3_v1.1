@@ -6,10 +6,7 @@
             <div class="mb-5">
               <h3 class="footer-heading mb-4">About Travelers</h3>
               <p> If you travel, you will not only learn about foreign cultures, but about your own as well. You will notice the cultural differences, and will find out what makes your culture unique. After retrurning from a long journey, you will see your country with new eyes.</p>
-            </div>
-
-            
-            
+            </div>          
           </div>
           <div class="col-lg-4 mb-5 mb-lg-0">
             <div class="row mb-5">
