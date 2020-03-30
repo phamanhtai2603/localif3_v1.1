@@ -109,6 +109,7 @@
                   <p>For {{ $size }} people</p>
                   <p>On day:  {{ substr($date, 0, -1) }}</p>
                   <p>TOTAL COST: <b><i>{{ number_format($total_price)  }} VND</i></b></p>
+                  <p style=" color: #F58543;"> This order didnt checked. Please waiting for the host's response! </p>
               </div>
             </div>
         </div>

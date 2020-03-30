@@ -116,7 +116,7 @@
                       <?php
                       }
                       ?>
-                  </ul>  
+                  </ul>
                 </div>
             </div>
             <br>
@@ -217,28 +217,28 @@
                   </div>
 
                   <div class="col-md-12">
-                          <label class="text-black" for="size">People size</label> 
+                          <label class="text-black" for="size">People size</label>
                           <input type="number" name="size" class="form-control" placeholder="Số người dự kiến"
                           value="1" data-parsley-trigger="change" required minlength="1">
                   </div>
-              </div> 
+              </div>
               <div class="row form-group">
                   <div class="col-md-12">
-                      <label class="text-black" for="date_from">From</label> 
-                      <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="date_from" class="form-control" 
+                      <label class="text-black" for="date_from">From</label>
+                      <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="date_from" class="form-control"
                       data-parsley-trigger="change" required minlength="1">
                   </div>
-              </div> 
+              </div>
               <div class="row form-group">
                   <div class="col-md-12">
-                      <label class="text-black" for="date_to">To</label> 
+                      <label class="text-black" for="date_to">To</label>
                       <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="date_to" class="form-control"
                       data-parsley-trigger="change" required minlength="1">
                   </div>
-              </div> 
+              </div>
               <div class="row form-group">
                   <div class="col-md-12">
-                      <label class="text-black" for="note">Notes</label> 
+                      <label class="text-black" for="note">Notes</label>
                       <textarea name="note" id="note" cols="30" rows="5" class="form-control" placeholder="Write your notes or questions here..."></textarea>
                   </div>
               </div>
@@ -280,12 +280,12 @@
                 </div>
               </div>
               @endforeach
-            @else 
+            @else
             <h3 class=" font-weight-light" style="color444444"><i>There are no rate!</i></h1>
             @endif
           </div>
         </div>
-        
+
     </div>
 </div>
 
@@ -334,7 +334,7 @@
                   <div class="col-md-10" style="margin-top: 15px; border-bottom: solid 1px #F58543 ">
                     <p>{{ $comment->comment }}</p>
                   </div>
-                  @if(Auth::user()->role==1 || Auth::user()->id==$comment->customer_id || Auth::user()->id==$tour->user->id)
+                  @if(Auth::user() && (Auth::user()->role==1 || Auth::user()->id==$comment->customer_id || Auth::user()->id==$tour->user->id))
                   <div class="col-md-2">
                     <a href="{{ route('post-page-destroy-comment',['id'=>$comment->id]) }}"><p style="color:red;"><i>Delete</i></p></a>
                   </div>
@@ -410,7 +410,7 @@
           moveRight();
       });
 
-    });    
+    });
     $("#Txt_Date").datepicker({
       format: 'yyyy-mm-dd',
       inline: false,

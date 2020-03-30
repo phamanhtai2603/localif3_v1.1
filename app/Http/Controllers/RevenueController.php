@@ -24,9 +24,9 @@ class RevenueController extends Controller
     public function viewTourguides(){
         $users = User::where('role',2)->get();
         return view('admin.revenue.tourguides',['users'=>$users]);
-    }   
+    }
 
-    public function getMonthly($year){ 
+    public function getMonthly($year){
         $revenue_arr = $this->monthlyRevenue($year);
         $revenue=0;
         foreach($revenue_arr as $re){
@@ -52,14 +52,14 @@ class RevenueController extends Controller
                 </thead>
                 <tbody>
                     <tr>
-                    "; 
-                    for($i=0; $i<12; $i++) 
+                    ";
+                    for($i=0; $i<12; $i++)
                     echo "<td>".number_format($revenue_arr[$i])."</td>"; echo"
                     </tr>
                 </tbody>
             </table>
             ";
-        
+
             echo " 
             <div class ='row'>
                 <div class='col-md-1'>
@@ -85,7 +85,7 @@ class RevenueController extends Controller
             $bookeds_done_count=0;
             $revenue_tour=0;
             foreach($bookeds as $booked)
-            {   
+            {
                 $bookeds_count += 1;
                 if($booked->status==1){
                     $revenue_tour += $booked->total_price;
@@ -108,14 +108,14 @@ class RevenueController extends Controller
        // dd($bookedtours);
         $stt=1;
         return view('admin.revenue.detail_tourguide',['stt'=>$stt,'user'=>$user,'bookedtours'=>$bookedtours,'tours_count'=>$tours_count,'revenue_tour'=>$revenue_tour,'bookeds_done_count'=>$bookeds_done_count,'bookeds_count'=>$bookeds_count]);
-    }    
+    }
 
     public function getMonthlyTourguide($year, $id){
         $tours = Tour::where('tourguide_id',$id)->get();
         $revenue=0;
-        $revenue12=0; $revenue1=0; $revenue2=0; $revenue3=0; $revenue4=0; $revenue5=0; 
-        $revenue6=0; $revenue7=0; $revenue8=0; $revenue9=0; $revenue10=0; $revenue11=0; 
-        //dd(Carbon::now()->month); 
+        $revenue12=0; $revenue1=0; $revenue2=0; $revenue3=0; $revenue4=0; $revenue5=0;
+        $revenue6=0; $revenue7=0; $revenue8=0; $revenue9=0; $revenue10=0; $revenue11=0;
+        //dd(Carbon::now()->month);
         // $year_now = Carbon::now()->format('Y'); //Lấy năm hiện tại
         // $next_or_previous = (int)$year_now + (int)$i; //Lấy năm cân xem
         foreach($tours as $tour)
@@ -138,38 +138,38 @@ class RevenueController extends Controller
                                 break;
                             case 3:
                                 $revenue3 += $booked->total_price;
-                                break;      
+                                break;
                             case 4:
                                 $revenue4 += $booked->total_price;
-                                break;    
+                                break;
                             case 5:
                                 $revenue5 += $booked->total_price;
-                                break;    
+                                break;
                             case 6:
                                 $revenue6 += $booked->total_price;
-                                break;    
+                                break;
                             case 7:
                                 $revenue7 += $booked->total_price;
-                                break;   
+                                break;
                             case 8:
                                 $revenue8 += $booked->total_price;
-                                break; 
+                                break;
                             case 9:
                                 $revenue9 += $booked->total_price;
-                                break; 
+                                break;
                             case 10:
                                 $revenue10 += $booked->total_price;
-                                break; 
+                                break;
                             case 11:
                                 $revenue11 += $booked->total_price;
-                                break;        
+                                break;
                             case 12:
                                 $revenue12 += $booked->total_price;
-                                break;         
+                                break;
                         }
                     }
                 }
-        } 
+        }
             echo "
                 <table id='bootstrap-data-table' class='table table-striped table-bordered' style='text-align:center'>
                 <thead>
@@ -207,7 +207,7 @@ class RevenueController extends Controller
                 </tbody>
             </table>
             ";
-        
+
             echo " 
             <div class ='row'>
                 <div class='col-md-1'>
@@ -220,14 +220,14 @@ class RevenueController extends Controller
             ";
     }
 
-    public function monthlyRevenue($year){ 
+    public function monthlyRevenue($year){
         //dd($year);
         $tours = Tour::all();
         $revenue=0;
-        $revenue12=0; $revenue1=0; $revenue2=0; $revenue3=0; $revenue4=0; $revenue5=0; 
-        $revenue6=0; $revenue7=0; $revenue8=0; $revenue9=0; $revenue10=0; $revenue11=0; 
+        $revenue12=0; $revenue1=0; $revenue2=0; $revenue3=0; $revenue4=0; $revenue5=0;
+        $revenue6=0; $revenue7=0; $revenue8=0; $revenue9=0; $revenue10=0; $revenue11=0;
         $array_revenue=[];
-        //dd(Carbon::now()->month); 
+        //dd(Carbon::now()->month);
         // $year_now = Carbon::now()->format('Y'); //Lấy năm hiện tại
         // $next_or_previous = (int)$year_now + (int)$i; //Lấy năm cân xem
         foreach($tours as $tour)
@@ -250,38 +250,38 @@ class RevenueController extends Controller
                             break;
                         case 3:
                             $revenue3 += $booked->total_price;
-                            break;      
+                            break;
                         case 4:
                             $revenue4 += $booked->total_price;
-                            break;    
+                            break;
                         case 5:
                             $revenue5 += $booked->total_price;
-                            break;    
+                            break;
                         case 6:
                             $revenue6 += $booked->total_price;
-                            break;    
+                            break;
                         case 7:
                             $revenue7 += $booked->total_price;
-                            break;   
+                            break;
                         case 8:
                             $revenue8 += $booked->total_price;
-                            break; 
+                            break;
                         case 9:
                             $revenue9 += $booked->total_price;
-                            break; 
+                            break;
                         case 10:
                             $revenue10 += $booked->total_price;
-                            break; 
+                            break;
                         case 11:
                             $revenue11 += $booked->total_price;
-                            break;        
+                            break;
                         case 12:
                             $revenue12 += $booked->total_price;
-                            break;         
+                            break;
                     }
                 }
             }
-        } 
+        }
         array_push($array_revenue,$revenue1,$revenue2,$revenue3,$revenue4,$revenue5
         ,$revenue6,$revenue7,$revenue8,$revenue9,$revenue10,$revenue11,$revenue12);
 

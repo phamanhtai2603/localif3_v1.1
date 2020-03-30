@@ -186,10 +186,11 @@ class Helper{
             
     }
 
-    public static function checkRated($booked_id){
-        $rate = Rate::find($booked_id);
-        if (isset($rate))
+    public static function checkRated($booked_id){ 
+        $rate = Rate::where('bookedtour_id',$booked_id)->get();
+        if (count($rate)>0)
             return true;
+        return false;
         
     }
 }
