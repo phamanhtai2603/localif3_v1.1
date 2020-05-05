@@ -157,7 +157,7 @@
                     <a class="btn btn-success btn-sm btn-op" href="" data-toggle="modal" data-target="#myModal2{{$tour->id}}" data-backdrop="true"><span><i class="fa fa-eye"></i></span> Old images</a> 
                 </div>
                 <div class="modal fade" id="myModal2{{$tour->id}}">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog margin-popup">
                         <div class="modal-content">
 
                         <!-- Modal Header -->
@@ -218,7 +218,7 @@
                     @endif
                 </p>
                 <p style="font-size:20px"><b>PRICE(VND)/MAN/DAY: 
-                        <input type="text" name="price" placeholder="ex: 1000000"
+                        <input id="price-tourmanage" type="number" name="price" placeholder="ex: 1000000"
                         value="{{ $tour->price}}" class="form-control" data-parsley-trigger="change" required minlength="3">        
                 </p>
                 @if ($errors->has('price'))

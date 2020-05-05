@@ -218,8 +218,8 @@
 
                   <div class="col-md-12">
                           <label class="text-black" for="size">People size</label> 
-                          <input type="number" name="size" class="form-control" placeholder="Số người dự kiến"
-                          value="1" data-parsley-trigger="change" required minlength="1">
+                          <input type="number" max="2" onkeypress="if (this.value.length > 1) return false;" name="size" class="form-control" placeholder="Số người dự kiến"
+                          value="1" data-parsley-trigger="change" id="size-of-eople" required minlength="1">
                   </div>
               </div> 
               <div class="row form-group">

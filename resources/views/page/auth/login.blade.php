@@ -29,16 +29,17 @@
 	<link rel="stylesheet" type="text/css" href="page_login/css/custom.css">
 <!--===============================================================================================-->
 </head>
-<body style="background-color: #666666;">
-	
+<body>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" action="{{route('post-login')}}" method="POST">
 					@csrf
-					<div ><a href="{{ route('get-page-view') }}" ><img class="user-avatar rounded-circle float-center" width="80px"  src="upload/images/logo.jpg" alt="User Avatar"></a></div>	
-					<span class="login100-form-title p-b-43" style="color:	#E96E50;">
-						Login to continue
+					<!-- <div ><a href="{{ route('get-page-view') }}" ><img class="user-avatar rounded-circle float-center" width="80px"  src="upload/images/logo.jpg" alt="User Avatar"></a></div>	 -->
+					<span class="login100-form-title p-b-30">
+						<a href="{{ route('get-page-view') }}">
+							<img class="logo-ring" src="upload/images/logo.jpg" alt="User Avatar">
+						</a>
 					</span>
 					@if (session('noti'))
 						<div class="alert alert-danger">{{ session('noti') }}</div>
@@ -91,7 +92,6 @@
 					</div>
 				</form>
 				<div class="login100-more"  style="background-image: url('page_login/images/bg-01.jpg');">
-				</a>
 			</div>
 		</div>
 	</div>

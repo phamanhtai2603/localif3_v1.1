@@ -48,7 +48,7 @@
 						</div>
 					</div>
 					<div class="modal fade" id="exampleModaladd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
+						<div class="modal-dialog margin-popup" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel">Add busy days</h5>
@@ -59,8 +59,8 @@
 								<div class="modal-body">                
 									<form action="{{ route('tourguidebusy-add',['id'=>Auth::user()->id]) }}" method="POST" >
 									@csrf
-										<input type="text" name="busyunavai" id="Txt_Date" value="{{$busyunavai}}" style="cursor: pointer; width: 308.59px;" readonly >
-										<button type="submit" >OK!</button>
+										<input class="input-busy-date" type="t" name="busyunavai" id="Txt_Date" value="{{$busyunavai}}" readonly >
+										<button class="btn-OK-busy" type="submit">OK!</button>
 								</form>
 								</div>
 							</div>
@@ -68,7 +68,7 @@
 					</div>
 
 					<div class="modal fade" id="exampleModalremove" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
+						<div class="modal-dialog margin-popup" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel">Remove busy days</h5>
@@ -79,8 +79,8 @@
 								<div class="modal-body">                
 									<form action="{{ route('tourguidebusy-remove',['id'=>Auth::user()->id]) }}" method="POST" >
 									@csrf
-										<input type="text" name="busy_day" id="Txt_Date2" value="{{$busyday}}" style="cursor: pointer; width: 308.59px;" readonly >
-										<button type="submit" >OK!</button>
+										<input class="input-busy-date" type="text" name="busy_day" id="Txt_Date2" value="{{$busyday}}" readonly >
+										<button class="btn-OK-busy" type="submit" >OK!</button>
 								</form>
 								</div>
 							</div>

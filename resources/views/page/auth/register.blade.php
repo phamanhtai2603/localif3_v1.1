@@ -1,4 +1,4 @@
-s<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Register</title>
@@ -28,8 +28,7 @@ s<!DOCTYPE html>
 	<link rel="stylesheet" type="text/css" href="page_login/css/main.css">
 <!--===============================================================================================-->
 </head>
-<body style="background-color: #666666;">
-	
+<body>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -45,11 +44,15 @@ s<!DOCTYPE html>
 						<div class="alert alert-success">{{ session('success') }}</div>
 					@endif
 					
-					<div class="" data-validate = "Enter your real name" >
-						<input type="radio" name="role" value="2"> 
-						<span class="fs-17 text-color" style="color:#E96E50;"><i>I want to make my tours</i></span><br>
-						<input type="radio" name="role" value="3" checked> 
-						<span class="fs-17 text-color"  style="color:#E96E50;"><i>I am a traveller</i></span>
+					<div class="borderout">
+						<div class="borderradio radioleft Unselected" id="boder-custommer">
+							<input id="custommer" class="inline" type="radio" name="role" value="3" checked> 
+							<label for="custommer" class="inline">I am a traveller</label>
+						</div>
+						<div class="borderradio radioright" id="boder-make-tour">
+							<input id="make-tour" class="inline" type="radio" name="role" value="2">
+							<label for="make-tour" class="inline">I am tour guide</label>
+						</div>
 					</div>
 					<br>
 
@@ -93,8 +96,7 @@ s<!DOCTYPE html>
 					
 					<div class="text-center p-t-46 p-b-20">
 						<span class="txt2">
-							or <a href="" class="txt1">Login</a>
-
+							or <a href="{{ route('get-login') }}" class="txt1">Login</a>
 						</span>
 					</div>
 				</form>

@@ -34,13 +34,6 @@
         return check;
     });
 
-
-    $('.validate-form .input100').each(function(){
-        $(this).focus(function(){
-           hideValidate(this);
-        });
-    });
-
     function validate (input) {
         if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
             if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
@@ -65,6 +58,19 @@
 
         $(thisAlert).removeClass('alert-validate');
     }
-    
+    /*=================================================================
+    [Radio buton dỏ sing up] */
 
+    var radioCustomer = document.getElementById("boder-custommer");
+    var radioMakeTour = document.getElementById("boder-make-tour");
+    
+    $( "#custommer" ).click(function() {       
+        radioCustomer.classList.add("Unselected");
+        radioMakeTour.classList.remove("Unselected");
+    });
+
+    $( "#make-tour" ).click(function() {
+        radioMakeTour.classList.add("Unselected");
+        radioCustomer.classList.remove("Unselected");
+    });
 })(jQuery);

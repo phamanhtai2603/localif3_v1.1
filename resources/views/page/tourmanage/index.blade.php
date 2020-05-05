@@ -30,7 +30,6 @@
                             <tr>
                                 <th></th>
                                 <th>Name</th>
-                                <th>Created at</th>
                                 <th>Location </th>
                                 <th>Price</th>
                                 <th>Status</th>
@@ -44,9 +43,8 @@
                                 
                                 <td class="text-center">{{$stt++}}</td>
                                 <td>{{ $tour->name }}</td>
-                                <td>{{$tour->created_at}}</td>
                                 <td>{{$tour->location->name}}</td>
-                                <td>{{$tour->price}}</td>
+                                <td class="format-money">{{$tour->price}}</td>
                                 <td>
                                     @if($tour->status == 0)
                                         <span class="text-success">{{'Active'}}</span>
@@ -62,62 +60,55 @@
                                 {{-- modal --}}
                                 <!-- The Modal -->
                                 <div class="modal fade" id="myModal{{$tour->id}}">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog margin-popup">
                                         <div class="modal-content">
 
                                         <!-- Modal Header -->
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Information</h4>
+                                            <h2 class="modal-title">Information</h2>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                         
 
                                         <!-- Modal body -->
                                         <div class="modal-body">
-                                            <div class="row">
-                                                <div class="my-center my-center-95">
-                                                    <div class="row">
-                                                        <div class="col-4"></div>
-                                                        <div class="col-4">
-                                                        <a class="btn btn-success btn-sm btn-op" href="" data-toggle="modal" data-target="#myModal2{{$tour->id}}" data-backdrop="true"><span><i class="fa fa-eye"></i></span> Xem ảnh</a> 
-                                                        </div>
-                                                        <div class="col-4"></div>
-                                                    </div>
+                                            <div class="my-center my-center-95">
+                                                <div>
                                                     <h4 class="text-center mt-2">{{$tour->name}}</h4>
-                                                        @if ($tour->status == 0)
-                                                            <p  class="text-center p-5px"><small class="text-success">{{'Hoạt động'}}</small></p>
-                                                        @else
-                                                            <p class="text-center p-5px"><small class="text-danger">{{'Vô hiệu hóa'}}</small></p>
-                                                        @endif
-                                                    <hr class="my-1">
+                                                    <a class=" btn btn-success btn-sm btn-op float-right-header" href="" data-toggle="modal" data-target="#myModal2{{$tour->id}}" data-backdrop="true"><span><i class="fa fa-eye"></i></span> Xem ảnh</a> 
+                                                    @if ($tour->status == 0)
+                                                        <p  class="text-center p-5px"><small class="text-success">{{'Hoạt động'}}</small></p>
+                                                    @else
+                                                        <p class="text-center p-5px"><small class="text-danger">{{'Vô hiệu hóa'}}</small></p>
+                                                    @endif
                                                 </div>
-                                                <div class="my-center my-center-85">
-                                                    <div class="row">
-                                                    <p class="col-4 p-5px">Tourist guide :</p><p class="col-8 p-5px text-body">{{ $tour->user->first_name.' '.$tour->user->last_name}}</p>
-                                                    </div>
-                                                    <div class="row">
-                                                    <p class="col-4 p-5px">Email :</p><p class="col-8 p-5px text-body ">{{$tour->user->email}}</p>
-                                                    </div>
-                                                    <div class="row">
-                                                        <p class="col-4 p-5px ">Location:</p><p class="col-8 p-5px text-body">{{$tour->location->name}}</p>
-                                                    </div>
-                                                    <div class="row">
-                                                        <p class="col-4 p-5px">description</p><p class="col-8 p-5px text-body ">{{$tour->description }}</p>
-                                                    </div>
-                                                    <div class="row">
-                                                        <p class="col-4 p-5px">Price</p><p class="col-8 p-5px text-body">{{$tour->price}}</p>
-                                                    </div>
-                                                    <div class="row">
-                                                        <p class="col-4 p-5px">Rate</p>
-                                                        @if($tour->avgrate=='')
-                                                        <p class="col-4 p-5px text-body">No rate</p>
-                                                        @else
-                                                        <p class="col-4 p-5px text-body">{{ $tour->avgrate }}</p>
-                                                        @endif
-                                                    </div>
+                                                <hr class="my-1">
+                                            </div>
+                                            <div class="my-center my-center-85">
+                                                <div class="row">
+                                                <p class="col-4 p-5px">Tourist guide :</p><p class="col-8 p-5px text-body">{{ $tour->user->first_name.' '.$tour->user->last_name}}</p>
+                                                </div>
+                                                <div class="row">
+                                                <p class="col-4 p-5px">Email :</p><p class="col-8 p-5px text-body ">{{$tour->user->email}}</p>
+                                                </div>
+                                                <div class="row">
+                                                    <p class="col-4 p-5px ">Location:</p><p class="col-8 p-5px text-body">{{$tour->location->name}}</p>
+                                                </div>
+                                                <div class="row">
+                                                    <p class="col-4 p-5px">description</p><p class="col-8 p-5px text-body ">{{$tour->description }}</p>
+                                                </div>
+                                                <div class="row">
+                                                    <p class="col-4 p-5px">Price</p><p class="col-8 p-5px text-body">{{$tour->price}}</p>
+                                                </div>
+                                                <div class="row">
+                                                    <p class="col-4 p-5px">Rate</p>
+                                                    @if($tour->avgrate=='')
+                                                    <p class="col-4 p-5px text-body">No rate</p>
+                                                    @else
+                                                    <p class="col-4 p-5px text-body">{{ $tour->avgrate }}</p>
+                                                    @endif
                                                 </div>
                                             </div>
-                                            <hr class="my-1">
                                         </div>
                                         <div class="modal-footer">
                                                 <a class="btn btn-primary" href=""><i class="fa fa-edit"></i> View comments</a>
@@ -127,7 +118,7 @@
                                         </div>
                                     </div>
                                     <div class="modal fade" id="myModal2{{$tour->id}}">
-                                            <div class="modal-dialog">
+                                            <div class="modal-dialog margin-popup">
                                                 <div class="modal-content">
                     
                                                 <!-- Modal Header -->
@@ -137,17 +128,11 @@
                                                 </div>
                     
                                                 <!-- Modal body -->
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                            <?php $arr_img = explode ( ',' , $tour->image,-1) ?>
-                                                            @foreach($arr_img as $img)
-                                                                <div class="col-6">
-                                                                    <img width="220" height="200" src="images/{{ $img }}" >
-                                                                </div>
-                                                            @endforeach
-                                                            
-                                                    </div>
-                                                    <hr class="my-1">
+                                                <div class="modal-body margin-auto-popup center-popup">
+                                                    <?php $arr_img = explode ( ',' , $tour->image,-1) ?>
+                                                    @foreach($arr_img as $img)
+                                                        <img width="200" height="150" class="image-block" src="images/{{ $img }}" >
+                                                    @endforeach                                                           
                                                 </div>
                                                 <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -273,8 +273,6 @@ iframe {
   text-align: center;
 }
 
-
-
 /*------------------------------------------------------------------
 [ Input ]*/
 
@@ -617,4 +615,60 @@ input.input100 {
 .login100-form-social-item:hover {
   background: #333333;
   color: #fff;
+}
+
+/*==================================================================
+[ Radio button]*/
+
+.borderout{
+  width: 100%;
+  height: auto;
+}
+.borderradio{
+  width: 49%;
+  height: 100%;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+.borderradio.radioright{
+  float: right;
+  border-radius: 10px;
+}
+.borderradio.radioleft{
+  float: left;
+  border-radius: 10px;
+}
+.borderradio.Unselected{
+  border: 1px solid #E96E50;
+}
+
+/* =====================================================================
+[Orther] */
+
+.logo-ring
+{
+  width: 100px;
+  height: 90px;
+  border-radius:50px;
+}
+
+.inline
+{
+  display: inline-block;
+  font-family: "Montserrat-Regular";
+  font-size: 18px;
+  color: #999999;
+  line-height: 40px;
+  margin: 5px;
+}
+
+@media screen and (max-width: 900px) {
+  .inline {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .inline {
+    font-size: 10px;
+  }
 }

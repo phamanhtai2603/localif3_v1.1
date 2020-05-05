@@ -240,6 +240,12 @@ h1, h2, h3, h4, h5,
     top: 0;
     left: 0;
     width: 100%; }
+  .site-navbar.changefixed{
+    background-color: #dee2e6;
+    position: fixed;
+    width: 100%;
+    transition: background-color 1s linear;}
+
   .site-navbar .site-logo {
     position: absolute;
     left: 0;

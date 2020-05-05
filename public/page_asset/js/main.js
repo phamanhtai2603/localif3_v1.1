@@ -235,5 +235,33 @@ jQuery(document).ready(function($) {
 
 	};
 	siteDatePicker();
+	$(document).scroll(function(){
+		var $nav = $(".site-navbar");
+		$nav.toggleClass("changefixed", $(this).scrollTop() > $nav.height());
+	});
 
+	var x = document.getElementsByClassName("splitName");
+	for(var i = 0; i < x.length ; i ++)
+	{
+		x[i].textContent = x[i].textContent.split('@')[0];
+	}
+
+	var absoluteValue = document.getElementById('price-tourmanage');
+	if (absoluteValue != null)
+	{
+		absoluteValue.onblur = inputBlur;
+	}
+	function inputBlur(){
+		if (parseInt(absoluteValue.value, 10) < 0 )
+		{
+			absoluteValue.value = Math.abs(parseInt(absoluteValue.value, 10));
+		}
+	}
+	
+	var formatMoney = document.getElementsByClassName('format-money');
+	for (var i = 0; i < formatMoney.length; i++)
+	{
+		var n = parseInt(formatMoney[i].textContent, 10).toFixed(0).replace(/(\d)(?=(\d{3})+\b)/g,'$1 ');
+		formatMoney[i].textContent = n;
+	}
 });

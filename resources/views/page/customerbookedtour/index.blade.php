@@ -91,7 +91,7 @@
                                         @elseif($checkdone==2)
                                         <a style="color:red; text-align:center">Out of date</a>
                                         @else
-                                        <a class="btn btn-danger btn-sm btn-op" href="" data-toggle="modal" data-target="#myModalDel{{$bookedtour->id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Cancel</a>
+                                        <a class="btn btn-danger btn-sm btn-op" id="minsize" href="" data-toggle="modal" data-target="#myModalDel{{$bookedtour->id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Cancel</a>
                                         @endif
                                     @endif
                                 </td>

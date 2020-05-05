@@ -35,11 +35,8 @@
                                 <th></th>
                                 <th>Name</th>
                                 <th>Booked by</th>
-                                <th>Created at</th>
-                                <th>Size </th>
                                 <th>From</th>
                                 <th>To</th>
-                                <th>Cost</th>
                                 <th>Message</th>
                                 <th>Status</th>
                                 <th class="mw-241"></th>
@@ -63,34 +60,31 @@
                                 ?>
                                 <td class="text-center">{{$stt++}}</td>
                                 <td >{{ $bookedtour->t_name }}</td>
-                                <td ><a href="{{ route('get-page-otheruser-profile-view',['id'=>$bookedtour->b_u]) }}">{{ $bookedtour->u_email }}</a></td>
-                                <td>{{$bookedtour->b_created_at}}</td>
-                                <td>{{$bookedtour->size}}</td>
+                                <td ><a class="splitName" href="{{ route('get-page-otheruser-profile-view',['id'=>$bookedtour->b_u]) }}">{{ $bookedtour->u_email }}</a></td>
                                 <td>{{ PageTourController::cutDateFrom($bookedtour->b_date) }}</td>
                                 <td>{{ PageTourController::cutDateTo($bookedtour->b_date) }}</td> 
-                                <td>{{$bookedtour->total_price}}</td>
-                                <td><a class="btn btn-success btn-sm btn-op" href="" data-toggle="modal" data-target="#myModalDel3{{$bookedtour->b_id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span>Click to see</a></td>
+                                <td><a class="btn btn-success btn-sm btn-op btn-in-table" href="" data-toggle="modal" data-target="#myModalDel3{{$bookedtour->b_id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span>More</a></td>
                                 @if($bookedtour->b_status==0)
                                 <td><a style="color:yellowgreen">Unchecked</a></td>
                                 @elseif($bookedtour->b_status==1)
-                                <td><a style="color:green">Accepted</a></td>
+                                <td><a style="color:green"><i class="far fa-check-square"></i></a></td>
                                 @elseif($bookedtour->b_status==2)
                                 <td><a style="color:red">Refused</a></td>
                                 @elseif($bookedtour->b_status==3)
-                                <td><a style="color:red">Canceled</a></td>
+                                <td><a style="color:red"><i class="far fa-window-close"></i></a></td>
                                 @endif
                                 
                                 <td>
                                     @if($bookedtour->b_status!=3 && $bookedtour->b_status!=2)        
                                         @if($bookedtour->b_status==1 && $checkdone==1)
-                                        <a style="color:green; text-align:center">DONE</a>
+                                        <a class="btn-in-table" style="color:green; text-align:center">DONE</a>
                                         @elseif($bookedtour->b_status!=1 && $checkdone==1)
                                         <a style="color:red; text-align:center">Out of date</a>
                                         @elseif($checkdone==0 && $bookedtour->b_status==0)
-                                        <a class="btn btn-success btn-sm btn-op" href="" data-toggle="modal" data-target="#myModalDel2{{$bookedtour->b_id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Accept</a>
-                                        <a class="btn btn-danger btn-sm btn-op" href="" data-toggle="modal" data-target="#myModalDel{{$bookedtour->b_id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Deny</a>
+                                        <a class="btn btn-success btn-sm btn-op btn-in-table" href="" data-toggle="modal" data-target="#myModalDel2{{$bookedtour->b_id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Accept</a>
+                                        <a class="btn btn-danger btn-sm btn-op btn-in-table" href="" data-toggle="modal" data-target="#myModalDel{{$bookedtour->b_id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Deny</a>
                                         @elseif($checkdone==0 && $bookedtour->b_status==1)
-                                        <a class="btn btn-danger btn-sm btn-op" href="" data-toggle="modal" data-target="#myModalDel{{$bookedtour->b_id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Deny</a>
+                                        <a class="btn btn-danger btn-sm btn-op btn-in-table" href="" data-toggle="modal" data-target="#myModalDel{{$bookedtour->b_id}}" data-backdrop="true"><span><i class="fa fa-trash"></i></span> Deny</a>
                                         @endif
                                     @else                                      
                                     @endif
@@ -136,7 +130,7 @@
                                     </div>
                                 </div>
                                 <div class="modal fade" id="myModalDel3{{$bookedtour->b_id}}">
-                                        <div class="modal-dialog">  
+                                        <div class="modal-dialog margin-popup">  
                                           <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title">Message from customer</h4>
