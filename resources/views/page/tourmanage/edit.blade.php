@@ -218,7 +218,7 @@
                     @endif
                 </p>
                 <p style="font-size:20px"><b>PRICE(VND)/MAN/DAY: 
-                        <input id="price-tourmanage" type="number" name="price" placeholder="ex: 1000000"
+                        <input id="price-tourmanage" type="text" name="price" data-type="currency" placeholder="ex: 1,000,000.00"
                         value="{{ $tour->price}}" class="form-control" data-parsley-trigger="change" required minlength="3">        
                 </p>
                 @if ($errors->has('price'))

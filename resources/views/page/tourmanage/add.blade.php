@@ -190,8 +190,8 @@
                     @endif
                 </p>
                 <p style="font-size:20px"><b>PRICE(VND)/MAN/DAY: 
-                        <input type="text" name="price" placeholder="ex: 1000000"
-                        value="{{old('price')}}" class="form-control" data-parsley-trigger="change" required minlength="3">        
+                    <input type="text" name="price" data-type="currency" placeholder="ex: 1,000,000.00"
+                    value="{{old('price')}}" class="form-control" data-parsley-trigger="change" required minlength="3">        
                 </p>
                 @if ($errors->has('price'))
                 <small class="form-control-feedback text text-danger">

@@ -113,7 +113,12 @@ class PageTourManageController extends Controller
             $tour->description = $request->description;
             $tour->content = $request->content;
             $tour->plan = $request->plan;
-            $tour->price = $request->price;
+            
+            $valuePrice = $request->price;
+            $strPrice = str_replace(',','',$valuePrice);
+            $numberPrice = intval($strPrice);
+
+            $tour->price = $numberPrice;
             $tour->status = $request->status;
 
             $image_code = '';
@@ -154,5 +159,4 @@ class PageTourManageController extends Controller
         $tour->delete();
         return back()->with('noti', 'Deleted!')->withInput();
     }
-
 }
