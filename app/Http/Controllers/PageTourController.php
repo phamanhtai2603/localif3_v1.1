@@ -21,7 +21,7 @@ class PageTourController extends Controller
 {
     public function viewall(){
         $tours = Tour::where('status', 0)->paginate(15);
-        return redirect()->route('get-page-view');
+        return view('page.tours',['tours'=>$tours]);
     }
 
     public function locationview($id){

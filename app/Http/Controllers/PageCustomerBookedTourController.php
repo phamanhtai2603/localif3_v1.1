@@ -10,6 +10,7 @@ use App\User;
 use App\Rate;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
 class PageCustomerBookedTourController extends Controller
@@ -67,7 +68,8 @@ class PageCustomerBookedTourController extends Controller
             return back()->with('errorSQL', 'Something wrong happened!')->withInput();
         }
         $email = $bookedtour->tour->user->email;
-        Mail::send('page.mail.customercanceled', ['bookedtour'=>$bookedtour], function($message) use ($email) {
+        $customer = $bookedtour->tour->user->email;
+        Mail::send('page.mail.customercanceled', ['bookedtour'=>$bookedtour, 'customer'=>$customer], function($message) use ($email) {
             $message->to($email)
             ->subject('Localif3');
             $message->from('phamanhtai263@gmail.com','Localif3 - Your tour has been canceled!');

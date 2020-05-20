@@ -26,7 +26,7 @@ class TourController extends Controller
             return back()->with('errorSQL', 'Có lỗi xảy ra')->withInput();
         }
         return redirect()->back()->with('success', 'Xóa thành công');
-        }
+    }
 
 
     public function create(){

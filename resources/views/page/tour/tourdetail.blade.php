@@ -85,12 +85,18 @@
       position: relative;
       top: 17px;
     }
+    
     .checked{
     color: orange;
     }
+
     .orange{
     color: 	#F06757
     }
+
+    .modal{
+		padding-top: 200px;
+	}
   </style>
 @endsection
 @section('content')

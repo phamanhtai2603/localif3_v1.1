@@ -1,9 +1,5 @@
 <header class="site-navbar py-1" role="banner">
-<<<<<<< HEAD
-  <div class="container">
-=======
   <div class="container" id="nhuan">
->>>>>>> noti email
     <div class="row align-items-center">
       <div class="col-6 col-xl-2">
         <a href="{{ route('get-page-view') }}" class="text-black h2 mb-0">
@@ -46,7 +42,7 @@
             </li>          
             @else
             <li><a href="{{ route('get-login') }}" class="btn btn-primary py-1 px-3 text-white">Login</a></li>
-            <li><a href="{{ route('get-page-registration-view') }}" class="btn btn-primary py-1 px-3 text-white">Sign in</a></li>
+            <li><a href="{{ route('get-page-registration-view') }}" class="btn btn-primary py-1 px-3 text-white">Sign up</a></li>
             @endif
           </ul>
           {{-- <div class="dropdown for-notification ">

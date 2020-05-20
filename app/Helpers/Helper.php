@@ -100,7 +100,7 @@ class Helper{
         // call funtion get arr input from app\heplers\helper
         $helper = new Helper;
         $input = $helper->getArrInput($request);
-
+        
         // nếu mật khẩu null thì không đổi mật khẩu;
         if($input['password']==null){
             $input['password'] = $user['password'];

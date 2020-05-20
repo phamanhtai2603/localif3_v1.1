@@ -32,11 +32,11 @@
             <div class="row form-group" >
               <div class="col-md-6 mb-3 mb-md-0">
                 <label class="text-black" for="fname">First Name</label>
-                <input type="text" id="first_name" value="{{ Auth::user()->first_name }}"class="form-control">
+                <input type="text" id="first_name" name="first_name" value="{{ Auth::user()->first_name }}"class="form-control">
               </div>
               <div class="col-md-6">
                 <label class="text-black" for="lname">Last Name</label>
-                <input type="text" id="last_name" value="{{ Auth::user()->last_name }}" class="form-control">
+                <input type="text" id="last_name" name = "last_name" value="{{ Auth::user()->last_name }}" class="form-control">
               </div>
             </div>
             <div class="row form-group">
