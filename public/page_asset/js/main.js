@@ -278,8 +278,7 @@ jQuery(document).ready(function($) {
 		},
 		blur: function() { 
 		  formatCurrency($(this), "blur");
-		}
-	});
+
 
 	function formatNumber(n) {
 		// format number 1000000 to 1,234,567
