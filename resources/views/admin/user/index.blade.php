@@ -50,7 +50,7 @@
                       <div class="page-title">
                           <ol class="breadcrumb text-right">
                           <li><a href="{{'/admin'}}">Bảng điều khiển</a></li>
-                          <li><a href="">Quản lý người dùng</a></li>
+                          <li><a href="{{ route('user.index') }}">Quản lý người dùng</a></li>
                           </ol>
                       </div>
                   </div>
@@ -197,7 +197,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                                <a class="btn btn-primary" href=""><i class="fa fa-edit"></i> Chỉnh sửa</a>
+                                                <a class="btn btn-primary" href="{{ route('get-user-edit',['id'=>$user->id]) }}"><i class="fa fa-edit"></i> Chỉnh sửa</a>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                                             </div>
                                         </div>

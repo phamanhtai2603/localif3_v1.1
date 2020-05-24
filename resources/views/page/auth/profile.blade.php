@@ -32,17 +32,17 @@
             <div class="row form-group" >
               <div class="col-md-6 mb-3 mb-md-0">
                 <label class="text-black" for="fname">First Name</label>
-                <input type="text" id="first_name" name="first_name" value="{{ Auth::user()->first_name }}"class="form-control">
+                <input type="text" id="first_name" name="first_name" pattern="([a-zA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵ ]){2,}" value="{{ Auth::user()->first_name }}"class="form-control">
               </div>
               <div class="col-md-6">
                 <label class="text-black" for="lname">Last Name</label>
-                <input type="text" id="last_name" name = "last_name" value="{{ Auth::user()->last_name }}" class="form-control">
+                <input type="text" id="last_name" name = "last_name" pattern="([a-zA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵ ]){2,}" value="{{ Auth::user()->last_name }}" class="form-control">
               </div>
             </div>
             <div class="row form-group">
               <div class="col-md-6 mb-3 mb-md-0">
                 <label class="text-black" for="email">Phone</label> 
-                <input type="number" id="email" name ="phone_number" value="{{ Auth::user()->phone_number }}" class="form-control">
+                <input type="text" name ="phone_number" pattern="(09|03|07|08|05)+([0-9]{8})" value="{{ Auth::user()->phone_number }}" class="form-control">
               </div>
               <div class="col-md-6">
                 <label class="text-black" for="subject">Date of birth</label> 
@@ -109,7 +109,7 @@
               @endif
               " class="img-responsive" alt="user-img" />
               <span class="input-edit">
-                  <input name="avatar" id="avatar" type="file"/>
+                  <input name="avatar" id="avatar" accept="image/*" type="file"/>
                   <input name="id" type="hidden" value="{{Auth::user()->id}}">
               </span>
             </div><!-- end columns -->

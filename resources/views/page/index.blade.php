@@ -66,7 +66,7 @@
             @endif
             <div class="unit-1-text">
               <h3 class="unit-1-heading t-name" style="padding: 5px; margin:0px">{{ $tour->name }}</h3>
-              <strong class="text-primary mb-2 d-block t-price" style="margin:0px">{{ $tour->price }} VND</strong>
+              <strong class="text-primary mb-2 d-block t-price format-money" style="margin:0px">{{ $tour->price }} VND</strong>
               <p style="padding: 5px; font-size:15px ; margin:0px " class="color-white-opacity-5">{{ $tour->location->name }} </p>
               <div>
                 @if($tour->avgrate==NULL)

@@ -63,7 +63,7 @@ Thêm mới người dùng
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="email-input" class=" form-control-label">Họ*</label></div>
                     <div class="col-12 col-md-9">
-                        <input type="text" id="email-input" name="first_name" placeholder="Họ" class="form-control" data-parsley-trigger="change" required="" >
+                        <input type="text" id="firstNameAdd" name="first_name" placeholder="Họ" class="form-control" data-parsley-trigger="change" required="" >
                         @if($errors->has('first_name'))
                             <small class="text-danger w-100">
                                 {{$errors->first('first_name')}}
@@ -74,7 +74,7 @@ Thêm mới người dùng
               <div class="row form-group">
                     <div class="col col-md-3"><label for="email-input" class=" form-control-label">Tên*</label></div>
                     <div class="col-12 col-md-9">
-                        <input type="text" id="email-input" name="last_name" placeholder="Tên" class="form-control" data-parsley-trigger="change" required="" >
+                        <input type="text" id="lastNameAdd" name="last_name" placeholder="Tên" class="form-control" data-parsley-trigger="change" required="" >
                         @if($errors->has('last_name'))
                             <small class="text-danger w-100">
                                 {{$errors->first('last_name')}}
@@ -107,7 +107,7 @@ Thêm mới người dùng
                 <div class="row form-group">
                     <div class="col col-md-3"><label for="text-input" class=" form-control-label">Số điện thoại</label></div>
                     <div class="col-12 col-md-9">
-                        <input type="text" id="text-input" name="phone_number" placeholder="Số điện thoại" class="form-control" data-parsley-trigger="change">
+                        <input type="text" name="phone_number" pattern="/((09|03|07|08|05)+([0-9]{8})\b)/g" placeholder="Số điện thoại" class="form-control userPhone" data-parsley-trigger="change">
                         @if($errors->has('phone_number'))
                             <small class="text-danger w-100">
                                 {{$errors->first('phone_number')}}
@@ -147,7 +147,7 @@ Thêm mới người dùng
                     <div class="col-12"><label for="file-input" class=" form-control-label">Avatar</label></div>
                     <div class="col-12">
                         <img class="my-2" id="preview_avatar" src="admin_page_asset/images/default.png" alt="ảnh đại điện">
-                        <input type="file" id="avatar" name="avatar" class="form-control-file">
+                        <input type="file" id="avatar" accept="image/*" name="avatar" class="form-control-file">
                         @if($errors->has('avatar'))
                             <small class="text-danger w-100">
                                 {{$errors->first('avatar')}}

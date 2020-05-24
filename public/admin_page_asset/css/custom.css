@@ -91,3 +91,9 @@ table{
   margin-left: -5px;
   color: #58595b;
 }
+.textsizeMini{
+  font-size: 15px;
+}
+.textsizeMini .nav-link{
+  line-height: 10px;
+}

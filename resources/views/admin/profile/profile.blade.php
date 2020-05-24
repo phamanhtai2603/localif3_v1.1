@@ -180,7 +180,7 @@
                             @endif
                             " class="img-responsive" alt="user-img" />
                             <span class="input-edit">
-                                <input name="avatar" id="avatar" style="margin-left: 2px; padding-left: 0px" type="file" value="" placeholder="Ảnh đại diện"/>
+                                <input name="avatar" id="avatar" style="margin-left: 2px; padding-left: 0px" type="file" accept="image/*" value="" placeholder="Ảnh đại diện"/>
                                 <input name="id" type="hidden" value="{{Auth::user()->id}}">
                             </span>
                         </div><!-- end columns -->

@@ -57,19 +57,19 @@
 					<br>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter your real name">
-						<input class="input100" type="text" name="first_name">
+						<input class="input100" pattern="([a-zA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵ ]){2,}" type="text" name="first_name">
 						<span class="focus-input100"></span>
 						<span class="label-input100">First Name</span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="text" name="last_name">
+                        <input class="input100" pattern="([a-zA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵ ]){2,}" type="text" name="last_name">
                         <span class="focus-input100"></span>
                         <span class="label-input100">Last Name</span>
                     </div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Your phone number is..">
-						<input class="input100" type="text" name="phone_number">
+						<input class="input100" pattern="(09|03|07|08|05)+([0-9]{8})" type="text" name="phone_number">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Phone number</span>
 					</div>
@@ -82,7 +82,7 @@
 					
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="password">
+						<input class="input100" pattern=".{6,16}" type="password" name="password">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Password</span>
 					</div>

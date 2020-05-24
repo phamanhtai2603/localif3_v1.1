@@ -85,6 +85,14 @@ jQuery(document).ready(function($) {
 		} 
 		
 	});
-  
- 
+
+	var checkNameInput = "([a-zA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵ ]){2,}";
+	var firstNameAdd = document.getElementById('firstNameAdd');
+	firstNameAdd.pattern = checkNameInput;
+	var lastNameAdd = document.getElementById('lastNameAdd');
+	lastNameAdd.pattern = checkNameInput;
+	// var firstNameUserEdit = document.getElementById('firstNameUserEdit');
+	// firstNameUserEdit.pattern = checkNameInput;
+	// var lastNameEdit = document.getElementById('lastNameEdit');
+	// lastNameEdit.pattern = checkNameInput;
 });
